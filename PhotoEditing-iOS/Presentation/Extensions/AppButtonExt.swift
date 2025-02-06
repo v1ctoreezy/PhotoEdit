@@ -1,8 +1,8 @@
 //
 //  AppButtonExt.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 09.12.2024.
+//  Created by Victor Cherkasov on 09.12.2024.
 //
 
 import SwiftUI

@@ -1,8 +1,8 @@
 //
 //  ViewController.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 29.10.2024.
+//  Created by Victor Cherkasov on 29.10.2024.
 //
 
 import UIKit

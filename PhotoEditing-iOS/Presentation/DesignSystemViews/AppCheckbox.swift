@@ -1,6 +1,6 @@
 //
 //  AppCheckbox.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Victor Cherkasov on 06.12.2024.
 //

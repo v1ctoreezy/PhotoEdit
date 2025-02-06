@@ -1,8 +1,8 @@
 //
 //  extension.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 16.01.2025.
+//  Created by Victor Cherkasov on 16.01.2025.
 //
 
 import SwiftUI

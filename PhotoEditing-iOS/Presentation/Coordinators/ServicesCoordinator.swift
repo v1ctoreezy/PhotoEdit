@@ -1,8 +1,8 @@
 //
 //  ServicesCoordinator.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 13.11.2024.
+//  Created by Victor Cherkasov on 13.11.2024.
 //
 
 import SwiftUI

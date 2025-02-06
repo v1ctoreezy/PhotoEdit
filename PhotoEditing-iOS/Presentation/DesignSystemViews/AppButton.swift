@@ -1,6 +1,6 @@
 //
 //  AppButton.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Good Shmorning on 27.11.2024.
 //

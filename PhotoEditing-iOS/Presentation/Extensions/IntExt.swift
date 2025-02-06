@@ -1,6 +1,6 @@
 //
 //  IntExt.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Victor Cherkasov on 31.01.2025.
 //

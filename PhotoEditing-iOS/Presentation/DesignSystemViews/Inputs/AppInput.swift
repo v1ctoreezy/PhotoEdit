@@ -1,6 +1,6 @@
 //
 //  AppInput.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Victor Cherkasov on 09.12.2024.
 //

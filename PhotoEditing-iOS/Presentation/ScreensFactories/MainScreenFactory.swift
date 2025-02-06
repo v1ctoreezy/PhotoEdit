@@ -1,8 +1,8 @@
 //
 //  MainScreenFactory.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 12.11.2024.
+//  Created by Victor Cherkasov on 12.11.2024.
 //
 
 import UIKit

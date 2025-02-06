@@ -1,8 +1,8 @@
 //
 //  TabViewModel.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 01.11.2024.
+//  Created by Victor Cherkasov on 01.11.2024.
 //
 
 import Combine

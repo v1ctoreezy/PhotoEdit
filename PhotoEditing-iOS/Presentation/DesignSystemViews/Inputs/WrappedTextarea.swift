@@ -1,6 +1,6 @@
 //
 //  WrappedTextArea.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Victor Cherkasov on 13.12.2024.
 //

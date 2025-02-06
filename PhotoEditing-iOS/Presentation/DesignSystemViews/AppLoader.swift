@@ -1,8 +1,8 @@
 //
 //  AppLoader.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 16.12.2024.
+//  Created by Victor Cherkasov on 16.12.2024.
 //
 
 import SwiftUI

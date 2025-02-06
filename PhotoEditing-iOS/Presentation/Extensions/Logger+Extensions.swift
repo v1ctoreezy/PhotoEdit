@@ -1,6 +1,6 @@
 //
 //  Logger+Extensions.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Victor Cherkasov on 18.12.2024.
 //

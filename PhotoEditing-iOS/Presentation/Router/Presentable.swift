@@ -1,8 +1,8 @@
 //
 //  Presentable.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 11.11.2024.
+//  Created by Victor Cherkasov on 11.11.2024.
 //
 
 import UIKit

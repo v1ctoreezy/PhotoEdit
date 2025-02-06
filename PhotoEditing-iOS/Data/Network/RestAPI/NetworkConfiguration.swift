@@ -1,6 +1,6 @@
 //
 //  NetworkConfiguration.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Victor Cherkasov on 16.12.2024.
 //

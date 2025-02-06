@@ -1,8 +1,8 @@
 //
 //  StateableButton.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 04.12.2024.
+//  Created by Victor Cherkasov on 04.12.2024.
 //
 
 import SwiftUI

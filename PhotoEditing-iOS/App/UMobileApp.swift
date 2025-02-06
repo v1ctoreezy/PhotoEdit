@@ -1,6 +1,6 @@
 //
-//  UMobileApp.swift
-//  UMobile
+//  //  PhotoEditing-iOS.swift
+//  PhotoEditing-iOS
 //
 //  Created by Good Shmorning on 29.10.2024.
 //

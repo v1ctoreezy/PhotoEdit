@@ -1,6 +1,6 @@
 //
 //  AppChoseMediaItem.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
 //  Created by Victor Cherkasov on 03.02.2025.
 //

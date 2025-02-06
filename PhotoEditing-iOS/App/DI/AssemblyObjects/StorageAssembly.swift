@@ -1,8 +1,8 @@
 //
 //  StorageAssembly.swift
-//  UMobile
+//  PhotoEditing-iOS
 //
-//  Created by Good Shmorning on 30.10.2024.
+//  Created by Victor Cherkasov on 30.10.2024.
 //
 
 import Swinject
