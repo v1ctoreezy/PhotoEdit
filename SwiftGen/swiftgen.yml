@@ -1,0 +1,34 @@
+xcassets:
+  - inputs: ../UMobile/Resources/ColorPalette.xcassets
+    outputs:
+       - templatePath: Templates/ColorPalette.stencil
+         output: ../UMobile/Resources/GeneratedResources/ColorPalette.swift
+         params:
+            enumName: Color
+            publicAccess: 1
+            noAllValues: 1
+
+  - inputs: ../UMobile/Resources/Assets.xcassets
+    outputs:
+      - templatePath: Templates/ImageAssets.stencil
+        output: ../UMobile/Resources/GeneratedResources/Image.swift
+        params:
+            enumName: Img
+            publicAccess: 1
+            noAllValues: 1
+  - inputs: ../UMobile/Resources/Assets.xcassets
+    outputs:
+       - templatePath: Templates/UIImageAssets.stencil
+         output: ../UMobile/Resources/GeneratedResources/UIImage.swift
+         params:
+            enumName: UIImg
+            publicAccess: 1
+            noAllValues: 1
+strings:
+  - inputs: ../UMobile/Resources/LocalStrings.strings
+    outputs:
+       - templateName: structured-swift5
+         output: ../UMobile/Resources/GeneratedResources/LocalStrings.swift
+         params:
+            enumName: LocalStrings
+            publicAccess: 1
