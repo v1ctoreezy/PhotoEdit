@@ -6,6 +6,7 @@
 //
 
 import Swinject
+import UIKit
 
 class ViewModelAssembly: Assembly {
     
@@ -14,10 +15,27 @@ class ViewModelAssembly: Assembly {
             RootNavigationViewModel()
         }.inObjectScope(.transient)
         
+        container.register(LaunchViewModel.self) { (resolver, actions: LaunchActions) in
+            LaunchViewModel(actions: actions)
+        }.inObjectScope(.transient)
+        
         container.register(TabViewModel.self) { (resolver, actions: TabActions) in
             TabViewModel(
                 actions: actions
             )
+        }.inObjectScope(.transient)
+        
+        container.register(TabViewModel.self) { (resolver, actions: TabActions) in
+            TabViewModel(
+                actions: actions)
+        }.inObjectScope(.transient)
+        
+        container.register(PhotoSelctionViewModel.self) { (resolver, actions: PhotoSelctionActions) in
+            PhotoSelctionViewModel(actions: actions)
+        }.inObjectScope(.transient)
+        
+        container.register(PhotoEditingViewModel.self) { (resolver, image: UIImage, actions: PhotoEditingActions) in
+            PhotoEditingViewModel(originalImage: image, actions: actions)
         }.inObjectScope(.transient)
     }
     

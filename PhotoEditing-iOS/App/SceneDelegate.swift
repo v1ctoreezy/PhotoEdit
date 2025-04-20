@@ -29,12 +29,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = navigationVC
 
         appCoordinator = AppFlowCoordinator(rootController: navigationVC, dependencyProvider: environment.container)
-        appCoordinator.startWithAction(.main(.news))
+//        appCoordinator.startWithAction(.main(.catalog))
        
         if let url = connectionOptions.userActivities.first?.webpageURL {
             appCoordinator.receiveDeepLink(url)
         } else {
-//            appCoordinator.start()
+            appCoordinator.start()
         }
 //
         systemScreenBrightness = UIScreen.main.brightness

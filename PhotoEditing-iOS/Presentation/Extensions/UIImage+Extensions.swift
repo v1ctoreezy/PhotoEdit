@@ -91,3 +91,22 @@ extension UIImage {
         return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
+
+extension UIImage {
+    func applyStandartFilter(_ filter: FilterStandartIOSType) -> UIImage {
+        let ciFilter = CIFilter(name: filter.rawValue)
+        let ciInput = CIImage(image: self)
+        
+        ciFilter?.setValue(ciInput, forKey: "inputImage")
+        
+        let ciOutput = ciFilter?.outputImage
+        let ciContext = CIContext()
+        
+        if let wrpCiOutput = ciOutput {
+            let ciImage = ciContext.createCGImage(wrpCiOutput, from: (wrpCiOutput.extent))
+            return UIImage(cgImage: ciImage!)
+        }
+        
+        return self
+    }
+}

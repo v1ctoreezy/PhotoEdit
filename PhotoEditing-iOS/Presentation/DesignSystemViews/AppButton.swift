@@ -138,7 +138,7 @@ extension AppButton {
                     
                     simpleButton(size: size)
                         .frame(height: size.rawValue)
-                        .frame(minWidth: 320, maxWidth: .infinity)
+                        .frame(minWidth: 30)
                         .background(
                             setupColor(
                                 type: type,

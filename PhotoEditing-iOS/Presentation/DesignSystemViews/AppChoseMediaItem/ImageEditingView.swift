@@ -415,14 +415,6 @@ private final class OverlayView: UIView {
         overlayViewHeightConstraint?.priority = .defaultHigh
         overlayViewHeightConstraint?.isActive = true
     }
-    
-//    func snapLayout() {
-//        updateFadeMask()
-//        
-//        guard overlayViewWidthConstraintSnap == nil, overlayViewHeightConstraintSnap else { return }
-//        
-//        overlayViewWidthConstraintSnap.
-//    }
 
     // MARK: - Private Methods
 

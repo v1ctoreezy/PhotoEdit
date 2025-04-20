@@ -17,7 +17,7 @@ enum LaunchNavigationScreen {
 }
 
 enum MainNavigationScreen {
-    case news, services, documents, profile
+    case photoEdit, catalog, editedPhoto, profile
 }
 
 final class AppFlowCoordinator: BaseCoordinator {
@@ -77,10 +77,12 @@ private extension AppFlowCoordinator {
 
     func performLaunchFlow(_ action: LaunchNavigationScreen? = nil) {
         let coordinator = LaunchCoordinator(appRouter: router, screensFactory: screensFactory)
+        
         coordinator.finishFlow = { [unowned self, unowned coordinator] options in
             self.removeDependency(coordinator)
             self.startWithAction(options)
         }
+        
         addDependency(coordinator)
         coordinator.startWithAction(action)
     }

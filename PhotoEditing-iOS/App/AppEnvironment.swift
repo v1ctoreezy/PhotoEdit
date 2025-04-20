@@ -21,4 +21,8 @@ extension AppEnvironment {
         return AppEnvironment(container: container,
                 systemEventsHandler: systemEventsHandler)
     }
+    
+    static func photoBootStrap() {
+        
+    }
 }

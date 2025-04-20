@@ -8,16 +8,14 @@
 import UIKit
 
 protocol MainScreenFactory {
-    
-    func makeTabScreen(withPages pages: [TabBarPage],  withTabControllers tabControllers: [TabBarPage: UIViewController],_ actions: TabActions) -> UIViewController
+    func makeTabScreen(withPages pages: [TabBarPage], withTabControllers tabControllers: [TabBarPage: UIViewController]) -> TabBarController    
 }
 
 extension ScreensFactory: MainScreenFactory {
-    
-    func makeTabScreen(withPages pages: [TabBarPage],  withTabControllers tabControllers: [TabBarPage: UIViewController],_ actions: TabActions) -> UIViewController {
-        let contentView = dependencyProvider.assembler.resolver.resolve(TabBarView.self, argument: actions)!
-        let vc = HostingController(rootView: contentView)
-        return vc
+    func makeTabScreen(withPages pages: [TabBarPage], withTabControllers tabControllers: [TabBarPage: UIViewController]) -> TabBarController {
+        let tabBarController = TabBarController()
+        
+        tabBarController.tabControllers = tabControllers
+        return tabBarController
     }
-
 }

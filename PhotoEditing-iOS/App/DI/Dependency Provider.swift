@@ -21,7 +21,11 @@ class DependencyProvider {
              UseCaseAssembly(),
              StorageAssembly(),
              ViewModelAssembly(),
-             ViewAssembly()],
+             ViewAssembly(),
+             
+             EngineAssembly()
+             
+            ],
             
             container: container
         )

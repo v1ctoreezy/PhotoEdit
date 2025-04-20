@@ -20,6 +20,8 @@ struct LaunchFlowResult {
 final class LaunchCoordinator: BaseCoordinator, LaunchCoordinatorDelegate {
 
     var finishFlow: LaunchCompletionBlock?
+    
+    private var isLoggedIn: Bool = true
 
     private var launchResult: LaunchFlowResult?
 
@@ -39,19 +41,58 @@ extension LaunchCoordinator: Coordinatable {
     }
 
     func startWithAction(_ action: LaunchNavigationScreen?) {
-
+        switch action {
+        case .launch:
+            start()
+        default:
+            start()
+        }
     }
 }
 
 // MARK:- Private methods
 private extension LaunchCoordinator {
-
+    
     func performFlow() {
+        showLaunchScreen()
     }
-
+    
     func downloadComplete(_ res: LaunchFlowResult) {
         self.launchResult = res
     }
+    
+    func showLaunchScreen() {
+        let screen = screensFactory
+            .makeLaunchScreen(
+                actions:
+                    LaunchActions(showNextScreen: { [weak self] in
+                        self?.downloadComplete()
+                    })
+            )
+        
+        screen.modalPresentationStyle = .overFullScreen
+        screen.modalTransitionStyle = .flipHorizontal
+        
+        appRouter.setRootModule(screen, hideBar: true)
+    }
+    
+    func downloadComplete() {
+        showNextScreen()
+    }
+    
+    func showNextScreen() {
+        if isLoggedIn {
+            performTabFlow(action: .catalog)
+        } else {
+            
+        }
+    }
+    
+    func showLogin() {
+        
+    }
+    
+    func performTabFlow(action: MainNavigationScreen? = nil) {
+        self.finishFlow?(.main(.catalog))
+    }
 }
-
-

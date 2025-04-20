@@ -7,5 +7,7 @@ target 'PhotoEditing-iOS' do
 
   # Pods for PhotoEditing-iOS
   pod 'SwiftGen', '6.6.2'
+  pod 'Alamofire'
+  pod 'Swinject'
 
 end

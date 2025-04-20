@@ -61,7 +61,9 @@ extension Router: Routable {
             completions[controller] = completion
         }
         
-        rootController?.pushViewController(controller, animated: animated)
+        UIView.animate(withDuration: 1.0) {
+            self.rootController?.pushViewController(controller, animated: animated)
+        }
     }
     
     func push(_ module: Presentable?, transition: CATransition, completion: CompletionBlock?) {
@@ -136,7 +138,8 @@ extension Router: Routable {
     func setRootModule(_ module: Presentable?, hideBar: Bool) {
         guard let controller = module?.toPresent else { return }
         rootController?.isNavigationBarHidden = true // fix bug navigation bar
-        rootController?.setViewControllers([controller], animated: false)
+        
+        rootController?.setViewControllers([controller], animated: true)
     }
     
     func popToRootModule(animated: Bool) {
