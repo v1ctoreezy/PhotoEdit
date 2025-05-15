@@ -81,6 +81,7 @@ private extension LaunchCoordinator {
     }
     
     func showNextScreen() {
+        
         if isLoggedIn {
             performTabFlow(action: .catalog)
         } else {

@@ -68,17 +68,20 @@ extension CatalogCoordinator: Coordinatable {
     }
     
     
-    func showPhotoEdit(_ image: UIImage) {
-        let vc = screensFactory
-            .makePhotoEditingScreen(
-                image: image,
-                actions: PhotoEditingActions(
-                    dismiss: { [weak self] in
-                        self?.subRouter.dismiss(animated: true)
-//                        self?.togleTabBar?()
-                    }
-                )
-            )
+    func showPhotoEdit(_ image: UIImage?) {
+//        let vc = screensFactory
+//            .makePhotoEditingScreen(
+//                image: image,
+//                actions: PhotoEditingActions(
+//                    dismiss: { [weak self] in
+//                        self?.subRouter.dismiss(animated: true)
+////                        self?.togleTabBar?()
+//                    }
+//                )
+//            )
+        
+//        let vc = PhotoEditingViewController(image: (CIImage(image: image)?.oriented(CIImage.mapOrientation(image.imageOrientation)))!)
+        let vc = PhotoEditingViewController(image: nil)
         
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .coverVertical

@@ -12,7 +12,7 @@ extension CIImage {
     static func mapOrientation(_ orientation: UIImage.Orientation) -> CGImagePropertyOrientation {
         return switch orientation {
         case .up:
-                .up
+                .down
         case .down:
                 .down
         case .left:
