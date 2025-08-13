@@ -23,7 +23,7 @@ class DependencyProvider {
              ViewModelAssembly(),
              ViewAssembly(),
              
-             EngineAssembly()
+//             EngineAssembly()
              
             ],
             

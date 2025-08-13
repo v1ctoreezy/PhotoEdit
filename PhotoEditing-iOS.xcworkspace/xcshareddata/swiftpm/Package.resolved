@@ -1,31 +1,13 @@
 {
-  "originHash" : "b8d93abd044078485d82599cd29e3bc54bd544c40a14c9f83a29ed4d82c6d2f7",
+  "originHash" : "1bd2fb1d8a0b32ef90bc4bfa8c7862758e0a61bf4cef0340a2c34585078787ff",
   "pins" : [
     {
-      "identity" : "sdwebimage",
+      "identity" : "pixelenginepackage",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
+      "location" : "https://github.com/khanhuitse05/PixelEnginePackage",
       "state" : {
-        "revision" : "10d06f6a33bafae8c164fbfd1f03391f6d4692b3",
-        "version" : "5.20.0"
-      }
-    },
-    {
-      "identity" : "sdwebimageswiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
-      "state" : {
-        "revision" : "451c6dfd5ecec2cf626d1d9ca81c2d4a60355172",
-        "version" : "3.1.3"
-      }
-    },
-    {
-      "identity" : "snapkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SnapKit/SnapKit",
-      "state" : {
-        "revision" : "2842e6e84e82eb9a8dac0100ca90d9444b0307f4",
-        "version" : "5.7.1"
+        "revision" : "d3eaf69accc4396f807fe8497efe03f4f33c5763",
+        "version" : "1.0.0"
       }
     }
   ],

@@ -10,7 +10,7 @@ import UIKit
 
 protocol PhotoSelectionScreenFactory {
     func makePhotoSelectionScreen(actions: PhotoSelctionActions) -> UIViewController
-    func makePhotoEditingScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController
+//    func makePhotoEditingScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController
 }
 
 
@@ -21,9 +21,9 @@ extension ScreensFactory: PhotoSelectionScreenFactory {
         return vc
     }
     
-    func makePhotoEditingScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController {
-        let contentView = dependencyProvider.container.resolve(PhotoEditingView.self, arguments: image, actions)
-        let vc = HostingController(rootView: contentView)
-        return vc
-    }
+//    func makePhotoEditingScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController {
+//        let contentView = dependencyProvider.container.resolve(PhotoEditingView.self, arguments: image, actions)
+//        let vc = HostingController(rootView: contentView)
+//        return vc
+//    }
 }

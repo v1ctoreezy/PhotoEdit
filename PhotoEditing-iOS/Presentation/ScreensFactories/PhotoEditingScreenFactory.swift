@@ -8,15 +8,15 @@
 import Foundation
 import UIKit
 
-protocol PhotoEditingScreenFactory {
-    func makeEditPhotoScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController
-}
-
-extension ScreensFactory: PhotoEditingScreenFactory {
-    func makeEditPhotoScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController {
-        let contentView = dependencyProvider.assembler.resolver.resolve(PhotoEditingView.self, arguments: image, actions)
-        let vc = HostingController(rootView: contentView)
-        
-        return vc
-    }
-}
+//protocol PhotoEditingScreenFactory {
+//    func makeEditPhotoScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController
+//}
+//
+//extension ScreensFactory: PhotoEditingScreenFactory {
+//    func makeEditPhotoScreen(image: UIImage, actions: PhotoEditingActions) -> UIViewController {
+//        let contentView = dependencyProvider.assembler.resolver.resolve(PhotoEditingView.self, arguments: image, actions)
+//        let vc = HostingController(rootView: contentView)
+//        
+//        return vc
+//    }
+//}

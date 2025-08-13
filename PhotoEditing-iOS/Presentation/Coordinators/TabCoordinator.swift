@@ -75,7 +75,7 @@ extension TabCoordinator: Coordinatable {
             break
             
         case .catalog:
-            let coordinator = CatalogCoordinator(appRouter: appRouter, screensFactory: screensFactory, subNavigation: navController)
+            let coordinator = PhotoSelectionCoordinator(appRouter: appRouter, screensFactory: screensFactory, subNavigation: navController)
             coordinator.finishFlow = { action in
                 if let action = action, case .main(let value) = action {
                     self.startWithAction(value)

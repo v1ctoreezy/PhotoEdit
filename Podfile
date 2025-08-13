@@ -9,5 +9,5 @@ target 'PhotoEditing-iOS' do
   pod 'SwiftGen', '6.6.2'
   pod 'Alamofire'
   pod 'Swinject'
-
+  pod 'SnapKit'
 end

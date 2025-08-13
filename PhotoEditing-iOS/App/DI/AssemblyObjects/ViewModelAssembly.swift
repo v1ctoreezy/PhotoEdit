@@ -34,9 +34,9 @@ class ViewModelAssembly: Assembly {
             PhotoSelctionViewModel(actions: actions)
         }.inObjectScope(.transient)
         
-        container.register(PhotoEditingViewModel.self) { (resolver, image: UIImage, actions: PhotoEditingActions) in
-            PhotoEditingViewModel(originalImage: image, actions: actions)
-        }.inObjectScope(.transient)
+//        container.register(PhotoEditingViewModel.self) { (resolver, image: UIImage, actions: PhotoEditingActions) in
+//            PhotoEditingViewModel(originalImage: image, actions: actions)
+//        }.inObjectScope(.transient)
     }
     
     func loaded(resolver: Resolver) {

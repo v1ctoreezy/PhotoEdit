@@ -27,9 +27,9 @@ class ViewAssembly: Assembly {
         }
         .inObjectScope(.transient)
         
-        container.register(PhotoEditingView.self) { (resolver, image: UIImage, actions: PhotoEditingActions) in
-            PhotoEditingView(model: resolver.resolve(PhotoEditingViewModel.self, arguments: image, actions)!)
-        }.inObjectScope(.transient)
+//        container.register(PhotoEditingView.self) { (resolver, image: UIImage, actions: PhotoEditingActions) in
+//            PhotoEditingView(model: resolver.resolve(PhotoEditingViewModel.self, arguments: image, actions)!)
+//        }.inObjectScope(.transient)
         
 //        container.register(TabBarView.self) { (resolver, actions: TabActions) in
 //            TabBarView(_
