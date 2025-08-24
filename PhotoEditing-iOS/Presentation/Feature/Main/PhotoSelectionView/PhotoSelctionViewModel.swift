@@ -33,11 +33,11 @@ final class PhotoSelctionViewModel: ObservableObject {
     }
     
     func getUserEditedPhotos() {
-//        self.editedPhotos = [
-//            UIImage(named: "IMG_8740")!,
-//            UIImage(named: "IMG_333")!,
-//            UIImage(named: "IMG_222")!
-//        ]
+        self.editedPhotos = [
+            UIImage(named: "IMG_8740")!,
+            UIImage(named: "IMG_333")!,
+            UIImage(named: "IMG_222")!
+        ]
     }
     
     func showImagePicker() {

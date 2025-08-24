@@ -23,6 +23,7 @@ class ImageRendererImpl: NSObject, ImageRenderer {
         }
         set {
             ciImage = newValue
+            metalKitView.setNeedsDisplay()
         }
     }
     

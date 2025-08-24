@@ -10,8 +10,9 @@ import Metal
 import MetalKit
 import CoreImage
 import Combine
+import PixelEnginePackage
 
-class PhotoEditingViewController: UIViewController {
+class PhotoEditingViewController: UIViewController, UINavigationBarDelegate {
     private var cancelBag = Set<AnyCancellable>()
     private var viewModel: PhotoEditingViewModel
     
@@ -35,7 +36,9 @@ class PhotoEditingViewController: UIViewController {
     
     lazy var controlsView: UIView = {
         let view = HostingController(
-            rootView: EditingControlsView(data: self.viewModel.lutCollections, select: viewModel.selectFilter)
+            rootView: EditingControlsView(selectedFilter: self.viewModel.lutImageEngine?.selectedFilter?.name ?? "", data: self.viewModel.lutImageEngine?.lutCollections ?? [], select: { [weak self] filter in
+                self?.viewModel.selectFilter(filter: filter)
+            })
         ).view
         
         view?.translatesAutoresizingMaskIntoConstraints = false
@@ -67,13 +70,16 @@ class PhotoEditingViewController: UIViewController {
             selectedFilter: .LinearBurn
         )
         
-        if let _image = (CIImage(image: viewModel.currentImage)?.oriented(CIImage.mapOrientation(viewModel.currentImage.imageOrientation))) {
-            self.renderer?.currentImage = _image
+        if let initialCIImage = viewModel.currentCIImage {
+            self.renderer?.currentImage = initialCIImage
         }
         
+        addNavBar()
         addMainView()
         addControllsView()
         addMTKView()
+        
+        subscribeToFields()
     }
 }
 
@@ -101,7 +107,7 @@ extension PhotoEditingViewController {
         mainView.addSubview(mtkView)
         
         NSLayoutConstraint.activate([
-            mtkView.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor),
+            mtkView.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor, constant: 40),
             mtkView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
             mtkView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
             mtkView.bottomAnchor.constraint(equalTo: controlsView.topAnchor)
@@ -112,10 +118,58 @@ extension PhotoEditingViewController {
         mainView.addSubview(controlsView)
         NSLayoutConstraint.activate([
 //            controlsView.topAnchor.constraint(equalTo: mtkView.bottomAnchor),
-            controlsView.heightAnchor.constraint(equalToConstant: 200),
-            controlsView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
+            controlsView.heightAnchor.constraint(equalToConstant: 175),
+            controlsView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -30),
             controlsView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
             controlsView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor)
         ])
+    }
+    
+    private func addNavBar() {
+        let height: CGFloat = 75
+        let navbar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height))
+        navbar.backgroundColor = UIColor.clear
+        navbar.delegate = self
+        
+        let navItem = UINavigationItem()
+        
+        navItem.title = "Title"
+        navItem.leftBarButtonItem = UIBarButtonItem(title: "Left Button", style: .plain, target: self, action: nil)
+        navItem.rightBarButtonItem = UIBarButtonItem(title: "Right Button", style: .plain, target: self, action: nil)
+        
+        navbar.items = [navItem]
+        
+        self.mainView.addSubview(navbar)
+        navbar.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            navbar.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor),
+            navbar.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            navbar.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
+            navbar.heightAnchor.constraint(equalToConstant: 40)
+        ])
+    }
+}
+
+extension PhotoEditingViewController {
+    private func subscribeToFields() {
+        viewModel.$currentCIImage
+            .sink { [weak self] currentCIImage in
+                guard let self = self, let ciImage = currentCIImage else { return }
+                self.renderer?.currentImage = ciImage
+                
+                DispatchQueue.main.async {
+                    self.controlsView.setNeedsLayout()
+                }
+            }
+            .store(in: &cancelBag)
+        
+        viewModel.lutImageEngine?.$lutCollections
+            .sink(receiveValue: { [weak self] collections in
+                DispatchQueue.main.async {
+                    self?.controlsView.setNeedsLayout()
+                }
+            })
+            .store(in: &cancelBag)
     }
 }

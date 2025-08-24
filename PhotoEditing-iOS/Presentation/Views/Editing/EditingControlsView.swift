@@ -10,12 +10,26 @@ import MetalKit
 import PixelEnginePackage
 
 struct EditingControlsView: View {
+    let selectedFilter: String
+    
+//    let availableTools: []
+    
     let data: [LUTCollection]
     let select: (FilterColorCube) -> Void
     
     var body: some View {
         ZStack {
             VStack {
+                HStack(spacing: 0) {
+                    Text(selectedFilter)
+                        .font(.app_S)
+                        .foregroundColor(.appBWVariants900000)
+
+                    FilterListSelector(data: data)
+                }
+                
+                Spacer()
+                
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(data, id: \.lutID) { collection in
@@ -29,10 +43,16 @@ struct EditingControlsView: View {
                     .padding(.horizontal, 16)
                 }
                 
-//                Spacer()
+                HStack {
+                    Text(selectedFilter)
+                        .font(.app_S)
+                        .foregroundColor(.appBWVariants900000)
+                    
+                    Spacer()
+                }
             }
         }
-        .frame(height: 200)
+        .frame(height: 150)
     }
 }
 
@@ -60,6 +80,28 @@ struct FilterItem: View {
         .background(Color.appBlackWhite100)
         .onTapGesture {
             select(cube.filter)
+        }
+    }
+}
+
+struct FilterListSelector: View {
+    let data: [LUTCollection]
+
+//    let scrollTo: CompletionBlock
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 0) {
+                ForEach(data, id: \.lutID) { collection in
+                    HStack(spacing: 12){
+                        Text(collection.lutName)
+                            .font(.app_XS)
+                        
+                        Spacer()
+                    }
+                }
+            }
+            .padding(.horizontal, 16)
         }
     }
 }

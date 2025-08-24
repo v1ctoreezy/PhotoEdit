@@ -18,6 +18,7 @@
 		446115CA2E3896E300F3EC12 /* EditingStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115C92E3896E300F3EC12 /* EditingStack.swift */; };
 		446115CC2E3899CC00F3EC12 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CB2E3899CC00F3EC12 /* LinkedList.swift */; };
 		446115CF2E46360900F3EC12 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CE2E46360900F3EC12 /* Stack.swift */; };
+		4464876A2E5B7BB4009E5BA4 /* LUTImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446487692E5B7BB4009E5BA4 /* LUTImageEngine.swift */; };
 		448800002E2297BF000F2CAF /* EditingControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488FFFF2E2297BF000F2CAF /* EditingControlsView.swift */; };
 		448800022E229C95000F2CAF /* PhotoEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448800012E229C95000F2CAF /* PhotoEditingViewModel.swift */; };
 		4488FFD12E16BB2C000F2CAF /* MetalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488FFD02E16BB2C000F2CAF /* MetalContext.swift */; };
@@ -154,6 +155,7 @@
 		446115C92E3896E300F3EC12 /* EditingStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingStack.swift; sourceTree = "<group>"; };
 		446115CB2E3899CC00F3EC12 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		446115CE2E46360900F3EC12 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		446487692E5B7BB4009E5BA4 /* LUTImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LUTImageEngine.swift; sourceTree = "<group>"; };
 		448800012E229C95000F2CAF /* PhotoEditingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditingViewModel.swift; sourceTree = "<group>"; };
 		4488FFD02E16BB2C000F2CAF /* MetalContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalContext.swift; sourceTree = "<group>"; };
 		4488FFD22E16BDC5000F2CAF /* ImageFilterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilterContext.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 		44AB10E42E292ED100A6BDCC /* CoreImageLUT */ = {
 			isa = PBXGroup;
 			children = (
+				446487692E5B7BB4009E5BA4 /* LUTImageEngine.swift */,
 				44AB10E52E292F8D00A6BDCC /* LUTExporter.swift */,
 				44AB10E72E2BABBD00A6BDCC /* LUTCollection.swift */,
 				44A485712E2D6AEC0006EB7A /* LUTFilter.swift */,
@@ -1017,6 +1020,7 @@
 				6446962E2D5517200001DA58 /* AppFlowCoordinator.swift in Sources */,
 				644696382D5517BC0001DA58 /* PhotoSelectionCoordinator.swift in Sources */,
 				64FD3CE62D5FE24300478A42 /* ImageProcessor.swift in Sources */,
+				4464876A2E5B7BB4009E5BA4 /* LUTImageEngine.swift in Sources */,
 				6446969C2D551A6C0001DA58 /* LoggingType.swift in Sources */,
 				644696422D5517CD0001DA58 /* Routable.swift in Sources */,
 				64604A3E2D66E6FE00A7405A /* FilterDataSource.swift in Sources */,
