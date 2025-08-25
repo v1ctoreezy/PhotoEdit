@@ -36,9 +36,7 @@ class PhotoEditingViewController: UIViewController, UINavigationBarDelegate {
     
     lazy var controlsView: UIView = {
         let view = HostingController(
-            rootView: EditingControlsView(selectedFilter: self.viewModel.lutImageEngine?.selectedFilter?.name ?? "", data: self.viewModel.lutImageEngine?.lutCollections ?? [], select: { [weak self] filter in
-                self?.viewModel.selectFilter(filter: filter)
-            })
+            rootView: EditingControlsView(viewModel: self.viewModel)
         ).view
         
         view?.translatesAutoresizingMaskIntoConstraints = false
@@ -157,19 +155,7 @@ extension PhotoEditingViewController {
             .sink { [weak self] currentCIImage in
                 guard let self = self, let ciImage = currentCIImage else { return }
                 self.renderer?.currentImage = ciImage
-                
-                DispatchQueue.main.async {
-                    self.controlsView.setNeedsLayout()
-                }
             }
-            .store(in: &cancelBag)
-        
-        viewModel.lutImageEngine?.$lutCollections
-            .sink(receiveValue: { [weak self] collections in
-                DispatchQueue.main.async {
-                    self?.controlsView.setNeedsLayout()
-                }
-            })
             .store(in: &cancelBag)
     }
 }

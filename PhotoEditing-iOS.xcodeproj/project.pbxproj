@@ -19,6 +19,7 @@
 		446115CC2E3899CC00F3EC12 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CB2E3899CC00F3EC12 /* LinkedList.swift */; };
 		446115CF2E46360900F3EC12 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CE2E46360900F3EC12 /* Stack.swift */; };
 		4464876A2E5B7BB4009E5BA4 /* LUTImageEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446487692E5B7BB4009E5BA4 /* LUTImageEngine.swift */; };
+		4464876C2E5CE75B009E5BA4 /* NestedObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464876B2E5CE75B009E5BA4 /* NestedObservableObject.swift */; };
 		448800002E2297BF000F2CAF /* EditingControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488FFFF2E2297BF000F2CAF /* EditingControlsView.swift */; };
 		448800022E229C95000F2CAF /* PhotoEditingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 448800012E229C95000F2CAF /* PhotoEditingViewModel.swift */; };
 		4488FFD12E16BB2C000F2CAF /* MetalContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4488FFD02E16BB2C000F2CAF /* MetalContext.swift */; };
@@ -156,6 +157,7 @@
 		446115CB2E3899CC00F3EC12 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		446115CE2E46360900F3EC12 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		446487692E5B7BB4009E5BA4 /* LUTImageEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LUTImageEngine.swift; sourceTree = "<group>"; };
+		4464876B2E5CE75B009E5BA4 /* NestedObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedObservableObject.swift; sourceTree = "<group>"; };
 		448800012E229C95000F2CAF /* PhotoEditingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditingViewModel.swift; sourceTree = "<group>"; };
 		4488FFD02E16BB2C000F2CAF /* MetalContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalContext.swift; sourceTree = "<group>"; };
 		4488FFD22E16BDC5000F2CAF /* ImageFilterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFilterContext.swift; sourceTree = "<group>"; };
@@ -817,6 +819,7 @@
 				646B9D002D56788800D14EDB /* Filters */,
 				4488FFD02E16BB2C000F2CAF /* MetalContext.swift */,
 				4488FFD22E16BDC5000F2CAF /* ImageFilterContext.swift */,
+				4464876B2E5CE75B009E5BA4 /* NestedObservableObject.swift */,
 			);
 			path = PhotoEditingEngine;
 			sourceTree = "<group>";
@@ -1088,6 +1091,7 @@
 				644696472D5517E10001DA58 /* MainScreenFactory.swift in Sources */,
 				644696A12D551ABB0001DA58 /* RootNavigationController.swift in Sources */,
 				649F5FFD2D64B359006494D1 /* LaunchViewModel.swift in Sources */,
+				4464876C2E5CE75B009E5BA4 /* NestedObservableObject.swift in Sources */,
 				646B9CE92D55214F00D14EDB /* TabBarView.swift in Sources */,
 				644696962D551A6C0001DA58 /* NetworkService.swift in Sources */,
 				644696972D551A6C0001DA58 /* Request.swift in Sources */,

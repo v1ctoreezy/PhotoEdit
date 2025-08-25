@@ -17,8 +17,8 @@ struct TestStruct: EditingStackItem {
     let value: Int
 }
 
-final class PhotoEditingViewModel {
-    @Published var lutImageEngine: LUTImageEngine?
+final class PhotoEditingViewModel: ObservableObject {
+    @NestedObservableObject var lutImageEngine: LUTImageEngine
     
     @Published var currentUIImage: UIImage = UIImage.init()
     @Published var currentCIImage: CIImage?
@@ -30,13 +30,13 @@ final class PhotoEditingViewModel {
         
         self.disposables = []
         
-        self.lutImageEngine?.currentCIImage
+        self.lutImageEngine.currentCIImage
             .sink(receiveValue: { [weak self] img in
                 self?.currentCIImage = img
             })
             .store(in: &disposables)
         
-        self.lutImageEngine?.currentUIImage
+        self.lutImageEngine.currentUIImage
             .sink(receiveValue: { [weak self] img in
                 self?.currentUIImage = img
             })
@@ -44,6 +44,6 @@ final class PhotoEditingViewModel {
     }
     
     func selectFilter(filter: FilterColorCube) {
-        self.lutImageEngine?.selectFilter(filter: filter)
+        self.lutImageEngine.selectFilter(filter: filter)
     }
 }

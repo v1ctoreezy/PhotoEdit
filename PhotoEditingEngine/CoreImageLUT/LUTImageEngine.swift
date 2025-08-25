@@ -68,12 +68,16 @@ final class LUTImageEngine: ObservableObject {
         self.currentCIImageInternal = CIImage(image: image)
         
         if let smallImage = resizedImage(at: convertUItoCI(from: image), scale: 128 / image.size.height, aspectRatio: 1) {
-            self.lutCollections.forEach {
-                $0.setImage(smallImage)
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.lutCollections.forEach {
+                    $0.setImage(smallImage)
+                }
+                
+                DispatchQueue.main.async {
+                    self.isProccessing = false
+                }
             }
         }
-        
-        isProccessing = false
     }
     
     func selectFilter(filter: FilterColorCube) {
@@ -142,5 +146,3 @@ func resizedImage(at image: CIImage, scale: CGFloat, aspectRatio: CGFloat) -> CI
     
     return filter?.outputImage
 }
- 
-

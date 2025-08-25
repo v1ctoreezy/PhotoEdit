@@ -10,45 +10,48 @@ import MetalKit
 import PixelEnginePackage
 
 struct EditingControlsView: View {
-    let selectedFilter: String
-    
-//    let availableTools: []
-    
-    let data: [LUTCollection]
-    let select: (FilterColorCube) -> Void
+    @ObservedObject var viewModel: PhotoEditingViewModel
     
     var body: some View {
         ZStack {
-            VStack {
-                HStack(spacing: 0) {
-                    Text(selectedFilter)
-                        .font(.app_S)
-                        .foregroundColor(.appBWVariants900000)
+            ScrollViewReader { reader in
+                VStack {
+                    HStack(spacing: 0) {
+                        Text(viewModel.lutImageEngine.selectedFilter?.name ?? "")
+                            .font(.app_S)
+                            .foregroundColor(.appBWVariants900000)
 
-                    FilterListSelector(data: data)
-                }
-                
-                Spacer()
-                
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 12) {
-                        ForEach(data, id: \.lutID) { collection in
-                            HStack(spacing: 12){
-                                ForEach(collection.lutCubePreviews, id: \.filter.identifier) { cube in
-                                    FilterItem(cube: cube, select: select)
-                                }
-                            }.id("\(collection.lutID)-cube")
+                        FilterListSelector(data: viewModel.lutImageEngine.lutCollections) { id in
+                            withAnimation {
+                                reader.scrollTo("\(id)-cube", anchor: .leading)
+                            }
                         }
                     }
-                    .padding(.horizontal, 16)
-                }
-                
-                HStack {
-                    Text(selectedFilter)
-                        .font(.app_S)
-                        .foregroundColor(.appBWVariants900000)
                     
                     Spacer()
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(viewModel.lutImageEngine.lutCollections, id: \.lutID) { collection in
+                                HStack(spacing: 12){
+                                    ForEach(collection.lutCubePreviews, id: \.filter.identifier) { cube in
+                                        FilterItem(cube: cube) {
+                                            viewModel.selectFilter(filter: $0)
+                                        }
+                                    }
+                                }.id("\(collection.lutID)-cube")
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                    }
+                    
+    //                HStack {
+    //                    Text(viewModel.lutImageEngine.selectedFilter?.name ?? "")
+    //                        .font(.app_S)
+    //                        .foregroundColor(.appBWVariants900000)
+    //
+    //                    Spacer()
+    //                }
                 }
             }
         }
@@ -86,8 +89,8 @@ struct FilterItem: View {
 
 struct FilterListSelector: View {
     let data: [LUTCollection]
-
-//    let scrollTo: CompletionBlock
+    
+    let scrollToId: (String) -> Void
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -98,6 +101,9 @@ struct FilterListSelector: View {
                             .font(.app_XS)
                         
                         Spacer()
+                    }
+                    .onTapGesture {
+                        scrollToId(collection.lutID)
                     }
                 }
             }
