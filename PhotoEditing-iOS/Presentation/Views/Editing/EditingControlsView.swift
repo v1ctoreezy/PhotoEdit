@@ -16,7 +16,7 @@ struct EditingControlsView: View {
         ZStack {
             ScrollViewReader { reader in
                 VStack {
-                    HStack(spacing: 0) {
+                    HStack(spacing: 10) {
                         Text(viewModel.lutImageEngine.selectedFilter?.name ?? "")
                             .font(.app_S)
                             .foregroundColor(.appBWVariants900000)
@@ -27,9 +27,7 @@ struct EditingControlsView: View {
                             }
                         }
                     }
-                    
-                    Spacer()
-                    
+                                        
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 12) {
                             ForEach(viewModel.lutImageEngine.lutCollections, id: \.lutID) { collection in
@@ -44,6 +42,20 @@ struct EditingControlsView: View {
                         }
                         .padding(.horizontal, 16)
                     }
+                    
+                    HStack(spacing: 10) {
+                        Text(viewModel.lutImageEngine.selectedFilter?.name ?? "")
+                            .font(.app_S)
+                            .foregroundColor(.appBWVariants900000)
+
+                        FilterListSelector(data: viewModel.lutImageEngine.lutCollections) { id in
+                            withAnimation {
+                                reader.scrollTo("\(id)-cube", anchor: .leading)
+                            }
+                        }
+                    }
+                    
+//                    Spacer()
                     
     //                HStack {
     //                    Text(viewModel.lutImageEngine.selectedFilter?.name ?? "")

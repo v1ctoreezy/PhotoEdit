@@ -80,11 +80,7 @@ extension PhotoSelectionCoordinator: Coordinatable {
     }
     
     func showPhotoPicker() {
-        let vc = ImagePicker(sourceType: .photoLibrary) { img in
-            self.appRouter.dismiss(animated: true) {
-                self.showPhotoEdit(img)
-            }
-        }
+        let vc = UIImagePickerController()
         
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .coverVertical

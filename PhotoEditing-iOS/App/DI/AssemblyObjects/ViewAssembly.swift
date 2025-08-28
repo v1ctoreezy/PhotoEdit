@@ -13,8 +13,7 @@ class ViewAssembly: Assembly {
     func assemble(container: Container) {
         
         container.register(RootNavigationController.self) { resolver in
-            let vc = RootNavigationController()
-            vc.viewModel = resolver.resolve(RootNavigationViewModel.self)
+            let vc = RootNavigationController(viewModel: resolver.resolve(RootNavigationViewModel.self)!)
             return vc
         }.inObjectScope(.transient)
         

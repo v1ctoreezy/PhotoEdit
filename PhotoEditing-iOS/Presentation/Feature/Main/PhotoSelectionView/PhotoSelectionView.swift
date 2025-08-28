@@ -35,7 +35,7 @@ struct PhotoSelectionView: View {
                 }
             }
         }
-        .background(
+        .overlay(
             EmptyView().fullScreenCover(isPresented: $model.showPhotoPicker, content: {
                 SUIImagePicker(sourceType: .photoLibrary, selectImage: { image in
                     model.showEditPhoto(selectedImage: image)

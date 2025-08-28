@@ -41,7 +41,7 @@ final class PhotoSelctionViewModel: ObservableObject {
     }
     
     func showImagePicker() {
-//        showPhotoPicker = true
-        actions.showImagePicker()
+        showPhotoPicker = true
+//        actions.showImagePicker()
     }
 }
