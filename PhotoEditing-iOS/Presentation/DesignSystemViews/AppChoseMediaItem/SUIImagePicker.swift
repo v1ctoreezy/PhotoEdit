@@ -53,7 +53,6 @@ struct SUIImagePicker: UIViewControllerRepresentable {
 
 final class ImagePicker: UIImagePickerController {
     private var userSourceType: UIImagePickerController.SourceType
-    
     var passImage: (UIImage) -> Void
     
     init(sourceType: UIImagePickerController.SourceType, passImage: @escaping (UIImage) -> Void) {
@@ -61,6 +60,7 @@ final class ImagePicker: UIImagePickerController {
         self.userSourceType = sourceType
         
         super.init(nibName: nil, bundle: nil)
+        configurePicker() // Добавьте вызов здесь
     }
     
     override func viewDidLoad() {
@@ -73,6 +73,8 @@ final class ImagePicker: UIImagePickerController {
     }
     
     private func configurePicker() {
+        self.mediaTypes = ["public.image"]
+        
         self.sourceType = userSourceType
         self.allowsEditing = false
         self.delegate = self
@@ -81,8 +83,13 @@ final class ImagePicker: UIImagePickerController {
 
 extension ImagePicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let image = info[.originalImage] as? UIImage {
             passImage(image)
         }
+        picker.dismiss(animated: true, completion: nil) // Добавьте dismiss
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil) // Обработка отмены
     }
 }

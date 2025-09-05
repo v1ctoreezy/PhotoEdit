@@ -12,7 +12,6 @@ protocol ImageRenderer: MTKViewDelegate {
     var currentImage: CIImage { get set }
     var verBuffer: MTLBuffer? { get set }
     
-    var currentFilter: MTLCustomPhotoFilters { get set }
     func getFilteredImage() -> CGImage?
 }
 
@@ -36,14 +35,9 @@ class ImageRendererImpl: NSObject, ImageRenderer {
         }
     }
     
-    var currentFilter: MTLCustomPhotoFilters {
-        get {
-            mtlCustromFilter
-        }
-        set {
-            mtlCustromFilter = newValue
-            createRenderPipelineState()
-            metalKitView.setNeedsDisplay()
+    var saturation: Double = 0.0 {
+        didSet {
+            applySaturation()
         }
     }
     
@@ -229,5 +223,24 @@ extension ImageRendererImpl {
         } catch {
             fatalError("Не удалось создать pipeline: \(error)")
         }
+    }
+}
+
+// MARK: - Photo Instruments
+extension ImageRendererImpl {
+    private func applyExposition() {
+        
+    }
+    
+    private func applyContast() {
+        
+    }
+    
+    private func applySaturation() {
+        
+    }
+    
+    private func applyWhiteBalance() {
+        
     }
 }

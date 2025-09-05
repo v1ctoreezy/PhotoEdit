@@ -59,7 +59,15 @@
       }
     },
     "NSPhotoLibraryUsageDescription" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Access needed to get photos"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

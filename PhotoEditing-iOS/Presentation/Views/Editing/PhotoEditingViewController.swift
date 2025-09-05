@@ -83,7 +83,7 @@ class PhotoEditingViewController: UIViewController, UINavigationBarDelegate {
 
 extension PhotoEditingViewController {
     func selectFilter(_ filter: MTLCustomPhotoFilters) {
-        renderer?.currentFilter = filter
+//        renderer?.currentFilter = filter
     }
 }
 
@@ -116,7 +116,7 @@ extension PhotoEditingViewController {
         mainView.addSubview(controlsView)
         NSLayoutConstraint.activate([
 //            controlsView.topAnchor.constraint(equalTo: mtkView.bottomAnchor),
-            controlsView.heightAnchor.constraint(equalToConstant: 175),
+            controlsView.heightAnchor.constraint(equalToConstant: 200),
             controlsView.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -30),
             controlsView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
             controlsView.trailingAnchor.constraint(equalTo: mainView.trailingAnchor)
@@ -155,6 +155,12 @@ extension PhotoEditingViewController {
             .sink { [weak self] currentCIImage in
                 guard let self = self, let ciImage = currentCIImage else { return }
                 self.renderer?.currentImage = ciImage
+            }
+            .store(in: &cancelBag)
+        
+        viewModel.$intensity
+            .sink{ [weak self] intensity in
+                self?.renderer?.saturation = intensity
             }
             .store(in: &cancelBag)
     }

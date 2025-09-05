@@ -15,6 +15,7 @@
 		440236962DE862FE00913F63 /* CGSize + Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402368F2DE862FE00913F63 /* CGSize + Helpers.swift */; };
 		4402369B2DE867EA00913F63 /* PointShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4402369A2DE867EA00913F63 /* PointShader.metal */; };
 		4402369E2DE86D3A00913F63 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402369D2DE86D3A00913F63 /* Point.swift */; };
+		4413A5F42E619B5400B5309C /* EditingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413A5F32E619B5400B5309C /* EditingSlider.swift */; };
 		446115CA2E3896E300F3EC12 /* EditingStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115C92E3896E300F3EC12 /* EditingStack.swift */; };
 		446115CC2E3899CC00F3EC12 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CB2E3899CC00F3EC12 /* LinkedList.swift */; };
 		446115CF2E46360900F3EC12 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CE2E46360900F3EC12 /* Stack.swift */; };
@@ -151,6 +152,7 @@
 		440236912DE862FE00913F63 /* UIColor + Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Utils.swift"; sourceTree = "<group>"; };
 		4402369A2DE867EA00913F63 /* PointShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PointShader.metal; sourceTree = "<group>"; };
 		4402369D2DE86D3A00913F63 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		4413A5F32E619B5400B5309C /* EditingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingSlider.swift; sourceTree = "<group>"; };
 		446115C92E3896E300F3EC12 /* EditingStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingStack.swift; sourceTree = "<group>"; };
 		446115CB2E3899CC00F3EC12 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		446115CE2E46360900F3EC12 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
@@ -323,6 +325,14 @@
 			path = DataStrucutres;
 			sourceTree = "<group>";
 		};
+		4413A5F22E619B3A00B5309C /* EditingControlls */ = {
+			isa = PBXGroup;
+			children = (
+				4413A5F32E619B5400B5309C /* EditingSlider.swift */,
+			);
+			path = EditingControlls;
+			sourceTree = "<group>";
+		};
 		446115C82E3896D400F3EC12 /* EditingStack */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +377,13 @@
 			path = Launch;
 			sourceTree = "<group>";
 		};
+		4464876D2E5E1B2B009E5BA4 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		4488FFF62E184402000F2CAF /* CustomFilters */ = {
 			isa = PBXGroup;
 			children = (
@@ -387,6 +404,7 @@
 		44AB10E42E292ED100A6BDCC /* CoreImageLUT */ = {
 			isa = PBXGroup;
 			children = (
+				4464876D2E5E1B2B009E5BA4 /* Filter */,
 				446487692E5B7BB4009E5BA4 /* LUTImageEngine.swift */,
 				44AB10E52E292F8D00A6BDCC /* LUTExporter.swift */,
 				44AB10E72E2BABBD00A6BDCC /* LUTCollection.swift */,
@@ -849,6 +867,7 @@
 		64EB68BE2DD3671300B1AB27 /* Editing */ = {
 			isa = PBXGroup;
 			children = (
+				4413A5F22E619B3A00B5309C /* EditingControlls */,
 				64EB68BC2DD1F7B800B1AB27 /* PhotoEditingViewController.swift */,
 				4488FFFF2E2297BF000F2CAF /* EditingControlsView.swift */,
 				448800012E229C95000F2CAF /* PhotoEditingViewModel.swift */,
@@ -1084,6 +1103,7 @@
 				64FD3CE42D5FDB6400478A42 /* OnboardingCoordinator.swift in Sources */,
 				644696662D5518940001DA58 /* ViewModelAssembly.swift in Sources */,
 				644696982D551A6C0001DA58 /* NetworkServiceImpl.swift in Sources */,
+				4413A5F42E619B5400B5309C /* EditingSlider.swift in Sources */,
 				644696EF2D551BCD0001DA58 /* UIImage.swift in Sources */,
 				644696B92D551B250001DA58 /* ViewControllerExt.swift in Sources */,
 				448800002E2297BF000F2CAF /* EditingControlsView.swift in Sources */,

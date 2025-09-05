@@ -88,7 +88,7 @@ enum TabBarPage: Int {
     func pageIcon() -> UIImage {
         switch self {
         case .photoEdit:
-            return UIImage(systemName: "square.and.arrow.up.badge.clock.fill")!
+            return UIImage(systemName: "location")!
         case .catalog:
             return UIImage(systemName: "crop")!
 //        case .profile:

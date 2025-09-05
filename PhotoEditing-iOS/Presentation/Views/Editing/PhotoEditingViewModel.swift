@@ -23,6 +23,8 @@ final class PhotoEditingViewModel: ObservableObject {
     @Published var currentUIImage: UIImage = UIImage.init()
     @Published var currentCIImage: CIImage?
     
+    @Published var intensity: Double = 0.0
+    
     private var disposables: CancelBag
     
     init(selectedImage: UIImage) {
@@ -40,6 +42,12 @@ final class PhotoEditingViewModel: ObservableObject {
             .sink(receiveValue: { [weak self] img in
                 self?.currentUIImage = img
             })
+            .store(in: &disposables)
+        
+        $intensity
+            .sink { value in
+                print(value)
+            }
             .store(in: &disposables)
     }
     

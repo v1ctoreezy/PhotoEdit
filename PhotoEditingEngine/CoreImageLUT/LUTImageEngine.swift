@@ -18,11 +18,24 @@ enum LUTImageEnginePhotoFilterMode {
     case original
 }
 
-enum LUTImageEngineTools {
+enum LUTControls: String, CaseIterable {
+    case filters = "camera.filters"
+    case settings = "gearshape.fill"
+    case recipe = "bookmark.fill"
+}
+
+enum LUTImageEngineTools: String {
     case exposition
     case contrast
     case saturation
     case whiteBalance
+}
+
+struct LUTEngineConfig {
+    let availableTools: [LUTImageEngineTools] = [.contrast, .exposition, .saturation, .whiteBalance]
+    let availableControls: [LUTControls] = [.filters, .settings, .recipe]
+    let photoFilterMode: LUTImageEnginePhotoFilterMode = .original
+    
 }
 
 final class LUTImageEngine: ObservableObject {
@@ -41,8 +54,20 @@ final class LUTImageEngine: ObservableObject {
     @Published var lutCollections: [LUTCollection] = []
     
     @Published var isProccessing: Bool = false
+        
+    @Published var lutEngineConfig: LUTEngineConfig = LUTEngineConfig()
     
-    @Published var photoFilterMode: LUTImageEnginePhotoFilterMode = .original
+    var photoFilterMode: LUTImageEnginePhotoFilterMode {
+        lutEngineConfig.photoFilterMode
+    }
+    
+    var lutControls: [LUTControls] {
+        lutEngineConfig.availableControls
+    }
+    
+    var lutSettingsTools: [LUTImageEngineTools] {
+        lutEngineConfig.availableTools
+    }
     
     @Published var currentValue: TestStruct?
     var editingStack = PhotoEditingStackImpl<TestStruct>()
