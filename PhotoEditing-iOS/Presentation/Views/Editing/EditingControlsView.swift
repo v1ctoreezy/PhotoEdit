@@ -38,6 +38,9 @@ struct EditingControlsView: View {
                     
                     ScrollView(.horizontal, showsIndicators: false) {
                         switch currentPage {
+                        case .draw:
+                            EmptyView()
+                                .frame(height: 75)
                         case .filters:
                             filters
                         case .settings:

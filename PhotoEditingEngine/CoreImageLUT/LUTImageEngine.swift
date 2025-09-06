@@ -19,6 +19,7 @@ enum LUTImageEnginePhotoFilterMode {
 }
 
 enum LUTControls: String, CaseIterable {
+    case draw = "paintbrush.pointed.fill"
     case filters = "camera.filters"
     case settings = "gearshape.fill"
     case recipe = "bookmark.fill"
@@ -33,7 +34,7 @@ enum LUTImageEngineTools: String {
 
 struct LUTEngineConfig {
     let availableTools: [LUTImageEngineTools] = [.contrast, .exposition, .saturation, .whiteBalance]
-    let availableControls: [LUTControls] = [.filters, .settings, .recipe]
+    let availableControls: [LUTControls] = [.draw, .filters, .settings, .recipe]
     let photoFilterMode: LUTImageEnginePhotoFilterMode = .original
     
 }
