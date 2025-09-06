@@ -20,4 +20,8 @@ enum MTLCustomPhotoFilters: String {
     case Standart = "standartColor"
     case LinearBurn = "linearBurn"
     case InvertedColor = "invertColors"
+    case Exposition = "expositionFilter"
+    case Contrast = "contrastFilter"
+    case Saturation = "saturationFilter"
+    case WhiteBalance = "whiteBalanceFilter"
 }

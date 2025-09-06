@@ -17,6 +17,10 @@ struct TestStruct: EditingStackItem {
     let value: Int
 }
 
+struct PhotoEditingActions {
+    let close: CompletionBlock
+}
+
 final class PhotoEditingViewModel: ObservableObject {
     @NestedObservableObject var lutImageEngine: LUTImageEngine
     
@@ -25,11 +29,13 @@ final class PhotoEditingViewModel: ObservableObject {
     
     @Published var intensity: Double = 0.0
     
+    private let actions: PhotoEditingActions
+    
     private var disposables: CancelBag
     
-    init(selectedImage: UIImage) {
+    init(selectedImage: UIImage, actions: PhotoEditingActions) {
         self.lutImageEngine = PhotoEditing_iOS.LUTImageEngine(selectedImage: selectedImage)
-        
+        self.actions = actions
         self.disposables = []
         
         self.lutImageEngine.currentCIImage
@@ -53,5 +59,9 @@ final class PhotoEditingViewModel: ObservableObject {
     
     func selectFilter(filter: FilterColorCube) {
         self.lutImageEngine.selectFilter(filter: filter)
+    }
+    
+    func closeScreen() {
+        actions.close()
     }
 }

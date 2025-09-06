@@ -71,7 +71,7 @@ extension PhotoSelectionCoordinator: Coordinatable {
     
     
     func showPhotoEdit(_ image: UIImage?) {
-        let vc = PhotoEditingViewController(viewModel: PhotoEditingViewModel(selectedImage: image!))
+        let vc = UIHostingController(rootView: PhotoEditingView(model: PhotoEditingViewModel(selectedImage: image!, actions: PhotoEditingActions(close: {[weak self] in self?.subRouter.dismiss(animated: true)}))))
         
         vc.modalPresentationStyle = .fullScreen
         vc.modalTransitionStyle = .coverVertical

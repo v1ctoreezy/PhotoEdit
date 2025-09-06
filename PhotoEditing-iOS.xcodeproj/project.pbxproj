@@ -16,6 +16,13 @@
 		4402369B2DE867EA00913F63 /* PointShader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 4402369A2DE867EA00913F63 /* PointShader.metal */; };
 		4402369E2DE86D3A00913F63 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4402369D2DE86D3A00913F63 /* Point.swift */; };
 		4413A5F42E619B5400B5309C /* EditingSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4413A5F32E619B5400B5309C /* EditingSlider.swift */; };
+		44278AB72E6C4B0900935D2A /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44278AB62E6C4B0500935D2A /* CanvasView.swift */; };
+		44278AB92E6C4B5000935D2A /* CanvasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44278AB82E6C4B4D00935D2A /* CanvasViewController.swift */; };
+		44278ABB2E6C4C2500935D2A /* MLCanvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44278ABA2E6C4C2100935D2A /* MLCanvas.swift */; };
+		44278ABD2E6C4CB500935D2A /* ShapesClassification.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = 44278ABC2E6C4CB500935D2A /* ShapesClassification.mlpackage */; };
+		44278ABF2E6C4D8C00935D2A /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44278ABE2E6C4D8C00935D2A /* View+Extensions.swift */; };
+		44278AC12E6C4E2000935D2A /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44278AC02E6C4E2000935D2A /* Canvas.swift */; };
+		44278AC32E6C4E5A00935D2A /* TextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44278AC22E6C4E5A00935D2A /* TextLabel.swift */; };
 		446115CA2E3896E300F3EC12 /* EditingStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115C92E3896E300F3EC12 /* EditingStack.swift */; };
 		446115CC2E3899CC00F3EC12 /* LinkedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CB2E3899CC00F3EC12 /* LinkedList.swift */; };
 		446115CF2E46360900F3EC12 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 446115CE2E46360900F3EC12 /* Stack.swift */; };
@@ -136,7 +143,7 @@
 		649F5FFB2D64B28B006494D1 /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649F5FFA2D64B28B006494D1 /* LaunchView.swift */; };
 		649F5FFD2D64B359006494D1 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649F5FFC2D64B359006494D1 /* LaunchViewModel.swift */; };
 		649F5FFF2D64B443006494D1 /* LaunchScreenFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649F5FFE2D64B443006494D1 /* LaunchScreenFactory.swift */; };
-		64EB68BD2DD1F7B800B1AB27 /* PhotoEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EB68BC2DD1F7B800B1AB27 /* PhotoEditingViewController.swift */; };
+		64EB68BD2DD1F7B800B1AB27 /* PhotoEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EB68BC2DD1F7B800B1AB27 /* PhotoEditingView.swift */; };
 		64FD3CE42D5FDB6400478A42 /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FD3CE32D5FDB6400478A42 /* OnboardingCoordinator.swift */; };
 		64FD3CE62D5FE24300478A42 /* ImageProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64FD3CE52D5FE24300478A42 /* ImageProcessor.swift */; };
 		9CC38A52350E7E18FA0FFBBA /* Pods_PhotoEditing_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0F9826AD755896C502F55F0 /* Pods_PhotoEditing_iOS.framework */; };
@@ -153,6 +160,13 @@
 		4402369A2DE867EA00913F63 /* PointShader.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PointShader.metal; sourceTree = "<group>"; };
 		4402369D2DE86D3A00913F63 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		4413A5F32E619B5400B5309C /* EditingSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingSlider.swift; sourceTree = "<group>"; };
+		44278AB62E6C4B0500935D2A /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		44278AB82E6C4B4D00935D2A /* CanvasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasViewController.swift; sourceTree = "<group>"; };
+		44278ABA2E6C4C2100935D2A /* MLCanvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLCanvas.swift; sourceTree = "<group>"; };
+		44278ABC2E6C4CB500935D2A /* ShapesClassification.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; path = ShapesClassification.mlpackage; sourceTree = "<group>"; };
+		44278ABE2E6C4D8C00935D2A /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
+		44278AC02E6C4E2000935D2A /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		44278AC22E6C4E5A00935D2A /* TextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLabel.swift; sourceTree = "<group>"; };
 		446115C92E3896E300F3EC12 /* EditingStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditingStack.swift; sourceTree = "<group>"; };
 		446115CB2E3899CC00F3EC12 /* LinkedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkedList.swift; sourceTree = "<group>"; };
 		446115CE2E46360900F3EC12 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
@@ -274,7 +288,7 @@
 		649F5FFA2D64B28B006494D1 /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
 		649F5FFC2D64B359006494D1 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
 		649F5FFE2D64B443006494D1 /* LaunchScreenFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenFactory.swift; sourceTree = "<group>"; };
-		64EB68BC2DD1F7B800B1AB27 /* PhotoEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditingViewController.swift; sourceTree = "<group>"; };
+		64EB68BC2DD1F7B800B1AB27 /* PhotoEditingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditingView.swift; sourceTree = "<group>"; };
 		64FD3CE32D5FDB6400478A42 /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		64FD3CE52D5FE24300478A42 /* ImageProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageProcessor.swift; sourceTree = "<group>"; };
 		C0F9826AD755896C502F55F0 /* Pods_PhotoEditing_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoEditing_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -303,6 +317,7 @@
 				4402368F2DE862FE00913F63 /* CGSize + Helpers.swift */,
 				440236902DE862FE00913F63 /* Number+Helpers.swift */,
 				440236912DE862FE00913F63 /* UIColor + Utils.swift */,
+				44278ABE2E6C4D8C00935D2A /* View+Extensions.swift */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -331,6 +346,18 @@
 				4413A5F32E619B5400B5309C /* EditingSlider.swift */,
 			);
 			path = EditingControlls;
+			sourceTree = "<group>";
+		};
+		44278AB52E6C4AFE00935D2A /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				44278AC22E6C4E5A00935D2A /* TextLabel.swift */,
+				44278ABA2E6C4C2100935D2A /* MLCanvas.swift */,
+				44278AB82E6C4B4D00935D2A /* CanvasViewController.swift */,
+				44278AB62E6C4B0500935D2A /* CanvasView.swift */,
+				44278AC02E6C4E2000935D2A /* Canvas.swift */,
+			);
+			path = Drawing;
 			sourceTree = "<group>";
 		};
 		446115C82E3896D400F3EC12 /* EditingStack */ = {
@@ -753,6 +780,7 @@
 		644696E92D551BCD0001DA58 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44278ABC2E6C4CB500935D2A /* ShapesClassification.mlpackage */,
 				644696DE2D551BCD0001DA58 /* Fonts */,
 				644696E32D551BCD0001DA58 /* GeneratedResources */,
 				644696E42D551BCD0001DA58 /* Assets.xcassets */,
@@ -814,6 +842,7 @@
 		646B9CFD2D56783700D14EDB /* PhotoEditingEngine */ = {
 			isa = PBXGroup;
 			children = (
+				44278AB52E6C4AFE00935D2A /* Drawing */,
 				446115C82E3896D400F3EC12 /* EditingStack */,
 				44AB10E42E292ED100A6BDCC /* CoreImageLUT */,
 				4488FFF92E184B84000F2CAF /* Renderers */,
@@ -868,7 +897,7 @@
 			isa = PBXGroup;
 			children = (
 				4413A5F22E619B3A00B5309C /* EditingControlls */,
-				64EB68BC2DD1F7B800B1AB27 /* PhotoEditingViewController.swift */,
+				64EB68BC2DD1F7B800B1AB27 /* PhotoEditingView.swift */,
 				4488FFFF2E2297BF000F2CAF /* EditingControlsView.swift */,
 				448800012E229C95000F2CAF /* PhotoEditingViewModel.swift */,
 			);
@@ -1018,11 +1047,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64EB68BD2DD1F7B800B1AB27 /* PhotoEditingViewController.swift in Sources */,
+				64EB68BD2DD1F7B800B1AB27 /* PhotoEditingView.swift in Sources */,
 				646B9D032D5696EC00D14EDB /* FiltersListViewModel.swift in Sources */,
 				649F5FFB2D64B28B006494D1 /* LaunchView.swift in Sources */,
 				644696922D551A6C0001DA58 /* LogInterceptor.swift in Sources */,
 				6434879A2D58849100C19CCF /* PhotoEditingScreenFactory.swift in Sources */,
+				44278AC32E6C4E5A00935D2A /* TextLabel.swift in Sources */,
 				646B9CFF2D56785000D14EDB /* FilterStandartIOSType.swift in Sources */,
 				644696B62D551B250001DA58 /* Logger+Extensions.swift in Sources */,
 				6446962E2D5517200001DA58 /* AppFlowCoordinator.swift in Sources */,
@@ -1076,7 +1106,9 @@
 				644696412D5517CD0001DA58 /* Presentable.swift in Sources */,
 				6434879F2D58894900C19CCF /* UsersPhotoCatalogViewModel.swift in Sources */,
 				644696D02D551B6E0001DA58 /* AppInputConfig.swift in Sources */,
+				44278AB72E6C4B0900935D2A /* CanvasView.swift in Sources */,
 				644696162D5516410001DA58 /* AppDelegate.swift in Sources */,
+				44278ABD2E6C4CB500935D2A /* ShapesClassification.mlpackage in Sources */,
 				644696B82D551B250001DA58 /* UIImage+Extensions.swift in Sources */,
 				644696502D55180B0001DA58 /* AppConfig.swift in Sources */,
 				644696DB2D551B6E0001DA58 /* AppToggle.swift in Sources */,
@@ -1090,6 +1122,7 @@
 				644696EC2D551BCD0001DA58 /* ColorPalette.swift in Sources */,
 				644696182D5516410001DA58 /* SceneDelegate.swift in Sources */,
 				644696B72D551B250001DA58 /* Modifiers.swift in Sources */,
+				44278AC12E6C4E2000935D2A /* Canvas.swift in Sources */,
 				4488FFFB2E184B95000F2CAF /* DrawingRenderer.swift in Sources */,
 				644696472D5517E10001DA58 /* MainScreenFactory.swift in Sources */,
 				644696A12D551ABB0001DA58 /* RootNavigationController.swift in Sources */,
@@ -1105,6 +1138,8 @@
 				644696982D551A6C0001DA58 /* NetworkServiceImpl.swift in Sources */,
 				4413A5F42E619B5400B5309C /* EditingSlider.swift in Sources */,
 				644696EF2D551BCD0001DA58 /* UIImage.swift in Sources */,
+				44278ABB2E6C4C2500935D2A /* MLCanvas.swift in Sources */,
+				44278AB92E6C4B5000935D2A /* CanvasViewController.swift in Sources */,
 				644696B92D551B250001DA58 /* ViewControllerExt.swift in Sources */,
 				448800002E2297BF000F2CAF /* EditingControlsView.swift in Sources */,
 				649F5FFF2D64B443006494D1 /* LaunchScreenFactory.swift in Sources */,
@@ -1116,6 +1151,7 @@
 				644696D22D551B6E0001DA58 /* AppTextarea.swift in Sources */,
 				6446963C2D5517BC0001DA58 /* TabCoordinator.swift in Sources */,
 				644696432D5517CD0001DA58 /* Router.swift in Sources */,
+				44278ABF2E6C4D8C00935D2A /* View+Extensions.swift in Sources */,
 				6446969A2D551A6C0001DA58 /* NetworkConfiguration.swift in Sources */,
 				4402369E2DE86D3A00913F63 /* Point.swift in Sources */,
 				64604A342D66212800A7405A /* CIImage+Ext.swift in Sources */,

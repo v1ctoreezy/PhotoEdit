@@ -17,9 +17,10 @@ struct AppNavBar<Content: View, TrailingContent: View>: View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center, spacing: 0) {
                 Img.Icons.DsIcons.icArrowRight
+                    .renderingMode(.template)
                     .resizable()
                     .scaledToFill()
-                    .foregroundColor(.appBlue500)
+                    .foregroundColor(.appBWVariants950000)
                     .frame(width: 20, height: 20)
                     .rotationEffect(.degrees(180))
                     .onTapGesture {
