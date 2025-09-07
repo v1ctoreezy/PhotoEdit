@@ -17,48 +17,20 @@ import PencilKit
 struct PhotoEditingView: View {
     @ObservedObject var model: PhotoEditingViewModel
     
-    @State var imageView = UIImageView()
-    @State private var canvas = Canvas()
-    
-    @State private var toolPicker: PKToolPicker?
-
-    @State private var currentPage: LUTControls = .filters
+    @State private var currentPage: LUTControls = .draw
     @State private var showIntensity: Bool = false
+    
+    @State private var hidePicker = true
+    
+    @State private var canvasCommands: SUICanvasCommands? = nil
     
     var body: some View {
         ZStack {
-            AppNavBar(title: "Photo editing", backAction: model.closeScreen, trailingContent: { HStack { } }) {
+            AppNavBar(title: "Photo editing", backAction: model.closeScreen, trailingContent: { HStack { Text("show text").onTapGesture {
+                canvasCommands = .showText
+            } } }) {
                 VStack {
-                    ImageView(
-                        image: Binding(get: { model.currentUIImage }, set: { _ in }),
-                        imageView: imageView,
-                        contentMode: Binding(
-                            get: { .scaleAspectFit },
-                            set: { _ in }
-                        )
-                    )
-                    .frame(
-                        minWidth: 0,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: .infinity,
-                        alignment: .topLeading
-                    )
-                    .overlay(
-                        // Main drawing canvas
-                        CanvasView(canvas: $canvas, onChanged: { drawing in }, onSelectionChanged: { _ in })
-                        .onAppear {
-//                            mlCanvas.mainCanvas = canvas
-//                            canvas.mlCanvas = mlCanvas
-                        }
-                            .frame(
-                                minWidth: 0,
-                                maxWidth: .infinity,
-                                minHeight: 0,
-                                maxHeight: .infinity,
-                                alignment: .topLeading
-                            )
-                    )
+                    SUICanvasView(image: $model.currentUIImage, hideToolPicker: $hidePicker, canvasCommands: $canvasCommands)
                     
                     editingControlsView
                         .frame(minHeight: 75, maxHeight: 200)
@@ -210,7 +182,11 @@ struct PhotoEditingView: View {
             ForEach(model.lutImageEngine.lutControls, id: \.self) { contrl in
                 makeControlButton(systemImage: contrl.rawValue, isSelected: currentPage == contrl) {
                     currentPage = contrl
-                    
+                    if contrl == .recipe {
+//                        canvasCommands = .showText
+                    }
+//                    hidePicker = currentPage == .draw
+                    canvasCommands = .showTools(currentPage == .draw)
                 }
                 
                 Spacer()

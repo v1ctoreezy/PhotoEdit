@@ -60,8 +60,8 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
             toolPicker.setVisible(true, forFirstResponder: canvas)
             toolPicker.addObserver(canvas)
             toolPicker.selectedTool = PKInkingTool(.pen, color: .white, width: 5) // default tool
-            toolPicker.overrideUserInterfaceStyle = .dark
-            toolPicker.colorUserInterfaceStyle = .dark // required for correct black and white colors in different system modes
+            toolPicker.overrideUserInterfaceStyle = .unspecified
+            toolPicker.colorUserInterfaceStyle = .unspecified // required for correct black and white colors in different system modes
             self.toolPicker = toolPicker
         }
         
@@ -417,11 +417,48 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         // action buttons
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { action in
             guard textView.text != "" && !(textView.textColor == UIColor.lightGray && textView.text == "Aa..") else { return }
-            onSubmit?(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
+//            onSubmit?(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
+            self.addTextView(text: textView.text)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in }))
         
         present(alert, animated: true)
+    }
+    
+    func addTextView(text: String) {
+        let label = TextLabel(frame: CGRect(x: self.view.center.x - 128, y: self.view.center.y - 64, width: 256, height: 128))
+        label.accessibilityIdentifier = "textview_\(Int.random(in: 0..<65536))"
+        label.numberOfLines = 0
+        
+        label.text = text
+        label.textColor = .white
+        label.textAlignment = .center
+
+        let labelSize = label.intrinsicContentSize
+        label.bounds.size = CGSize(width: labelSize.width + 32, height: labelSize.height + 24)
+        
+        label.layer.cornerRadius = 16
+        label.layer.borderWidth = 3
+        label.layer.borderColor = UIColor.white.cgColor
+        label.tag = 1
+        label.layer.masksToBounds = true
+        label.styledLayer = label.layer.copied
+
+        label.isHidden = false
+
+        // enable multiple touch and user interaction
+        label.isUserInteractionEnabled = true
+        label.isMultipleTouchEnabled = true
+                
+        canvas.undoManager?.registerUndo(withTarget: canvas, handler: { _ in
+            label.removeFromSuperview()
+        })
+        
+        self.registerGestures(for: label)
+        self.view.addSubview(label)
+        
+//        resetSelection()
+        self.selectSubview(label)
     }
     
     /// Placeholder related method
