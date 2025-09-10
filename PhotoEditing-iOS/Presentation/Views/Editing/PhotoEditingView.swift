@@ -22,7 +22,7 @@ struct PhotoEditingView: View {
     
     @State private var hidePicker = true
     
-    @State private var canvasCommands: SUICanvasCommands? = nil
+    @State private var canvasCommands: SUICanvasCommands = .initial
     
     var body: some View {
         ZStack {

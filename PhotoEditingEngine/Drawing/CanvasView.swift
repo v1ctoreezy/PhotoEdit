@@ -22,12 +22,12 @@ struct SUICanvasView: View {
     
     @State private var canvasController: CanvasViewController<Canvas>?
     
-    @Binding var canvasCommands: SUICanvasCommands?
+    @Binding var canvasCommands: SUICanvasCommands
 
     @Binding var image: UIImage
     @Binding var showTools: Bool
     
-    init(image: Binding<UIImage>, hideToolPicker: Binding<Bool>, canvasCommands: Binding<SUICanvasCommands?>) {
+    init(image: Binding<UIImage>, hideToolPicker: Binding<Bool>, canvasCommands: Binding<SUICanvasCommands>) {
         self._image = image
         self._showTools = hideToolPicker
         self._canvasCommands = canvasCommands
@@ -70,6 +70,7 @@ struct SUICanvasView: View {
 }
 
 enum SUICanvasCommands {
+    case initial
     case showText
     case showTools(Bool)
 }
@@ -80,7 +81,7 @@ struct CanvasView<T: PKCanvasView>: UIViewControllerRepresentable {
     /// PKCanvasView object
     @Binding var canvas: T
     
-    @Binding var canvasCommands: SUICanvasCommands?
+    @Binding var canvasCommands: SUICanvasCommands
         
     /// Canvas drawing changed
     var onChanged: ((PKDrawing) -> Void)?
@@ -109,20 +110,26 @@ struct CanvasView<T: PKCanvasView>: UIViewControllerRepresentable {
             context.coordinator.showText()
         case .showTools(let bool):
             context.coordinator.toolPicker(show: bool)
-        case nil:
+        case .initial:
             break;
         }
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator()
+        return Coordinator(canvasCommands: $canvasCommands)
     }
     
     class Coordinator: NSObject, PKCanvasViewDelegate, PKToolPickerObserver {
+        @Binding var canvasCommands: SUICanvasCommands
+        
         weak var viewController: CanvasViewController<T>?
+        
+        init(canvasCommands: Binding<SUICanvasCommands>) {
+            self._canvasCommands = canvasCommands
+        }
 
         func showText() {
-            viewController?.showTextAlert(title: "DSADA", text: "DSAD", actionTitle: "DSADA", onSubmit: { _ in })
+            viewController?.showTextAlert(title: "DSADA", text: "DSAD", actionTitle: "DSADA")
         }
         
         func toolPicker(show: Bool) {

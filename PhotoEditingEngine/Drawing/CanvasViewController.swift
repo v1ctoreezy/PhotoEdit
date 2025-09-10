@@ -189,15 +189,15 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         let copy = label.copyView()
         copy.accessibilityIdentifier = "textview_\(Int.random(in: 0..<65536))"
                 
-        guard let textLabel = label as? TextLabel else { return }
+        guard let textLabel = label as? ResizableLabelView else { return }
         
-        copy.backgroundColor = textLabel.backgroundColor
-        copy.layer.backgroundColor = textLabel.backgroundColor?.cgColor
-        copy.layer.cornerRadius = textLabel.styledLayer.cornerRadius
-        copy.layer.borderWidth = textLabel.styledLayer.borderWidth
-        copy.layer.borderColor = textLabel.styledLayer.borderColor
+//        copy.backgroundColor = textLabel.backgroundColor
+//        copy.layer.backgroundColor = textLabel.backgroundColor?.cgColor
+//        copy.layer.cornerRadius = textLabel.styledLayer.cornerRadius
+//        copy.layer.borderWidth = textLabel.styledLayer.borderWidth
+//        copy.layer.borderColor = textLabel.styledLayer.borderColor
         copy.layer.masksToBounds = true
-        (copy as? TextLabel)?.styledLayer = copy.layer.copied
+        (copy as? ResizableLabelView)//?.styledLayer = copy.layer.copied
         
         // TODO: duplication offset (44, 44) maybe out of screen bounds
         UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseInOut, animations: {
@@ -327,16 +327,20 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
             guard view != highlighted else { return }
             
             // deselect another one
-            // highlighted.layer.borderColor = UIColor.black.cgColor
-            if let label = highlighted as? TextLabel {
-                highlighted.layer.cornerRadius = label.styledLayer.cornerRadius
-                highlighted.layer.borderWidth = label.styledLayer.borderWidth
-                highlighted.layer.borderColor = label.styledLayer.borderColor
+            if let resizableLabel = highlighted as? ResizableLabelView {
+                // Скрываем рамку предыдущего ResizableLabelView
+                resizableLabel.hideSelection()
             }
         }
         
-        view.layer.borderColor = UIColor.systemBlue.cgColor
-        view.layer.borderWidth = 3.0
+        // Показываем рамку для ResizableLabelView
+        if let resizableLabel = view as? ResizableLabelView {
+            resizableLabel.showSelection()
+        } else {
+            // Для обычных view показываем стандартную рамку
+            view.layer.borderColor = UIColor.systemBlue.cgColor
+            view.layer.borderWidth = 3.0
+        }
         
         highlightedSubview = view
         onSelectionChanged?(view)
@@ -345,12 +349,33 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
     
     /// Deselect text view if all the touches are outside its bounds
     func maybeDeselectSubview(_ view: UIView, touches: Set<UITouch>) {
-        guard let view = highlightedSubview else { return }
+        guard let highlighted = highlightedSubview else { return }
         
         for touch in touches {
-            if !view.bounds.contains(touch.location(in: view)) {
-                deselectSubview(view)
-                return
+            let touchLocation = touch.location(in: highlighted)
+            
+            // Для ResizableLabelView проверяем, что тап не по хэндлам
+            if let resizableLabel = highlighted as? ResizableLabelView {
+                // Проверяем, не тапнули ли по хэндлу
+                var isTouchingHandle = false
+                for handle in resizableLabel.handles {
+                    if handle.bounds.contains(touch.location(in: handle)) {
+                        isTouchingHandle = true
+                        break
+                    }
+                }
+                
+                // Если тап не по хэндлу и не по самому лейблу, то снимаем выделение
+                if !isTouchingHandle && !highlighted.bounds.contains(touchLocation) {
+                    deselectSubview(highlighted)
+                    return
+                }
+            } else {
+                // Для обычных view используем стандартную логику
+                if !highlighted.bounds.contains(touchLocation) {
+                    deselectSubview(highlighted)
+                    return
+                }
             }
         }
     }
@@ -358,11 +383,13 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
     /// Deselect passed text view - will revert border and style back
     func deselectSubview(_ view: UIView) {
         // print("deselect \(view.accessibilityIdentifier!)")
-        // view.layer.borderColor = UIColor.black.cgColor
-        if let label = view as? TextLabel {
-            view.layer.cornerRadius = label.styledLayer.cornerRadius
-            view.layer.borderWidth = label.styledLayer.borderWidth
-            view.layer.borderColor = label.styledLayer.borderColor
+        if let resizableLabel = view as? ResizableLabelView {
+            // Скрываем рамку ResizableLabelView
+            resizableLabel.hideSelection()
+        } else {
+            // Убираем стандартную рамку
+            view.layer.borderColor = UIColor.clear.cgColor
+            view.layer.borderWidth = 0
         }
         highlightedSubview = nil
         onSelectionChanged?(nil)
@@ -370,17 +397,18 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
     
     /// Shortcut to show text eding dialog
     func editTextView(_ view: UILabel) {
-        self.showTextAlert(title: "Edit", text: view.text, actionTitle: "Save") { text in
-            view.text = text
-            let size = view.intrinsicContentSize
-            view.bounds.size = CGSize(width: size.width + 32, height: size.height + 24)
-        }
+        self.showTextAlert(title: "Edit", text: view.text, actionTitle: "Save")
+//        { text in
+//            view.text = text
+//            let size = view.intrinsicContentSize
+//            view.bounds.size = CGSize(width: size.width + 32, height: size.height + 24)
+//        }
     }
     
     // MARK: Alert Text View
     
     /// Present add/edit text view dialog
-    func showTextAlert(title: String, text: String?, actionTitle: String, onSubmit: ((String) -> Void)?) {
+    func showTextAlert(title: String, text: String?, actionTitle: String) {
         let alert = UIAlertController(title: title, message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         alert.view.autoresizesSubviews = true
         alert.overrideUserInterfaceStyle = .dark
@@ -426,24 +454,20 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
     }
     
     func addTextView(text: String) {
-        let label = TextLabel(frame: CGRect(x: self.view.center.x - 128, y: self.view.center.y - 64, width: 256, height: 128))
+        let label = ResizableLabelView()
+        label.frame = .init(origin: .init(x: self.view.center.x, y: self.view.center.y), size: .zero)
         label.accessibilityIdentifier = "textview_\(Int.random(in: 0..<65536))"
-        label.numberOfLines = 0
         
+        // Устанавливаем текст (автоматически подгоняет размер)
         label.text = text
-        label.textColor = .white
-        label.textAlignment = .center
-
-        let labelSize = label.intrinsicContentSize
-        label.bounds.size = CGSize(width: labelSize.width + 32, height: labelSize.height + 24)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.tintColor = .white
         
-        label.layer.cornerRadius = 16
-        label.layer.borderWidth = 3
-        label.layer.borderColor = UIColor.white.cgColor
-        label.tag = 1
+        // Настройка внешнего вида
+        label.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
+        label.layer.cornerRadius = 8
         label.layer.masksToBounds = true
-        label.styledLayer = label.layer.copied
-
+        label.tag = 1
         label.isHidden = false
 
         // enable multiple touch and user interaction
@@ -457,7 +481,7 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         self.registerGestures(for: label)
         self.view.addSubview(label)
         
-//        resetSelection()
+        // Автоматически выделяем новый лейбл
         self.selectSubview(label)
     }
     
