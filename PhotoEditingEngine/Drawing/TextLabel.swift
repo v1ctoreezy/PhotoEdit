@@ -51,6 +51,10 @@ final class ResizableLabelView: UIView {
         label.font = .systemFont(ofSize: 18)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = true // будем управлять фреймами вручную
+        
+        self.layer.cornerRadius = 8
+        self.layer.masksToBounds = true
+        
         addSubview(label)
 
         // Tap для показа/скрытия рамки и хэндлов
@@ -159,6 +163,7 @@ final class ResizableLabelView: UIView {
         border.lineDashPattern = [4, 2]
         border.path = UIBezierPath(rect: bounds).cgPath
         layer.addSublayer(border)
+        self.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
         borderLayer = border
 
         // Создаем все хэндлы
@@ -167,6 +172,7 @@ final class ResizableLabelView: UIView {
     }
 
     func hideSelection() {
+        self.backgroundColor = .clear
         borderLayer?.removeFromSuperlayer()
         borderLayer = nil
         removeAllHandles()

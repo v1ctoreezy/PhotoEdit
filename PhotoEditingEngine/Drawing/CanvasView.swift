@@ -8,13 +8,10 @@
 import SwiftUI
 import PencilKit
 
-extension UIResponder {
-    /// Access parent controller
-    public var parentViewController: UIViewController? {
-        return next as? UIViewController ?? next?.parentViewController
-    }
+struct SUICanvasCommandsMessage: Identifiable {
+    let id: UUID = UUID()
+    let command: SUICanvasCommands
 }
-
 
 struct SUICanvasView: View {
     @State var imageView = UIImageView()
@@ -22,12 +19,12 @@ struct SUICanvasView: View {
     
     @State private var canvasController: CanvasViewController<Canvas>?
     
-    @Binding var canvasCommands: SUICanvasCommands
+    @Binding var canvasCommands: SUICanvasCommandsMessage
 
     @Binding var image: UIImage
     @Binding var showTools: Bool
     
-    init(image: Binding<UIImage>, hideToolPicker: Binding<Bool>, canvasCommands: Binding<SUICanvasCommands>) {
+    init(image: Binding<UIImage>, hideToolPicker: Binding<Bool>, canvasCommands: Binding<SUICanvasCommandsMessage>) {
         self._image = image
         self._showTools = hideToolPicker
         self._canvasCommands = canvasCommands
@@ -39,7 +36,7 @@ struct SUICanvasView: View {
                 image: Binding(get: { image }, set: { _ in }),
                 imageView: imageView,
                 contentMode: Binding(
-                    get: { .scaleAspectFit },
+                    get: { .scaleAspectFill },
                     set: { _ in }
                 )
             )
@@ -71,17 +68,18 @@ struct SUICanvasView: View {
 
 enum SUICanvasCommands {
     case initial
-    case showText
+    case showText(title: String, text: String, actionTitle: String)
     case showTools(Bool)
+    case undo
 }
 
-struct CanvasView<T: PKCanvasView>: UIViewControllerRepresentable {
+fileprivate struct CanvasView<T: PKCanvasView>: UIViewControllerRepresentable {
     typealias UIViewControllerType = CanvasViewController<T>
     
     /// PKCanvasView object
     @Binding var canvas: T
     
-    @Binding var canvasCommands: SUICanvasCommands
+    @Binding var canvasCommands: SUICanvasCommandsMessage
         
     /// Canvas drawing changed
     var onChanged: ((PKDrawing) -> Void)?
@@ -105,36 +103,46 @@ struct CanvasView<T: PKCanvasView>: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        switch canvasCommands {
-        case .showText:
-            context.coordinator.showText()
+        switch canvasCommands.command {
+        case .showText(let title, let text, let actionTitle):
+            context.coordinator.showText(title: title, text: text, actionTitle: actionTitle)
         case .showTools(let bool):
             context.coordinator.toolPicker(show: bool)
+        case .undo:
+            context.coordinator.viewController?.canvas.undoManager?.undo()
         case .initial:
             break;
         }
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(canvasCommands: $canvasCommands)
+        return Coordinator()
     }
     
     class Coordinator: NSObject, PKCanvasViewDelegate, PKToolPickerObserver {
-        @Binding var canvasCommands: SUICanvasCommands
+        private var isToolpickerOnScreen: Bool = true
         
         weak var viewController: CanvasViewController<T>?
-        
-        init(canvasCommands: Binding<SUICanvasCommands>) {
-            self._canvasCommands = canvasCommands
-        }
 
-        func showText() {
-            viewController?.showTextAlert(title: "DSADA", text: "DSAD", actionTitle: "DSADA")
+        func showText(title: String, text: String, actionTitle: String) {
+            viewController?.showTextAlert(
+                title: title,
+                text: text,
+                actionTitle: actionTitle,
+                onCancel: { [weak self] in
+                    guard let self = self else { return }
+                    self.toolPicker(show: self.isToolpickerOnScreen)
+                }
+            ) { [weak self] in
+                guard let self = self else { return }
+                self.toolPicker(show: self.isToolpickerOnScreen)
+            }
         }
         
         func toolPicker(show: Bool) {
             viewController?.canvas.becomeFirstResponder()
             viewController?.toolPicker?.setVisible(show, forFirstResponder: viewController!.canvas)
+            isToolpickerOnScreen = viewController?.toolPicker?.isVisible ?? false
         }
     }
 }

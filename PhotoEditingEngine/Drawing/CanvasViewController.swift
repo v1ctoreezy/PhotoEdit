@@ -123,14 +123,14 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         gestureRecognizer.delegate = self
         view.addGestureRecognizer(gestureRecognizer)
         
-        // MARK: Used for scaling may be disable - implemented via slider
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
-        pinchGesture.delegate = self
-        view.addGestureRecognizer(pinchGesture)
-        
-        let rotate = UIRotationGestureRecognizer.init(target: self, action: #selector(handleRotate(_:)))
-        rotate.delegate = self
-        view.addGestureRecognizer(rotate)
+//        // MARK: Used for scaling may be disable - implemented via slider
+//        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+//        pinchGesture.delegate = self
+//        view.addGestureRecognizer(pinchGesture)
+//        
+//        let rotate = UIRotationGestureRecognizer.init(target: self, action: #selector(handleRotate(_:)))
+//        rotate.delegate = self
+//        view.addGestureRecognizer(rotate)
     }
     
     /// Detect if touched outside of selected text view
@@ -186,6 +186,7 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         guard let label = self.view.subviews.first(where: {
             $0.accessibilityIdentifier == sender.accessibilityHint
         }) else { return }
+        deselectSubview(label)
         let copy = label.copyView()
         copy.accessibilityIdentifier = "textview_\(Int.random(in: 0..<65536))"
                 
@@ -207,8 +208,7 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         self.registerGestures(for: copy)
         self.view.addSubview(copy)
         
-        deselectSubview(label)
-        deselectSubview(copy)
+        selectSubview(copy)
         
         self.undoManager?.registerUndo(withTarget: self, handler: { _ in
             copy.removeFromSuperview()
@@ -408,7 +408,7 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
     // MARK: Alert Text View
     
     /// Present add/edit text view dialog
-    func showTextAlert(title: String, text: String?, actionTitle: String) {
+    func showTextAlert(title: String, text: String?, actionTitle: String, onCancel: CompletionBlock? = nil, onSubmit: CompletionBlock? = nil) {
         let alert = UIAlertController(title: title, message: "\n\n\n\n\n\n\n\n", preferredStyle: .alert)
         alert.view.autoresizesSubviews = true
         alert.overrideUserInterfaceStyle = .dark
@@ -423,7 +423,7 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
         
         // placeholder
-        if (text == nil) {
+        if (text?.isEmpty ?? true) {
             textView.text = "Aa.."
             textView.textColor = UIColor.lightGray
         } else {
@@ -445,10 +445,13 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         // action buttons
         alert.addAction(UIAlertAction(title: actionTitle, style: .default, handler: { action in
             guard textView.text != "" && !(textView.textColor == UIColor.lightGray && textView.text == "Aa..") else { return }
-//            onSubmit?(textView.text.trimmingCharacters(in: .whitespacesAndNewlines))
+            onSubmit?()
             self.addTextView(text: textView.text)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+            onCancel?()
+        }))
+        
         
         present(alert, animated: true)
     }
@@ -463,10 +466,6 @@ class CanvasViewController<T: PKCanvasView>: UIViewController, PKToolPickerObser
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         label.tintColor = .white
         
-        // Настройка внешнего вида
-        label.backgroundColor = UIColor.systemBlue.withAlphaComponent(0.1)
-        label.layer.cornerRadius = 8
-        label.layer.masksToBounds = true
         label.tag = 1
         label.isHidden = false
 

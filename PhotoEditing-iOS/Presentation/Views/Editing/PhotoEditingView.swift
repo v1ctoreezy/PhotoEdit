@@ -22,13 +22,22 @@ struct PhotoEditingView: View {
     
     @State private var hidePicker = true
     
-    @State private var canvasCommands: SUICanvasCommands = .initial
+    @State private var canvasCommands: SUICanvasCommandsMessage = .init(command: .initial)
     
     var body: some View {
         ZStack {
-            AppNavBar(title: "Photo editing", backAction: model.closeScreen, trailingContent: { HStack { Text("show text").onTapGesture {
-                canvasCommands = .showText
-            } } }) {
+            AppNavBar(
+                title: "Photo editing",
+                backAction: model.closeScreen,
+                trailingContent: {
+                    HStack {
+                        Text("show text")
+                            .onTapGesture {
+                                canvasCommands = .init(command: .showText(title: "Add text", text: "", actionTitle: "Sumbit"))
+                            }
+                    }
+                }
+            ) {
                 VStack {
                     SUICanvasView(image: $model.currentUIImage, hideToolPicker: $hidePicker, canvasCommands: $canvasCommands)
                     
@@ -182,18 +191,23 @@ struct PhotoEditingView: View {
             ForEach(model.lutImageEngine.lutControls, id: \.self) { contrl in
                 makeControlButton(systemImage: contrl.rawValue, isSelected: currentPage == contrl) {
                     currentPage = contrl
-                    if contrl == .recipe {
-//                        canvasCommands = .showText
+                    switch contrl {
+                    case .draw:
+                        self.canvasCommands = .init(command: .showTools(true))
+                    case .filters:
+                        self.canvasCommands = .init(command: .showTools(false))
+                    case .settings:
+                        self.canvasCommands = .init(command: .showTools(false))
+                    case .recipe:
+                        self.canvasCommands = .init(command: .showTools(false))
                     }
-//                    hidePicker = currentPage == .draw
-                    canvasCommands = .showTools(currentPage == .draw)
                 }
                 
                 Spacer()
             }
             
             Button {
-                
+                self.canvasCommands = .init(command: .undo)
             } label: {
                 Image(systemName: "arrow.uturn.backward")
                     .font(.app_XL)
