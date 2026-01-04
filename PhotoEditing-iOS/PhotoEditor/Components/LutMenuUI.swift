@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LutMenuUI: View {
     
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     var body: some View {
         ZStack{
@@ -102,7 +102,7 @@ struct LutMenuUILoading: View{
 ///
 struct LutMenuUIEdit: View{
     
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     var body: some View{
         VStack{
@@ -112,7 +112,7 @@ struct LutMenuUIEdit: View{
             Spacer()
             HStack{
                 Button(action: {
-                    self.shared.didReceive(action: PECtlAction.revert)
+                    self.shared.didReceive(action: PhotoEditingControllerAction.revert)
                     self.shared.lutsCtrl.onSetEditingMode(false)
                 }){
                     Image(systemName: "xmark")
@@ -124,7 +124,7 @@ struct LutMenuUIEdit: View{
                     .foregroundColor(Color.myGrayLight)
                 Spacer()
                 Button(action: {
-                    self.shared.didReceive(action: PECtlAction.commit)
+                    self.shared.didReceive(action: PhotoEditingControllerAction.commit)
                     self.shared.lutsCtrl.onSetEditingMode(false)
                 }){
                     Image(systemName: "checkmark")

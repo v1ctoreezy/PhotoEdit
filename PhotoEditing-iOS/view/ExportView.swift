@@ -96,7 +96,7 @@ struct ExportView: View {
 
 struct ExportView_Previews: PreviewProvider {
     static var previews: some View {
-        let shared = PECtl.shared
+        let shared = PhotoEditingController.shared
         shared.originUI = UIImage(named: "carem")
         return ExportView()
             .background(Color(UIColor.systemBackground))

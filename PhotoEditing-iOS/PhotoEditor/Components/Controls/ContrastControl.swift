@@ -31,7 +31,7 @@ struct ContrastControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.contrast?.value ?? 0
     }
     
@@ -40,12 +40,12 @@ struct ContrastControl: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.contrast = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.contrast = nil }))
             return
         }
         
         var f = FilterContrast()
         f.value = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.contrast = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.contrast = f }))
     }
 }

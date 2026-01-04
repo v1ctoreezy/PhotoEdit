@@ -45,7 +45,7 @@ struct WhiteBalanceControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.temperatureIntensity = edit.filters.whiteBalance?.valueTemperature ?? 0
         self.tintIntensity = edit.filters.whiteBalance?.valueTint ?? 0
         
@@ -57,13 +57,13 @@ struct WhiteBalanceControl: View {
         
         let valueTint = self.tintIntensity
         if (valueTemperature == 0 && valueTint == 0) {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.whiteBalance = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.whiteBalance = nil }))
             return
         }
         
         var f = FilterWhiteBalance()
         f.valueTint = valueTint
         f.valueTemperature = valueTemperature
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.whiteBalance = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.whiteBalance = f }))
     }
 }

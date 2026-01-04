@@ -30,7 +30,7 @@ struct VignetteControl: View {
     }
     
     func didReceiveCurrentEdit() {
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.vignette?.value ?? 0
     }
     
@@ -39,12 +39,12 @@ struct VignetteControl: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.vignette = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.vignette = nil }))
             return
         }
         
         var f = FilterVignette()
         f.value = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.vignette = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.vignette = f }))
     }
 }

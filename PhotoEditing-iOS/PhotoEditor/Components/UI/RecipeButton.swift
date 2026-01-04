@@ -10,12 +10,12 @@ import SwiftUI
 import CoreData
 
 struct RecipeButton: View {
-    var data:Recipe
+    var data: Recipe
     var on:Bool
     var index:Int
     
     
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     var body: some View {
         return Button(action: valueChanged){
@@ -48,7 +48,7 @@ struct RecipeButton: View {
         }
     }
     func valueChanged() {
-        shared.didReceive(action: PECtlAction.applyRecipe(shared.recipesCtrl.recipes[index].data))
+        shared.didReceive(action: PhotoEditingControllerAction.applyRecipe(shared.recipesCtrl.recipes[index].data))
     }
     func deleteItem() {
         shared.recipesCtrl.deleteRecipe(index)

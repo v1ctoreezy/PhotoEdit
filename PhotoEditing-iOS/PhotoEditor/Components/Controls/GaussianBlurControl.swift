@@ -31,7 +31,7 @@ struct GaussianBlurControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.gaussianBlur?.value ?? 0
     }
     
@@ -40,12 +40,12 @@ struct GaussianBlurControl: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.gaussianBlur = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.gaussianBlur = nil }))
             return
         }
         
         var f = FilterGaussianBlur()
         f.value = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.gaussianBlur = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.gaussianBlur = f }))
     }
 }

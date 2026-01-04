@@ -10,7 +10,7 @@ import SwiftUI
 
 struct FilterMenuUI: View {
     
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     var index:EditMenu {
         get {
             return shared.currentEditMenu
@@ -76,7 +76,7 @@ struct FilterMenuUI: View {
                     Spacer()
                     HStack{
                         Button(action: {
-                            self.shared.didReceive(action: PECtlAction.revert)
+                            self.shared.didReceive(action: PhotoEditingControllerAction.revert)
                             self.shared.currentFilter = FilterModel.noneFilterModel
                         }){
                             Image(systemName: "xmark")
@@ -88,7 +88,7 @@ struct FilterMenuUI: View {
                             .foregroundColor(Color.myGrayLight)
                         Spacer()
                         Button(action: {
-                            self.shared.didReceive(action: PECtlAction.commit)
+                            self.shared.didReceive(action: PhotoEditingControllerAction.commit)
                             self.shared.currentFilter = FilterModel.noneFilterModel
                         }){
                             Image(systemName: "checkmark")

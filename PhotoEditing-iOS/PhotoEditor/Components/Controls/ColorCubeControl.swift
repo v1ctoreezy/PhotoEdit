@@ -29,19 +29,19 @@ struct ColorCubeControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.colorCube?.amount ?? 1
     }
     
     func valueChanged() {
         
-        guard let filter: FilterColorCube =  PECtl.shared.editState.currentEdit.filters.colorCube else {
+        guard let filter: FilterColorCube =  PhotoEditingController.shared.editState.currentEdit.filters.colorCube else {
             return
         }
         
         let value = self.filterIntensity
         let clone:FilterColorCube = FilterColorCube(name: filter.name, identifier: filter.identifier, filter: filter.filter, amount: value)
        
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.colorCube = clone }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.colorCube = clone }))
     }
 }

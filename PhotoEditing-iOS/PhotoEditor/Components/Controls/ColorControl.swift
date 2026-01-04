@@ -34,7 +34,7 @@ struct ColorControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.color?.valueBrightness ?? 0
     }
     
@@ -43,13 +43,13 @@ struct ColorControl: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.color = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.color = nil }))
             return
         }
         
         
         var f = FilterColor()
         f.valueBrightness = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.color = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.color = f }))
     }
 }

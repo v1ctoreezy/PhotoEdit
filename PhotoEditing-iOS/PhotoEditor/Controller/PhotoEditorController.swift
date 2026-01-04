@@ -13,12 +13,12 @@ import PixelEnginePackage
 import QCropper
 import CoreData
 
-class PECtl : ObservableObject{
+class PhotoEditingController : ObservableObject {
     
-    static var shared = PECtl()
+    static var shared = PhotoEditingController()
     
     init() {
-        print("init PECtl")
+        print("init PhotoEditingController")
     }
     
     // origin image: pick from gallery or camera
@@ -93,7 +93,7 @@ class PECtl : ObservableObject{
         }
     }
     
-    func didReceive(action: PECtlAction) {
+    func didReceive(action: PhotoEditingControllerAction) {
         switch action {
         case .setFilter(let closure):
             setFilterDelay(filters: closure)

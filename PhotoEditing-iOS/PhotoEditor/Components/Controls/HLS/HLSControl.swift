@@ -89,7 +89,7 @@ struct HLSControl: View {
     }
     
     func didReceiveCurrentEdit() {
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         guard let hsv:FilterHLS = edit.filters.hls else{
             self.inputShift = FilterHLS.defaultValue
             print("hsv NULL")
@@ -114,6 +114,6 @@ struct HLSControl: View {
         
         var hsv = FilterHLS()
         hsv.inputShift = self.inputShift
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.hls = hsv }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.hls = hsv }))
     }
 }

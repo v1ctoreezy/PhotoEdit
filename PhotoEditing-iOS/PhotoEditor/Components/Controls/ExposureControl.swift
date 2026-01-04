@@ -31,7 +31,7 @@ struct ExposureControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.exposure?.value ?? 0
     }
     
@@ -40,12 +40,12 @@ struct ExposureControl: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.exposure = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.exposure = nil }))
             return
         }
         
         var f = FilterExposure()
         f.value = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.exposure = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.exposure = f }))
     }
 }

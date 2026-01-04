@@ -13,7 +13,7 @@ struct LUTButton: View {
     
     var cube:PreviewFilterColorCube
     
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     var body: some View {
         let on = shared.lutsCtrl.currentCube == cube.filter.identifier
@@ -45,7 +45,7 @@ struct LUTButton: View {
     
     func valueChanged() {
         shared.lutsCtrl.currentCube = cube.filter.identifier
-        shared.didReceive(action: PECtlAction.applyFilter({ $0.colorCube = self.cube.filter }))
+        shared.didReceive(action: PhotoEditingControllerAction.applyFilter({ $0.colorCube = self.cube.filter }))
     }
     func editAmong(){
         self.shared.lutsCtrl.onSetEditingMode(true)
@@ -55,7 +55,7 @@ struct LUTButton: View {
 struct NeutralButton: View {
     
     var image: UIImage
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     var body: some View {
         let on = shared.lutsCtrl.currentCube.isEmpty
@@ -80,7 +80,7 @@ struct NeutralButton: View {
     
     func valueChanged() {
         shared.lutsCtrl.selectCube("")
-        shared.didReceive(action: PECtlAction.applyFilter({ $0.colorCube = nil }))
+        shared.didReceive(action: PhotoEditingControllerAction.applyFilter({ $0.colorCube = nil }))
     }
 }
 

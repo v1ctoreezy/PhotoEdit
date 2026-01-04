@@ -20,13 +20,13 @@ class ExportController : ObservableObject{
     
     var originRatio: Double {
         get{
-            PECtl.shared.originUI.size.width/PECtl.shared.originUI.size.height;
+            PhotoEditingController.shared.originUI.size.width/PhotoEditingController.shared.originUI.size.height;
         }
     }
     
-    var controller: PECtl {
+    var controller: PhotoEditingController {
         get {
-            PECtl.shared
+            PhotoEditingController.shared
         }
     }
     

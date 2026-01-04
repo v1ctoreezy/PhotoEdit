@@ -31,7 +31,7 @@ struct SaturationControl: View {
     
     func didReceiveCurrentEdit() {
         
-        if let edit: EditingStack.Edit = PECtl.shared.editState?.currentEdit{
+        if let edit: EditingStack.Edit = PhotoEditingController.shared.editState?.currentEdit{
             self.filterIntensity = edit.filters.saturation?.value ?? 0
         }
     }
@@ -41,13 +41,13 @@ struct SaturationControl: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.saturation = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.saturation = nil }))
             return
         }
         
         
         var f = FilterSaturation()
         f.value = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.saturation = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.saturation = f }))
     }
 }

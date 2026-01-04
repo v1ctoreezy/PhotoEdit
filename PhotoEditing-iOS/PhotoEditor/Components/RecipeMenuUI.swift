@@ -11,14 +11,14 @@ import PixelEnginePackage
 
 struct RecipeMenuUI: View {
     
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     @State var filterIntensity:Double = 0
     
     @State var showInputName:Bool = false
     
     var body: some View {
-        let hasEdit = PECtl.shared.hasRecipeToSave
+        let hasEdit = PhotoEditingController.shared.hasRecipeToSave
         return  ZStack{
             VStack{
                 Spacer()
@@ -66,7 +66,7 @@ struct RecipeMenuUI: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.fade?.intensity ?? 0
     }
     

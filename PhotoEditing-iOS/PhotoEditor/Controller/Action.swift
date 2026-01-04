@@ -10,7 +10,7 @@ import PixelEnginePackage
 import QCropper
 
     
-public enum PECtlAction {
+public enum PhotoEditingControllerAction {
     case setFilter((inout EditingStack.Edit.Filters) -> Void)
     case applyFilter((inout EditingStack.Edit.Filters) -> Void)
     case commit

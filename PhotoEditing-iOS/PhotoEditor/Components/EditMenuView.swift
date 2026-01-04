@@ -11,7 +11,7 @@ import QCropper
 
 struct EditMenuView: View {
     
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     @State var currentView:EditView = .lut
     
@@ -36,7 +36,7 @@ struct EditMenuView: View {
                         Button(action:{
                             if(self.shared.lutsCtrl.loadingLut == false){
                                 self.currentView = .filter
-                                self.shared.didReceive(action: PECtlAction.commit)
+                                self.shared.didReceive(action: PhotoEditingControllerAction.commit)
                             }
                         }){
                             IconButton(self.currentView == .filter ? "edit-color-highlight" : "edit-color")
@@ -47,7 +47,7 @@ struct EditMenuView: View {
                             IconButton(self.currentView == .recipe ? "edit-recipe-highlight" : "edit-recipe")
                         }
                         Button(action:{
-                            self.shared.didReceive(action: PECtlAction.undo)
+                            self.shared.didReceive(action: PhotoEditingControllerAction.undo)
                         }){
                             IconButton("icon-undo")
                         }

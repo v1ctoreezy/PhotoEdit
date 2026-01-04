@@ -15,7 +15,7 @@ import SwiftUI
 public class Recipe {
     
     public let data: RecipeObject
-    public var preview:UIImage?
+    public var preview: UIImage?
     
     init(data: RecipeObject){
         self.data = data
@@ -23,7 +23,6 @@ public class Recipe {
     }
     ///
     public func setImage(image:CIImage?){
-        
         if let cubeSourceCI: CIImage = image
         {
             let draft = EditingStack.init(source: StaticImageSource(source: cubeSourceCI))

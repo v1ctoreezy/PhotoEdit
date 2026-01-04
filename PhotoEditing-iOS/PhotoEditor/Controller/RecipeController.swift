@@ -18,9 +18,9 @@ class RecipeController : ObservableObject{
     
     var sourceImage:CIImage?
     
-    var controller: PECtl {
+    var controller: PhotoEditingController {
         get {
-            PECtl.shared
+            PhotoEditingController.shared
         }
     }
     

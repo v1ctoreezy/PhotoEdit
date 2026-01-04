@@ -45,7 +45,7 @@ struct ToneControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.highlightIntensity = edit.filters.highlights?.value ?? 0
         self.shadowIntensity = edit.filters.shadows?.value ?? 0
         
@@ -55,24 +55,24 @@ struct ToneControl: View {
         
         let value = self.highlightIntensity
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.highlights = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.highlights = nil }))
             return
         }
         
         var f = FilterHighlights()
         f.value = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.highlights = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.highlights = f }))
     }
     func valueShadowChanged() {
         
         let value = self.shadowIntensity
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.shadows = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.shadows = nil }))
             return
         }
         
         var f = FilterShadows()
         f.value = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.shadows = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.shadows = f }))
     }
 }

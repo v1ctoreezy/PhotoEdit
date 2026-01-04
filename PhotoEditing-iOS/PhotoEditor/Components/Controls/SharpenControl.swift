@@ -29,7 +29,7 @@ struct SharpenControl: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.sharpen?.sharpness ?? 0
     }
     
@@ -38,12 +38,12 @@ struct SharpenControl: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.sharpen = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.sharpen = nil }))
             return
         }
         
         var f = FilterSharpen()
         f.sharpness = value
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.sharpen = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.sharpen = f }))
     }
 }

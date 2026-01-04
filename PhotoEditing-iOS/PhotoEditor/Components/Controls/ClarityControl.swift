@@ -30,7 +30,7 @@ struct ClarityCode: View {
     
     func didReceiveCurrentEdit() {
         
-        let edit: EditingStack.Edit = PECtl.shared.editState.currentEdit
+        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
         self.filterIntensity = edit.filters.unsharpMask?.intensity ?? 0
     }
     
@@ -39,13 +39,13 @@ struct ClarityCode: View {
         let value = self.filterIntensity
         
         guard value != 0 else {
-            PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.unsharpMask = nil }))
+            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.unsharpMask = nil }))
             return
         }
         
         var f = FilterUnsharpMask()
         f.intensity = value
         f.radius = 0.12
-        PECtl.shared.didReceive(action: PECtlAction.setFilter({ $0.unsharpMask = f }))
+        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.unsharpMask = f }))
     }
 }

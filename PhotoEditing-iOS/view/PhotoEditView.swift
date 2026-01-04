@@ -18,16 +18,15 @@ struct PhotoEditView: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(300)){
-            PECtl.shared.setImage(image: image)
+            PhotoEditingController.shared.setImage(image: image)
         }
     }
     
     
     @State private var showImagePicker = false
     @State private var pickImage:UIImage?
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     @Environment(\.presentationMode) var presentationMode
-    
     
     var body: some View {
         NavigationView{
@@ -94,7 +93,7 @@ struct PhotoEditView_Previews: PreviewProvider {
             PhotoEditView(image: UIImage(named: "carem"))
                 .background(Color(UIColor.systemBackground))
                 .environment(\.colorScheme, .dark)
-                .environmentObject(PECtl.shared)
+                .environmentObject(PhotoEditingController.shared)
         }
     }
 }

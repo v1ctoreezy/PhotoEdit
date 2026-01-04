@@ -15,7 +15,7 @@ struct CustomCropperView: UIViewControllerRepresentable {
     
     
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var shared:PECtl
+    @EnvironmentObject var shared: PhotoEditingController
     
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<CustomCropperView>) -> CropperViewController {
@@ -42,7 +42,7 @@ class CropperViewCoordinator: NSObject, UINavigationControllerDelegate, CropperV
     }
     
     func cropperDidConfirm(_ cropper: CropperViewController, state: CropperState?) {
-        PECtl.shared.cropperCtrl.setState(state)
+        PhotoEditingController.shared.cropperCtrl.setState(state)
         parent.presentationMode.wrappedValue.dismiss()
     }
     
