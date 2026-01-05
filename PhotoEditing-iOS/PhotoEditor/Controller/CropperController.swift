@@ -1,10 +1,22 @@
 import QCropper
+import Combine
+import SwiftUI
 
-class CropperController {
+class CropperController: ObservableObject {
     
-    var state:CropperState?
+    @Published var state: CropperState?
     
-    func setState(_ state:CropperState?){
+    // Callback to notify when crop state changes
+    var onCropChanged: (() -> Void)?
+    
+    func setState(_ state: CropperState?) {
         self.state = state
+        // Notify that crop has been applied
+        onCropChanged?()
+    }
+    
+    func reset() {
+        state = nil
+        onCropChanged?()
     }
 }

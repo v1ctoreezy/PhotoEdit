@@ -16,6 +16,7 @@ class PhotoEditingController: ObservableObject {
     // cache origin: convert from UI to CI
     private(set) var originCI: CIImage?
     // crop controller
+    @NestedObservableObject
     var cropperCtrl: CropperController = CropperController()
     // luts controller
     @NestedObservableObject
@@ -25,6 +26,7 @@ class PhotoEditingController: ObservableObject {
     var recipesCtrl: RecipeController = RecipeController()
     
     private(set) var editState: EditingStack?
+    private(set) var croppedEditState: EditingStack?
     
     var currentEditMenu: EditMenu {
         return currentFilter.edit
@@ -93,10 +95,18 @@ class PhotoEditingController: ObservableObject {
         }
         
         cropperCtrl = CropperController()
+        // Set up callback to update preview when crop changes
+        cropperCtrl.onCropChanged = { [weak self] in
+            self?.applyCrop()
+        }
 
         DispatchQueue.global(qos: .background).async { [weak self] in
             self?.apply()
         }
+    }
+    
+    func resetCrop() {
+        cropperCtrl.reset()
     }
     
     func didReceive(action: PhotoEditingControllerAction) {
@@ -106,22 +116,27 @@ class PhotoEditingController: ObservableObject {
             
         case .commit:
             editState?.commit()
+            croppedEditState?.commit()
             
         case .applyFilter(let closure):
             currentRecipe = nil
             editState?.set(filters: closure)
             editState?.commit()
+            croppedEditState?.set(filters: closure)
+            croppedEditState?.commit()
             apply()
             
         case .undo:
             guard let editState = editState, editState.canUndo else { return }
             editState.undo()
+            croppedEditState?.undo()
             let name = editState.currentEdit.filters.colorCube?.identifier ?? ""
             lutsCtrl.selectCube(name)
             apply()
 
         case .revert:
             editState?.revert()
+            croppedEditState?.revert()
             apply()
         
         case .applyRecipe(let recipeObject):
@@ -141,6 +156,8 @@ class PhotoEditingController: ObservableObject {
             let currentCount = self.filterDebounceCounter
             
             self.editState?.set(filters: filters)
+            // Also apply to cropped state if it exists
+            self.croppedEditState?.set(filters: filters)
             
             DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + self.filterDebounceDelay) { [weak self] in
                 guard let self = self else { return }
@@ -156,8 +173,11 @@ class PhotoEditingController: ObservableObject {
     }
     
     private func apply() {
-        guard let editState = editState,
-              let preview = editState.previewImage else {
+        // Use cropped edit state if crop is applied, otherwise use original
+        let activeEditState = croppedEditState ?? editState
+        
+        guard let activeEditState = activeEditState,
+              let preview = activeEditState.previewImage else {
             return
         }
         
@@ -174,9 +194,49 @@ class PhotoEditingController: ObservableObject {
         let colorCube: FilterColorCube? = Data.shared.cubeBy(identifier: data.lutIdentifier ?? "")
         currentRecipe = data
         
-        editState?.set(filters: RecipeUtils.applyRecipe(data, colorCube: colorCube))
+        let recipeFilters = RecipeUtils.applyRecipe(data, colorCube: colorCube)
+        editState?.set(filters: recipeFilters)
         editState?.commit()
+        croppedEditState?.set(filters: recipeFilters)
+        croppedEditState?.commit()
         apply()
+    }
+    
+    private func applyCrop() {
+        guard let originUI = originUI,
+              let editState = editState else { return }
+        
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let self = self else { return }
+            
+            if let cropperState = self.cropperCtrl.state,
+               let croppedUIImage = originUI.cropped(withCropperState: cropperState) {
+                // Create new editing stack with cropped image
+                let croppedCI = convertUItoCI(from: croppedUIImage)
+                let source = StaticImageSource(source: croppedCI)
+                
+                // Create a new EditingStack with the cropped image
+                let aspectRatio = croppedUIImage.size.width / croppedUIImage.size.height
+                let previewHeight: CGFloat = 512
+                let previewSize = CGSize(width: previewHeight * aspectRatio, height: previewHeight)
+                
+                self.croppedEditState = EditingStack(
+                    source: source,
+                    previewSize: previewSize
+                )
+                
+                // Copy current filters to cropped edit state
+                let currentFilters = editState.currentEdit.filters
+                self.croppedEditState?.set(filters: { $0 = currentFilters })
+                
+                // Apply with cropped image
+                self.apply()
+            } else {
+                // No crop applied, use original editState
+                self.croppedEditState = nil
+                self.apply()
+            }
+        }
     }
     
     private func cleanupResources() {
@@ -184,6 +244,7 @@ class PhotoEditingController: ObservableObject {
         originUI = nil
         originCI = nil
         editState = nil
+        croppedEditState = nil
         filterDebounceCounter = 0
     }
 }
