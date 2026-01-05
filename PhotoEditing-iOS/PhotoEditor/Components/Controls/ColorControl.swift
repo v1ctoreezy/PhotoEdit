@@ -1,11 +1,3 @@
-//
-//  BrightnessControl.swift
-//  colorful-room
-//
-//  Created by macOS on 7/14/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import PixelEnginePackage
 
@@ -13,7 +5,6 @@ struct ColorControl: View {
     @State var filterIntensity:Double = 0
     
     // Todo: Missing Saturation, Contrast
-    
     var body: some View {
         
         let intensity = Binding<Double>(
@@ -33,8 +24,7 @@ struct ColorControl: View {
     }
     
     func didReceiveCurrentEdit() {
-        
-        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
+        guard let edit = PhotoEditingController.shared.editState?.currentEdit else { return }
         self.filterIntensity = edit.filters.color?.valueBrightness ?? 0
     }
     
@@ -46,7 +36,6 @@ struct ColorControl: View {
             PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.color = nil }))
             return
         }
-        
         
         var f = FilterColor()
         f.valueBrightness = value

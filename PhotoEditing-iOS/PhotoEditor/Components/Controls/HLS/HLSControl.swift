@@ -1,11 +1,3 @@
-//
-//  HLSControl.swift
-//  colorful-room
-//
-//  Created by macOS on 7/8/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import PixelEnginePackage
 
@@ -89,8 +81,8 @@ struct HLSControl: View {
     }
     
     func didReceiveCurrentEdit() {
-        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
-        guard let hsv:FilterHLS = edit.filters.hls else{
+        guard let edit = PhotoEditingController.shared.editState?.currentEdit else { return }
+        guard let hsv = edit.filters.hls else {
             self.inputShift = FilterHLS.defaultValue
             print("hsv NULL")
             colorChange()
@@ -98,7 +90,6 @@ struct HLSControl: View {
         }
         self.inputShift = hsv.inputShift
         colorChange()
-        
     }
     
     func colorChange(){

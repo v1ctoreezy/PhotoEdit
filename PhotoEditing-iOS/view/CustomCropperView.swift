@@ -1,22 +1,11 @@
-//
-//  CropperViewController.swift
-//  colorful-room
-//
-//  Created by Ping9 on 26/11/2020.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import Foundation
 import SwiftUI
 import QCropper
 
-
 struct CustomCropperView: UIViewControllerRepresentable {
-    
     
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var shared: PhotoEditingController
-    
     
     func makeUIViewController(context: UIViewControllerRepresentableContext<CustomCropperView>) -> CropperViewController {
         let picker = CropperViewController(originalImage: shared.originUI ?? UIImage(), initialState: shared.cropperCtrl.state)
@@ -33,7 +22,7 @@ struct CustomCropperView: UIViewControllerRepresentable {
     }
 }
 
-class CropperViewCoordinator: NSObject, UINavigationControllerDelegate, CropperViewControllerDelegate{
+class CropperViewCoordinator: NSObject, UINavigationControllerDelegate, CropperViewControllerDelegate {
     
     let parent: CustomCropperView
     

@@ -1,10 +1,3 @@
-//
-//  RecipeModel.swift
-//  colorful-room
-//
-//  Created by Ping9 on 15/01/2022.
-//
-
 import Foundation
 import PixelEnginePackage
 import UIKit
@@ -144,7 +137,6 @@ public class RecipeUtils {
         item.hls = arrayVectorToString(filters.hls?.inputShift)
         
         // 4
-        
         do {
           try container.viewContext.save()
             return item

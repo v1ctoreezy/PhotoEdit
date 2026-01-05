@@ -1,11 +1,3 @@
-//
-//  ImageSaver.swift
-//  test
-//
-//  Created by macOS on 7/2/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import UIKit
 import Combine
 

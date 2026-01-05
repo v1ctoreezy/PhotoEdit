@@ -1,14 +1,4 @@
-//
-//  FilterModel.swift
-//  colorful-room
-//
-//  Created by Ping9 on 26/09/2021.
-//  Copyright © 2021 PingAK9. All rights reserved.
-//
-
 import Foundation
-
-
 
 public enum EditMenu {
     case none

@@ -1,11 +1,3 @@
-//
-//  RecipeMenuUI.swift
-//  colorful-room
-//
-//  Created by Ping9 on 09/10/2021.
-//  Copyright © 2021 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import PixelEnginePackage
 
@@ -65,8 +57,7 @@ struct RecipeMenuUI: View {
     }
     
     func didReceiveCurrentEdit() {
-        
-        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
+        guard let edit = PhotoEditingController.shared.editState?.currentEdit else { return }
         self.filterIntensity = edit.filters.fade?.intensity ?? 0
     }
     

@@ -1,10 +1,3 @@
-//
-//  Constants.swift
-//  colorful-room
-//
-//  Created by Ping9 on 16/01/2022.
-//
-
 import Foundation
 
 public class Constants{

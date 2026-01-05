@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  colorful-room
-//
-//  Created by macOS on 7/3/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import UIKit
 import PixelEnginePackage
@@ -19,7 +11,6 @@ struct ContentView: View {
     @State private var pickImage: UIImage?
     // for edit view
     @State private var inputImage: UIImage?
-    
     
     let imageHeight:Double = 355
     
@@ -99,7 +90,6 @@ struct ContentView: View {
         }.onAppear(perform: {
             // self.pickImage = UIImage(named: "carem")
             // self.loadImage()
-            
         })
         
     }

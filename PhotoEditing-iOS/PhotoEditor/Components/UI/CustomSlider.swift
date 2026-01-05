@@ -1,14 +1,4 @@
-//
-//  CustomSlider.swift
-//  colorful-room
-//
-//  Created by macOS on 7/15/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
-
-
 
 struct FilterSlider : View {
     
@@ -87,7 +77,6 @@ struct CustomSlider<Component: View> : View {
         }
     }
     
-    
     private func view(geometry: GeometryProxy) -> some View {
         
         let frame = geometry.frame(in: .global)
@@ -97,7 +86,6 @@ struct CustomSlider<Component: View> : View {
         let offsetX = self.getOffsetX(frame: frame)
         
         let offsetDefault = getOffsetXDefaultDot(frame: frame)
-        
         
         let knobSize = CGSize(width: knobWidth ?? frame.height, height: frame.height)
          let barSize = CGSize(width: frame.width, height:  frame.height)
@@ -112,7 +100,6 @@ struct CustomSlider<Component: View> : View {
             knob: CustomSliderModifier(name: .knob, size: knobSize, offset: offsetX),
             defaultDot: CustomSliderModifier(name: .defaultDot, size: dotSize, offset: offsetDefault)
             )
-        
         
         return ZStack { viewBuilder(modifiers).gesture(drag) }
         
@@ -146,7 +133,6 @@ struct CustomSlider<Component: View> : View {
 struct CustomSliderComponents {
 //    let barLeft: CustomSliderModifier
 //    let barRight: CustomSliderModifier
-    
     let bar: CustomSliderModifier
     let knob: CustomSliderModifier
     let defaultDot: CustomSliderModifier
@@ -156,7 +142,6 @@ struct CustomSliderModifier: ViewModifier {
     enum Name {
 //        case barLeft
 //        case barRight
-        
         case bar
         case knob
         case defaultDot

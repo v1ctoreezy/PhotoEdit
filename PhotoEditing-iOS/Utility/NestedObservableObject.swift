@@ -1,13 +1,3 @@
-//
-//  NestedObservableObject.swift
-//  colorful-room
-//
-//  Created by Ping9 on 28/06/2022.
-//
-// @ref https://www.swiftbysundell.com/articles/accessing-a-swift-property-wrappers-enclosing-instance/
-// @Ref https://stackoverflow.com/a/58406402/521197
-//
-
 import Foundation
 import Combine
 

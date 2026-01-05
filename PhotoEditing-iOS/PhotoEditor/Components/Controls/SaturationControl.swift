@@ -1,11 +1,3 @@
-//
-//  SaturationControl.swift
-//  colorful-room
-//
-//  Created by macOS on 7/14/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import PixelEnginePackage
 
@@ -44,7 +36,6 @@ struct SaturationControl: View {
             PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.saturation = nil }))
             return
         }
-        
         
         var f = FilterSaturation()
         f.value = value

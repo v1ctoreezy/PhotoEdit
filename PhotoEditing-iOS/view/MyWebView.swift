@@ -1,11 +1,3 @@
-//
-//  MyWebView.swift
-//  colorful-room
-//
-//  Created by Ping9 on 8/7/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import WebKit
 
@@ -25,7 +17,6 @@ struct MyWebView: View {
 }
 
 final class WebViewWrapper : UIViewRepresentable {
-    
     
     var request: URLRequest
     init(request: URLRequest) {

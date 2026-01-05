@@ -1,10 +1,3 @@
-//
-//  RecipeController.swift
-//  colorful-room
-//
-//  Created by Ping9 on 28/06/2022.
-//
-
 import Foundation
 import Combine
 import SwiftUI
@@ -46,10 +39,11 @@ class RecipeController : ObservableObject{
     
      ///
      func addRecipe(_ name: String){
-         if let e = RecipeUtils.addRecipe(name, filters: controller.editState.currentEdit.filters){
+         guard let editState = controller.editState else { return }
+         if let e = RecipeUtils.addRecipe(name, filters: editState.currentEdit.filters){
              let item = Recipe(data: e)
-             if(sourceImage != nil){
-                 item.setImage(image: sourceImage!)
+             if let sourceImage = sourceImage {
+                 item.setImage(image: sourceImage)
              }
              recipes.append(item)
              controller.currentRecipe = item.data

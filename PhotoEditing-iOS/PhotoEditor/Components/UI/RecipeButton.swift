@@ -1,11 +1,3 @@
-//
-//  RecipeButton.swift
-//  colorful-room
-//
-//  Created by Ping9 on 09/10/2021.
-//  Copyright © 2021 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import CoreData
 
@@ -13,7 +5,6 @@ struct RecipeButton: View {
     var data: Recipe
     var on:Bool
     var index:Int
-    
     
     @EnvironmentObject var shared: PhotoEditingController
     
@@ -54,7 +45,6 @@ struct RecipeButton: View {
         shared.recipesCtrl.deleteRecipe(index)
     }
 }
-
 
 struct RecipeEmptyButton: View {
     var name:String

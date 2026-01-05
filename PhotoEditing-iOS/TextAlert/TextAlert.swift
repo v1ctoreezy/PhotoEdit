@@ -1,10 +1,3 @@
-//
-//  TextAlert.swift
-//  colorful-room
-//
-//  Created by Ping9 on 30/11/2021.
-//
-
 import Foundation
 import UIKit
 import SwiftUI

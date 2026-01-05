@@ -1,11 +1,3 @@
-//
-//  RoadMapView.swift
-//  colorful-room
-//
-//  Created by Ping9 on 8/3/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 
 struct RoadMapView: View {
@@ -60,7 +52,6 @@ struct RoadMapView_Previews: PreviewProvider {
         RoadMapView()
     }
 }
-
 
 struct RoadStepView: View{
     

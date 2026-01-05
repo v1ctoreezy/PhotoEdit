@@ -1,11 +1,3 @@
-//
-//  ColorCubeControl.swift
-//  colorful-room
-//
-//  Created by macOS on 7/20/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import PixelEnginePackage
 
@@ -28,19 +20,17 @@ struct ColorCubeControl: View {
     }
     
     func didReceiveCurrentEdit() {
-        
-        let edit: EditingStack.Edit = PhotoEditingController.shared.editState.currentEdit
+        guard let edit = PhotoEditingController.shared.editState?.currentEdit else { return }
         self.filterIntensity = edit.filters.colorCube?.amount ?? 1
     }
     
     func valueChanged() {
-        
-        guard let filter: FilterColorCube =  PhotoEditingController.shared.editState.currentEdit.filters.colorCube else {
+        guard let filter = PhotoEditingController.shared.editState?.currentEdit.filters.colorCube else {
             return
         }
         
         let value = self.filterIntensity
-        let clone:FilterColorCube = FilterColorCube(name: filter.name, identifier: filter.identifier, filter: filter.filter, amount: value)
+        let clone = FilterColorCube(name: filter.name, identifier: filter.identifier, filter: filter.filter, amount: value)
        
         PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.colorCube = clone }))
     }

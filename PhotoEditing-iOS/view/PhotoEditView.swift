@@ -1,13 +1,4 @@
-//
-//  PhotoEditView.swift
-//  colorful-room
-//
-//  Created by macOS on 7/8/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
-
 
 struct PhotoEditView: View {
     init(image initImage:UIImage?){
@@ -21,7 +12,6 @@ struct PhotoEditView: View {
             PhotoEditingController.shared.setImage(image: image)
         }
     }
-    
     
     @State private var showImagePicker = false
     @State private var pickImage:UIImage?
@@ -71,7 +61,6 @@ struct PhotoEditView: View {
         }
     }
     
-    
     func loadImage(){
         print("Photo edit: pick image finish")
         guard let image = self.pickImage else {
@@ -82,9 +71,6 @@ struct PhotoEditView: View {
         self.shared.setImage(image: image)
     }
 }
-
-
-
 
 struct PhotoEditView_Previews: PreviewProvider {
     

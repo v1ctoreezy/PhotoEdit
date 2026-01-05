@@ -1,11 +1,3 @@
-//
-//  AppTheme.swift
-//  colorful-room
-//
-//  Created by macOS on 7/15/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import Foundation
 import SwiftUI
 

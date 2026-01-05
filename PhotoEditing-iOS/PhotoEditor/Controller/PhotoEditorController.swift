@@ -1,11 +1,3 @@
-//
-//  PhotoEditorController.swift
-//  colorful-room
-//
-//  Created by macOS on 7/8/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import Foundation
 import Combine
 import SwiftUI
@@ -13,83 +5,97 @@ import PixelEnginePackage
 import QCropper
 import CoreData
 
-class PhotoEditingController : ObservableObject {
+class PhotoEditingController: ObservableObject {
     
-    static var shared = PhotoEditingController()
+    static let shared = PhotoEditingController()
     
-    init() {
-        print("init PhotoEditingController")
-    }
+    // MARK: - Properties
     
     // origin image: pick from gallery or camera
-    var originUI:UIImage!
-    // cache origin: conver from UI to CI
-    var originCI:CIImage!
+    private(set) var originUI: UIImage?
+    // cache origin: convert from UI to CI
+    private(set) var originCI: CIImage?
     // crop controller
-    var cropperCtrl:CropperController = CropperController()
+    var cropperCtrl: CropperController = CropperController()
     // luts controller
     @NestedObservableObject
-    var lutsCtrl:LutsController = LutsController()
+    var lutsCtrl: LutsController = LutsController()
     // recipes controller
     @NestedObservableObject
-    var recipesCtrl:RecipeController = RecipeController()
+    var recipesCtrl: RecipeController = RecipeController()
     
+    private(set) var editState: EditingStack?
     
-    var editState: EditingStack!
-    
-    var currentEditMenu:EditMenu{
-        get{
-            return currentFilter.edit
-        }
+    var currentEditMenu: EditMenu {
+        return currentFilter.edit
     }
     
     // Image preview: will update after edited
     @Published
-    var previewImage:UIImage?
+    var previewImage: UIImage?
     
-    // Getter
     @Published
-    var currentRecipe:RecipeObject?
+    var currentRecipe: RecipeObject?
     
-    // 
     @Published
-    var currentFilter:FilterModel = FilterModel.noneFilterModel
+    var currentFilter: FilterModel = FilterModel.noneFilterModel
     
     // Check to show save recipe button
-    var hasRecipeToSave: Bool{
-        get{
-            return editState.canUndo && currentRecipe == nil
-        }
+    var hasRecipeToSave: Bool {
+        guard let editState = editState else { return false }
+        return editState.canUndo && currentRecipe == nil
     }
     
-    func setImage(image:UIImage) {
-        
-        /// resetUI
-        if(lutsCtrl.loadingLut == true){
+    // Debounce mechanism
+    private var filterDebounceCounter: Int = 0
+    private let filterDebounceQueue = DispatchQueue(label: "com.photoediting.filterDebounce", qos: .userInitiated)
+    private let filterDebounceDelay: TimeInterval = 0.3
+    
+    // MARK: - Initialization
+    
+    private init() {
+        print("init PhotoEditingController")
+    }
+    
+    deinit {
+        cleanupResources()
+    }
+    
+    // MARK: - Public Methods
+    
+    func setImage(image: UIImage) {
+        // Reset UI
+        guard lutsCtrl.loadingLut == false else {
             return
         }
+        
+        // Cleanup previous resources
+        cleanupResources()
+        
         currentFilter = FilterModel.noneFilterModel
         self.originUI = image
-        
         self.originCI = convertUItoCI(from: image)
         
-        self.editState = EditingStack.init(
-            source: StaticImageSource(source: self.originCI!),
-            // todo: need more code to caculator adjust with scale image
-            previewSize: CGSize(width: 512, height: 512 * self.originUI.size.width / self.originUI.size.height)
-            // previewSize: CGSize(width: self.originUI.size.width, height: self.originUI.size.height)
+        guard let originCI = self.originCI else { return }
+        
+        let aspectRatio = image.size.width / image.size.height
+        let previewHeight: CGFloat = 512
+        let previewSize = CGSize(width: previewHeight * aspectRatio, height: previewHeight)
+        
+        self.editState = EditingStack(
+            source: StaticImageSource(source: originCI),
+            previewSize: previewSize
         )
        
-        
-        if let smallImage = resizedImage(at: originCI, scale: 128 / self.originUI.size.height, aspectRatio: 1){
+        if let smallImage = resizedImage(at: originCI, scale: 128 / image.size.height, aspectRatio: 1) {
             lutsCtrl.setImage(image: smallImage)
             recipesCtrl.setImage(image: smallImage)
         }
         
         cropperCtrl = CropperController()
 
-        DispatchQueue.global(qos: .background).async{
-            self.apply()
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            self?.apply()
         }
     }
     
@@ -97,74 +103,88 @@ class PhotoEditingController : ObservableObject {
         switch action {
         case .setFilter(let closure):
             setFilterDelay(filters: closure)
+            
         case .commit:
             editState?.commit()
             
         case .applyFilter(let closure):
-            self.currentRecipe = nil
-            self.editState.set(filters: closure)
-            self.editState.commit()
-            self.apply()
+            currentRecipe = nil
+            editState?.set(filters: closure)
+            editState?.commit()
+            apply()
             
         case .undo:
-            if(editState?.canUndo == true){
-                self.editState.undo()
-                let name = self.editState.currentEdit.filters.colorCube?.identifier ?? ""
-                self.lutsCtrl.selectCube(name)
-                self.apply()
-            }
+            guard let editState = editState, editState.canUndo else { return }
+            editState.undo()
+            let name = editState.currentEdit.filters.colorCube?.identifier ?? ""
+            lutsCtrl.selectCube(name)
+            apply()
 
         case .revert:
-            self.editState.revert()
-            self.apply()
+            editState?.revert()
+            apply()
         
         case .applyRecipe(let recipeObject):
-            self.onApplyRecipe(recipeObject)
-            
+            onApplyRecipe(recipeObject)
         }
     }
     
+    // MARK: - Private Methods
     
-    var count:Int  = 0
-    func setFilterDelay(filters: (inout EditingStack.Edit.Filters) -> Void) {
+    private func setFilterDelay(filters: @escaping (inout EditingStack.Edit.Filters) -> Void) {
         currentRecipe = nil
-        self.count = self.count + 1
-        let currentCount = self.count
-        self.editState.set(filters: filters)
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 0.3, execute: {
-            // escaping closure captures non-escaping parameter
-            if (self.count == currentCount){
-                self.count  = 0
-                self.apply()
-            }else if (currentCount % 20 == 0){
-                self.apply()
+        
+        filterDebounceQueue.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.filterDebounceCounter += 1
+            let currentCount = self.filterDebounceCounter
+            
+            self.editState?.set(filters: filters)
+            
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + self.filterDebounceDelay) { [weak self] in
+                guard let self = self else { return }
+                
+                if self.filterDebounceCounter == currentCount {
+                    self.filterDebounceCounter = 0
+                    self.apply()
+                } else if currentCount % 20 == 0 {
+                    self.apply()
+                }
             }
-        })
+        }
     }
     
-    
-    func apply() {
-        guard let preview:CIImage = self.editState.previewImage else{
+    private func apply() {
+        guard let editState = editState,
+              let preview = editState.previewImage else {
             return
         }
-        DispatchQueue.main.async {
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
             if let cgimg = sharedContext.createCGImage(preview, from: preview.extent) {
                 self.previewImage = UIImage(cgImage: cgimg)
             }
         }
-        
     }
     
-    ///
-    func onApplyRecipe(_ data:RecipeObject) {
+    private func onApplyRecipe(_ data: RecipeObject) {
+        let colorCube: FilterColorCube? = Data.shared.cubeBy(identifier: data.lutIdentifier ?? "")
+        currentRecipe = data
         
-        let colorCube:FilterColorCube? = Data.shared.cubeBy(identifier: data.lutIdentifier ?? "")
-        self.currentRecipe = data
-        
-        self.editState.set(filters: RecipeUtils.applyRecipe(data, colorCube: colorCube))
-        self.editState.commit()
-        self.apply()
+        editState?.set(filters: RecipeUtils.applyRecipe(data, colorCube: colorCube))
+        editState?.commit()
+        apply()
     }
     
+    private func cleanupResources() {
+        previewImage = nil
+        originUI = nil
+        originCI = nil
+        editState = nil
+        filterDebounceCounter = 0
+    }
 }
 

@@ -1,11 +1,3 @@
-//
-//  EditController.swift
-//  test
-//
-//  Created by macOS on 7/2/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import Foundation
 import SwiftUI
 import PixelEnginePackage
@@ -23,7 +15,6 @@ class Data: ObservableObject {
 //                lutImage: neutralLUT,
 //                dimension: 64
 //            )
-            
             // basic
             let basic = Collection(name: "Basic", identifier: "Basic", cubeInfos: [])
             for i in 1...10{
@@ -69,14 +60,10 @@ class Data: ObservableObject {
         }
     }
     
-    
-    
     var neutralLUT: UIImage!
     
     var neutralCube: FilterColorCube!
     var collections:[Collection]!
-    
-    
     
     // Cube by collection
     func cubeBy(identifier:String) -> FilterColorCube?{

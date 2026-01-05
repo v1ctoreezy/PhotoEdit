@@ -1,11 +1,3 @@
-//
-//  LUTButton.swift
-//  colorful-room
-//
-//  Created by macOS on 7/14/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 import PixelEnginePackage
 
@@ -84,7 +76,6 @@ struct NeutralButton: View {
     }
 }
 
-
 struct LutLoadingButton: View {
     
     var name:String
@@ -103,6 +94,5 @@ struct LutLoadingButton: View {
                 .foregroundColor(.white)
         }
     }
-    
     
 }

@@ -1,11 +1,3 @@
-//
-//  ExportView.swift
-//  colorful-room
-//
-//  Created by macOS on 7/23/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 
 struct ExportView: View {
@@ -13,7 +5,6 @@ struct ExportView: View {
     @State var shared:ExportController = ExportController()
     @State private var showSheet:Bool = false
     @State private var showSuccessPopup = false
-    
     
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
@@ -94,13 +85,13 @@ struct ExportView: View {
     }
 }
 
-struct ExportView_Previews: PreviewProvider {
-    static var previews: some View {
-        let shared = PhotoEditingController.shared
-        shared.originUI = UIImage(named: "carem")
-        return ExportView()
-            .background(Color(UIColor.systemBackground))
-            .environment(\.colorScheme, .dark)
-            .environmentObject(shared)
-    }
-}
+//struct ExportView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let shared = PhotoEditingController.shared
+//        shared.originUI = UIImage(named: "carem")
+//        return ExportView()
+//            .background(Color(UIColor.systemBackground))
+//            .environment(\.colorScheme, .dark)
+//            .environmentObject(shared)
+//    }
+//}

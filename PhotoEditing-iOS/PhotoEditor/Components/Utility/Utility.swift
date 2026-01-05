@@ -1,19 +1,9 @@
-//
-//  Utility.swift
-//  colorful-room
-//
-//  Created by macOS on 7/16/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import Foundation
-
 
 import UIKit
 import CoreImage
 
 let sharedContext = CIContext(options: [.useSoftwareRenderer : false])
-
 
 func resizedImage(at image: CIImage, scale: CGFloat, aspectRatio: CGFloat) -> CIImage? {
     
@@ -24,7 +14,6 @@ func resizedImage(at image: CIImage, scale: CGFloat, aspectRatio: CGFloat) -> CI
     
     return filter?.outputImage
 }
-
 
 func convertUItoCI(from:UIImage) -> CIImage{
     let image = CIImage(image: from)!

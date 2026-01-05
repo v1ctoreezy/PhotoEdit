@@ -1,11 +1,3 @@
-//
-//  ImagePreviewView.swift
-//  colorful-room
-//
-//  Created by macOS on 7/8/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 
 struct ImagePreviewView: View {
@@ -27,7 +19,6 @@ struct ImagePreviewView: View {
         }
     }
 }
-
 
 struct ImagePreviewView_Previews: PreviewProvider {
     static var previews: some View {

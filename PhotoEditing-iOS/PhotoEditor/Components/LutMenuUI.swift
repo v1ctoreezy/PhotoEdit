@@ -1,11 +1,3 @@
-//
-//  LutMenuUI.swift
-//  colorful-room
-//
-//  Created by macOS on 7/14/20.
-//  Copyright © 2020 PingAK9. All rights reserved.
-//
-
 import SwiftUI
 
 struct LutMenuUI: View {
@@ -81,7 +73,6 @@ struct LutMenuUI: View {
     }
 }
 
-
 ///
 struct LutMenuUILoading: View{
     var body: some View{
@@ -119,7 +110,7 @@ struct LutMenuUIEdit: View{
                         .foregroundColor(.white)
                 }
                 Spacer()
-                Text(self.shared.editState.currentEdit.filters.colorCube?.name ?? "Lut")
+                Text(self.shared.editState?.currentEdit.filters.colorCube?.name ?? "Lut")
                     .font(.system(size: 14, weight: .regular))
                     .foregroundColor(Color.myGrayLight)
                 Spacer()

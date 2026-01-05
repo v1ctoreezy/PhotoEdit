@@ -1,10 +1,3 @@
-//
-//  colorful_roomApp.swift
-//  colorful-room
-//
-//  Created by Ping9 on 10/10/2021.
-//
-
 import SwiftUI
 
 @main
