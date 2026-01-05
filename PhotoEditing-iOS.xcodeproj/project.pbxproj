@@ -13,12 +13,12 @@
 		5924F515279408AE00BE7705 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924F514279408AE00BE7705 /* Action.swift */; };
 		5924F517279408BC00BE7705 /* ExportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924F516279408BC00BE7705 /* ExportController.swift */; };
 		5924F519279413EA00BE7705 /* StorageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5924F518279413EA00BE7705 /* StorageUtils.swift */; };
-		592B4E5127132BF400BBF5BA /* colorful_roomApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B4E5027132BF400BBF5BA /* colorful_roomApp.swift */; };
+		592B4E5127132BF400BBF5BA /* PhotoEditingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B4E5027132BF400BBF5BA /* PhotoEditingApp.swift */; };
 		592B4E5327132BF400BBF5BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B4E5227132BF400BBF5BA /* ContentView.swift */; };
 		592B4E5527132BF500BBF5BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 592B4E5427132BF500BBF5BA /* Assets.xcassets */; };
 		592B4E5827132BF500BBF5BA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 592B4E5727132BF500BBF5BA /* Preview Assets.xcassets */; };
 		592B4E5A27132BF500BBF5BA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592B4E5927132BF500BBF5BA /* Persistence.swift */; };
-		592B4E5D27132BF500BBF5BA /* colorful_room.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 592B4E5B27132BF500BBF5BA /* colorful_room.xcdatamodeld */; };
+		592B4E5D27132BF500BBF5BA /* PhotoEditing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 592B4E5B27132BF500BBF5BA /* PhotoEditing.xcdatamodeld */; };
 		592EC75C2756632C00631D09 /* TextAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 592EC75B2756632C00631D09 /* TextAlert.swift */; };
 		59752CF7286AC172001F919C /* CropperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59752CF6286AC172001F919C /* CropperController.swift */; };
 		59752CF9286AC1A5001F919C /* RecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59752CF8286AC1A5001F919C /* RecipeController.swift */; };
@@ -102,12 +102,12 @@
 		5924F516279408BC00BE7705 /* ExportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportController.swift; sourceTree = "<group>"; };
 		5924F518279413EA00BE7705 /* StorageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageUtils.swift; sourceTree = "<group>"; };
 		592B4E4D27132BF400BBF5BA /* PhotoEditing-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PhotoEditing-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		592B4E5027132BF400BBF5BA /* colorful_roomApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorful_roomApp.swift; sourceTree = "<group>"; };
+		592B4E5027132BF400BBF5BA /* PhotoEditingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoEditingApp.swift; sourceTree = "<group>"; };
 		592B4E5227132BF400BBF5BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		592B4E5427132BF500BBF5BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		592B4E5727132BF500BBF5BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		592B4E5927132BF500BBF5BA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		592B4E5C27132BF500BBF5BA /* colorful_room.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = colorful_room.xcdatamodel; sourceTree = "<group>"; };
+		592B4E5C27132BF500BBF5BA /* PhotoEditing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoEditing.xcdatamodel; sourceTree = "<group>"; };
 		592B4E6227132BF600BBF5BA /* PhotoEditing-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PhotoEditing-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		592B4E6C27132BF600BBF5BA /* PhotoEditing-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PhotoEditing-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		592EC75B2756632C00631D09 /* TextAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAlert.swift; sourceTree = "<group>"; };
@@ -267,11 +267,11 @@
 				59B31A2B271DA841002DADE8 /* photoEditor */,
 				59B31A1E271DA837002DADE8 /* model */,
 				592B4E5627132BF500BBF5BA /* Preview Content */,
-				592B4E5027132BF400BBF5BA /* colorful_roomApp.swift */,
+				592B4E5027132BF400BBF5BA /* PhotoEditingApp.swift */,
 				592B4E5227132BF400BBF5BA /* ContentView.swift */,
 				592B4E5427132BF500BBF5BA /* Assets.xcassets */,
 				592B4E5927132BF500BBF5BA /* Persistence.swift */,
-				592B4E5B27132BF500BBF5BA /* colorful_room.xcdatamodeld */,
+				592B4E5B27132BF500BBF5BA /* PhotoEditing.xcdatamodeld */,
 			);
 			path = "PhotoEditing-iOS";
 			sourceTree = "<group>";
@@ -611,7 +611,7 @@
 				59B31A6B271DA842002DADE8 /* TemperatureControl.swift in Sources */,
 				59B31A94271DA892002DADE8 /* MyWebView.swift in Sources */,
 				59752CFF286AF4B1001F919C /* NestedObservableObject.swift in Sources */,
-				592B4E5D27132BF500BBF5BA /* colorful_room.xcdatamodeld in Sources */,
+				592B4E5D27132BF500BBF5BA /* PhotoEditing.xcdatamodeld in Sources */,
 				592EC75C2756632C00631D09 /* TextAlert.swift in Sources */,
 				59752D01286B166F001F919C /* Recipe.swift in Sources */,
 				59B31A66271DA842002DADE8 /* VignetteControl.swift in Sources */,
@@ -671,7 +671,7 @@
 				5924F515279408AE00BE7705 /* Action.swift in Sources */,
 				59B31A6D271DA842002DADE8 /* ShadowsControl.swift in Sources */,
 				59B31A6A271DA842002DADE8 /* GaussianBlurControl.swift in Sources */,
-				592B4E5127132BF400BBF5BA /* colorful_roomApp.swift in Sources */,
+				592B4E5127132BF400BBF5BA /* PhotoEditingApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,13 +1052,13 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		592B4E5B27132BF500BBF5BA /* colorful_room.xcdatamodeld */ = {
+		592B4E5B27132BF500BBF5BA /* PhotoEditing.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				592B4E5C27132BF500BBF5BA /* colorful_room.xcdatamodel */,
+				592B4E5C27132BF500BBF5BA /* PhotoEditing.xcdatamodel */,
 			);
-			currentVersion = 592B4E5C27132BF500BBF5BA /* colorful_room.xcdatamodel */;
-			path = colorful_room.xcdatamodeld;
+			currentVersion = 592B4E5C27132BF500BBF5BA /* PhotoEditing.xcdatamodel */;
+			path = PhotoEditing.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

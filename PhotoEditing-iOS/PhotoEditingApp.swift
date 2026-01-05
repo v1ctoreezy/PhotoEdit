@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct colorful_roomApp: App {
+struct PhotoEditingApp: App {
     let persistenceController = PersistenceController.shared
     
     // register initial UserDefaults values every launch
@@ -17,3 +17,4 @@ struct colorful_roomApp: App {
         }
     }
 }
+

@@ -290,7 +290,7 @@ struct SharpenConfiguration: FilterControlConfiguration {
         return filter
     }
     
-    func applyFilter(_ filter: FilterSharpen?, to filters: inout EditingStack.Filters) {
+    func applyFilter(_ filter: FilterSharpen?, to filters: inout EditingStack.Edit.Filters) {
         filters.sharpen = filter
     }
 }
@@ -311,7 +311,7 @@ struct VignetteConfiguration: FilterControlConfiguration {
         return filter
     }
     
-    func applyFilter(_ filter: FilterVignette?, to filters: inout EditingStack.Filters) {
+    func applyFilter(_ filter: FilterVignette?, to filters: inout EditingStack.Edit.Filters) {
         filters.vignette = filter
     }
 }
@@ -332,7 +332,7 @@ struct ColorConfiguration: FilterControlConfiguration {
         return filter
     }
     
-    func applyFilter(_ filter: FilterColor?, to filters: inout EditingStack.Filters) {
+    func applyFilter(_ filter: FilterColor?, to filters: inout EditingStack.Edit.Filters) {
         filters.color = filter
     }
 }
