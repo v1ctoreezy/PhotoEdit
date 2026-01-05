@@ -2,58 +2,58 @@ import SwiftUI
 import PixelEnginePackage
 
 struct WhiteBalanceControl: View {
-    
-    @State var temperatureIntensity:Double = 0
-    
-    @State var tintIntensity:Double = 0
+    @State private var temperatureIntensity: Double = 0
+    @State private var tintIntensity: Double = 0
     
     var body: some View {
-        
-        let temperature = Binding<Double>(
-            get: {
-                self.temperatureIntensity
-        },
-            set: {
-                self.temperatureIntensity = $0
-                self.valueChanged()
-        }
-        )
-        let tint = Binding<Double>(
-            get: {
-                self.tintIntensity
-        },
-            set: {
-                self.tintIntensity = $0
-                self.valueChanged()
-        }
-        )
-        return VStack(spacing: 24){
-            FilterSlider(value: temperature, range: (FilterWhiteBalance.range.min, FilterWhiteBalance.range.max), lable: "Temperature", defaultValue: 0, spacing: 8)
+        VStack(spacing: 24) {
+            FilterSlider(
+                value: Binding(
+                    get: { temperatureIntensity },
+                    set: { temperatureIntensity = $0; valueChanged() }
+                ),
+                range: (FilterWhiteBalance.range.min, FilterWhiteBalance.range.max),
+                lable: "Temperature",
+                defaultValue: 0,
+                spacing: 8
+            )
             
-            FilterSlider(value: tint, range: (FilterWhiteBalance.range.min, FilterWhiteBalance.range.max),lable: "Tint", defaultValue: 0, spacing: 8)
+            FilterSlider(
+                value: Binding(
+                    get: { tintIntensity },
+                    set: { tintIntensity = $0; valueChanged() }
+                ),
+                range: (FilterWhiteBalance.range.min, FilterWhiteBalance.range.max),
+                lable: "Tint",
+                defaultValue: 0,
+                spacing: 8
+            )
         }
         .onAppear(perform: didReceiveCurrentEdit)
     }
     
-    func didReceiveCurrentEdit() {
+    private func didReceiveCurrentEdit() {
         guard let edit = PhotoEditingController.shared.editState?.currentEdit else { return }
-        self.temperatureIntensity = edit.filters.whiteBalance?.valueTemperature ?? 0
-        self.tintIntensity = edit.filters.whiteBalance?.valueTint ?? 0
+        temperatureIntensity = edit.filters.whiteBalance?.valueTemperature ?? 0
+        tintIntensity = edit.filters.whiteBalance?.valueTint ?? 0
     }
     
-    func valueChanged() {
+    private func valueChanged() {
+        let valueTemperature = temperatureIntensity
+        let valueTint = tintIntensity
         
-        let valueTemperature = self.temperatureIntensity
-        
-        let valueTint = self.tintIntensity
-        if (valueTemperature == 0 && valueTint == 0) {
-            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.whiteBalance = nil }))
+        guard valueTemperature != 0 || valueTint != 0 else {
+            PhotoEditingController.shared.didReceive(
+                action: PhotoEditingControllerAction.setFilter({ $0.whiteBalance = nil })
+            )
             return
         }
         
-        var f = FilterWhiteBalance()
-        f.valueTint = valueTint
-        f.valueTemperature = valueTemperature
-        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.whiteBalance = f }))
+        var filter = FilterWhiteBalance()
+        filter.valueTint = valueTint
+        filter.valueTemperature = valueTemperature
+        PhotoEditingController.shared.didReceive(
+            action: PhotoEditingControllerAction.setFilter({ $0.whiteBalance = filter })
+        )
     }
 }

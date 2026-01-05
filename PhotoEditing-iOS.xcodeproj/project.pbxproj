@@ -74,6 +74,7 @@
 		59B31A95271DA892002DADE8 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A87271DA892002DADE8 /* AppTheme.swift */; };
 		59B31A96271DA892002DADE8 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A88271DA892002DADE8 /* Utils.swift */; };
 		59B31A97271DA892002DADE8 /* AppContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A89271DA892002DADE8 /* AppContent.swift */; };
+		FF1FC002271DA842002DADE8 /* FilterControlConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1FC001271DA841002DADE8 /* FilterControlConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +167,7 @@
 		59B31A89271DA892002DADE8 /* AppContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppContent.swift; sourceTree = "<group>"; };
 		91676B46D8DB0C5B8B5F9F42 /* Pods-PhotoEditing-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoEditing-iOS.release.xcconfig"; path = "Target Support Files/Pods-PhotoEditing-iOS/Pods-PhotoEditing-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		DD1182218275F8BAFD4D51F6 /* Pods_PhotoEditing_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoEditing_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF1FC001271DA841002DADE8 /* FilterControlConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterControlConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -357,6 +359,7 @@
 				59B31A40271DA841002DADE8 /* ColorCubeControl.swift */,
 				59B31A41271DA841002DADE8 /* HighlightsControl.swift */,
 				59B31A42271DA841002DADE8 /* ClarityControl.swift */,
+				FF1FC001271DA841002DADE8 /* FilterControlConfiguration.swift */,
 				59B31A43271DA842002DADE8 /* VignetteControl.swift */,
 				59B31A44271DA842002DADE8 /* ToneControl.swift */,
 				59B31A45271DA842002DADE8 /* HLS */,
@@ -661,6 +664,7 @@
 				59B31A8F271DA892002DADE8 /* RoadMapView.swift in Sources */,
 				59B31A6F271DA842002DADE8 /* WhiteBalanceControl.swift in Sources */,
 				59B31A65271DA842002DADE8 /* ClarityControl.swift in Sources */,
+				FF1FC002271DA842002DADE8 /* FilterControlConfiguration.swift in Sources */,
 				59B31A56271DA842002DADE8 /* FilterModel.swift in Sources */,
 				59B31A6C271DA842002DADE8 /* ContrastControl.swift in Sources */,
 				59B31A5C271DA842002DADE8 /* CollectionButton.swift in Sources */,

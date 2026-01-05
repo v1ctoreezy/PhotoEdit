@@ -2,43 +2,7 @@ import SwiftUI
 import PixelEnginePackage
 
 struct SaturationControl: View {
-    @State var filterIntensity:Double = 0
-    
     var body: some View {
-        
-        let intensity = Binding<Double>(
-            get: {
-                self.filterIntensity
-        },
-            set: {
-                self.filterIntensity = $0
-                self.valueChanged()
-        }
-        )
-        let min = FilterSaturation.range.min
-        let max = FilterSaturation.range.max
-        return  FilterSlider(value: intensity, range: (min, max), lable: "Saturation", defaultValue: 0)
-        .onAppear(perform: didReceiveCurrentEdit)
-    }
-    
-    func didReceiveCurrentEdit() {
-        
-        if let edit: EditingStack.Edit = PhotoEditingController.shared.editState?.currentEdit{
-            self.filterIntensity = edit.filters.saturation?.value ?? 0
-        }
-    }
-    
-    func valueChanged() {
-        
-        let value = self.filterIntensity
-        
-        guard value != 0 else {
-            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.saturation = nil }))
-            return
-        }
-        
-        var f = FilterSaturation()
-        f.value = value
-        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.saturation = f }))
+        GenericFilterControl(config: SaturationConfiguration())
     }
 }

@@ -4,70 +4,131 @@ import QCropper
 struct EditMenuView: View {
     
     @EnvironmentObject var shared: PhotoEditingController
+    @State private var currentView: EditView = .lut
     
-    @State var currentView:EditView = .lut
+    // MARK: - Computed Properties
+    
+    private var shouldShowToolbar: Bool {
+        !isFilterEditingActive && !shared.lutsCtrl.editingLut
+    }
+    
+    private var isFilterEditingActive: Bool {
+        currentView == .filter && shared.currentEditMenu != .none
+    }
+    
+    // MARK: - Body
     
     var body: some View {
         GeometryReader { geometry in
-            VStack{
-                if((self.currentView == .filter && self.shared.currentEditMenu != .none) == false
-                   && self.shared.lutsCtrl.editingLut == false){
-                    HStack(spacing: 48){
-                        NavigationLink(destination:
-                                        CustomCropperView()
-                                        .navigationBarTitle("")
-                                        .navigationBarHidden(true)
-                        ){
-                            IconButton("adjustment")
-                        }
-                        Button(action:{
-                            self.currentView = .lut
-                        }){
-                            IconButton(self.currentView == .lut ? "edit-lut-highlight" : "edit-lut")
-                        }
-                        Button(action:{
-                            if(self.shared.lutsCtrl.loadingLut == false){
-                                self.currentView = .filter
-                                self.shared.didReceive(action: PhotoEditingControllerAction.commit)
-                            }
-                        }){
-                            IconButton(self.currentView == .filter ? "edit-color-highlight" : "edit-color")
-                        }
-                        Button(action:{
-                            self.currentView = .recipe
-                        }){
-                            IconButton(self.currentView == .recipe ? "edit-recipe-highlight" : "edit-recipe")
-                        }
-                        Button(action:{
-                            self.shared.didReceive(action: PhotoEditingControllerAction.undo)
-                        }){
-                            IconButton("icon-undo")
-                        }
-                    }
-                    .frame(width: geometry.size.width, height: 50)
-                    .background(Color.myPanel)
+            VStack(spacing: 0) {
+                if shouldShowToolbar {
+                    EditToolbar(
+                        currentView: $currentView,
+                        width: geometry.size.width,
+                        onUndo: handleUndo,
+                        onSwitchToFilter: handleSwitchToFilter
+                    )
                 }
+                
                 Spacer()
-                ZStack{
-                    if(self.currentView == .filter){
-                        FilterMenuUI()
-                    }
-                    if(self.currentView == .lut){
-                        LutMenuUI()
-                    }
-                    if(self.currentView == .recipe){
-                        RecipeMenuUI()
-                    }
-                }
+                
+                contentView
+                
                 Spacer()
             }
-           
         }
     }
     
+    // MARK: - Content View
+    
+    @ViewBuilder
+    private var contentView: some View {
+        switch currentView {
+        case .filter:
+            FilterMenuUI()
+        case .lut:
+            LutMenuUI()
+        case .recipe:
+            RecipeMenuUI()
+        }
+    }
+    
+    // MARK: - Actions
+    
+    private func handleUndo() {
+        shared.didReceive(action: PhotoEditingControllerAction.undo)
+    }
+    
+    private func handleSwitchToFilter() {
+        guard !shared.lutsCtrl.loadingLut else { return }
+        currentView = .filter
+        shared.didReceive(action: PhotoEditingControllerAction.commit)
+    }
 }
 
-public enum EditView{
+// MARK: - Edit Toolbar
+
+private struct EditToolbar: View {
+    @EnvironmentObject var shared: PhotoEditingController
+    @Binding var currentView: EditView
+    
+    let width: CGFloat
+    let onUndo: () -> Void
+    let onSwitchToFilter: () -> Void
+    
+    var body: some View {
+        HStack(spacing: 48) {
+            NavigationLink(destination: cropperView) {
+                IconButton("adjustment")
+            }
+            
+            ToolbarButton(
+                icon: currentView == .lut ? "edit-lut-highlight" : "edit-lut",
+                action: { currentView = .lut }
+            )
+            
+            ToolbarButton(
+                icon: currentView == .filter ? "edit-color-highlight" : "edit-color",
+                action: onSwitchToFilter
+            )
+            
+            ToolbarButton(
+                icon: currentView == .recipe ? "edit-recipe-highlight" : "edit-recipe",
+                action: { currentView = .recipe }
+            )
+            
+            ToolbarButton(
+                icon: "icon-undo",
+                action: onUndo
+            )
+        }
+        .frame(width: width, height: 50)
+        .background(Color.myPanel)
+    }
+    
+    private var cropperView: some View {
+        CustomCropperView()
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+    }
+}
+
+// MARK: - Toolbar Button
+
+private struct ToolbarButton: View {
+    let icon: String
+    let action: () -> Void
+    
+    var body: some View {
+        Button(action: action) {
+            IconButton(icon)
+        }
+    }
+}
+
+// MARK: - Edit View Enum
+
+public enum EditView {
     case lut
     case filter
     case recipe

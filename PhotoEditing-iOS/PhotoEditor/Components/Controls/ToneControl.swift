@@ -2,67 +2,18 @@ import SwiftUI
 import PixelEnginePackage
 
 struct ToneControl: View {
-    
-    @State var highlightIntensity:Double = 0
-    
-    @State var shadowIntensity:Double = 0
-    
     var body: some View {
-        
-        let highlight = Binding<Double>(
-            get: {
-                self.highlightIntensity
-        },
-            set: {
-                self.highlightIntensity = $0
-                self.valueHighlightChanged()
-        }
-        )
-        let shadow = Binding<Double>(
-            get: {
-                self.shadowIntensity
-        },
-            set: {
-                self.shadowIntensity = $0
-                self.valueShadowChanged()
-        }
-        )
-        return VStack(spacing: 24){
-            FilterSlider(value: highlight, range: (FilterHighlights.range.min, FilterHighlights.range.max), lable: "Highlights", defaultValue: 0, rangeDisplay: (0, 100), spacing: 8)
+        VStack(spacing: 24) {
+            GenericFilterControl(config: HighlightsConfiguration(
+                withLabel: "Highlights",
+                withRangeDisplay: (0, 100),
+                spacing: 8
+            ))
             
-            FilterSlider(value: shadow, range: (FilterShadows.range.min, FilterShadows.range.max),lable: "Shadows", defaultValue: 0, spacing: 8)
+            GenericFilterControl(config: ShadowsConfiguration(
+                withLabel: "Shadows",
+                spacing: 8
+            ))
         }
-        .onAppear(perform: didReceiveCurrentEdit)
-    }
-    
-    func didReceiveCurrentEdit() {
-        guard let edit = PhotoEditingController.shared.editState?.currentEdit else { return }
-        self.highlightIntensity = edit.filters.highlights?.value ?? 0
-        self.shadowIntensity = edit.filters.shadows?.value ?? 0
-    }
-    
-    func valueHighlightChanged() {
-        
-        let value = self.highlightIntensity
-        guard value != 0 else {
-            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.highlights = nil }))
-            return
-        }
-        
-        var f = FilterHighlights()
-        f.value = value
-        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.highlights = f }))
-    }
-    func valueShadowChanged() {
-        
-        let value = self.shadowIntensity
-        guard value != 0 else {
-            PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.shadows = nil }))
-            return
-        }
-        
-        var f = FilterShadows()
-        f.value = value
-        PhotoEditingController.shared.didReceive(action: PhotoEditingControllerAction.setFilter({ $0.shadows = f }))
     }
 }
