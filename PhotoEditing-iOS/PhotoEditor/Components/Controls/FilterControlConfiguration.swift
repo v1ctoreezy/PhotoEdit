@@ -22,7 +22,6 @@ extension FilterControlConfiguration {
 }
 
 // MARK: - Generic Filter Control
-
 struct GenericFilterControl<Config: FilterControlConfiguration>: View {
     let config: Config
     @State private var filterIntensity: Double = 0
@@ -291,7 +290,7 @@ struct SharpenConfiguration: FilterControlConfiguration {
         return filter
     }
     
-    func applyFilter(_ filter: FilterSharpen?, to filters: inout EditingStack.Edit.Filters) {
+    func applyFilter(_ filter: FilterSharpen?, to filters: inout EditingStack.Filters) {
         filters.sharpen = filter
     }
 }
@@ -312,7 +311,7 @@ struct VignetteConfiguration: FilterControlConfiguration {
         return filter
     }
     
-    func applyFilter(_ filter: FilterVignette?, to filters: inout EditingStack.Edit.Filters) {
+    func applyFilter(_ filter: FilterVignette?, to filters: inout EditingStack.Filters) {
         filters.vignette = filter
     }
 }
@@ -333,7 +332,7 @@ struct ColorConfiguration: FilterControlConfiguration {
         return filter
     }
     
-    func applyFilter(_ filter: FilterColor?, to filters: inout EditingStack.Edit.Filters) {
+    func applyFilter(_ filter: FilterColor?, to filters: inout EditingStack.Filters) {
         filters.color = filter
     }
 }
