@@ -88,6 +88,10 @@ class PhotoEditingController: ObservableObject {
             source: StaticImageSource(source: originCI),
             previewSize: previewSize
         )
+        
+        // Initialize with default filters to avoid empty edits array
+        self.editState?.set(filters: { _ in })
+        self.editState?.commit()
        
         if let smallImage = resizedImage(at: originCI, scale: 128 / image.size.height, aspectRatio: 1) {
             lutsCtrl.setImage(image: smallImage)
@@ -224,6 +228,9 @@ class PhotoEditingController: ObservableObject {
                     source: source,
                     previewSize: previewSize
                 )
+                
+                // Initialize with default filters first to avoid empty edits array
+                self.croppedEditState?.set(filters: { _ in })
                 
                 // Copy current filters to cropped edit state
                 let currentFilters = editState.currentEdit.filters
