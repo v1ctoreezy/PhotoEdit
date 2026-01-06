@@ -202,27 +202,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		5909A0BB2792CA6100431609 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A2F271DA841002DADE8 /* FilterModel.swift */,
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		5924F5132794086100BE7705 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A53271DA842002DADE8 /* PhotoEditorController.swift */,
-				5924F514279408AE00BE7705 /* Action.swift */,
-				5924F516279408BC00BE7705 /* ExportController.swift */,
-				59752CF6286AC172001F919C /* CropperController.swift */,
-				59752CF8286AC1A5001F919C /* RecipeController.swift */,
-				59752CFC286AC28C001F919C /* LutsController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
+	5924F5132794086100BE7705 /* Controllers */ = {
+		isa = PBXGroup;
+		children = (
+			5924F514279408AE00BE7705 /* Action.swift */,
+			59752CF6286AC172001F919C /* CropperController.swift */,
+			5924F516279408BC00BE7705 /* ExportController.swift */,
+			59752CFC286AC28C001F919C /* LutsController.swift */,
+			59B31A53271DA842002DADE8 /* PhotoEditorController.swift */,
+			59752CF8286AC1A5001F919C /* RecipeController.swift */,
+		);
+		path = Controllers;
+		sourceTree = "<group>";
+	};
 		592B4E4427132BF400BBF5BA = {
 			isa = PBXGroup;
 			children = (
@@ -243,101 +235,118 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		592B4E4F27132BF400BBF5BA /* PhotoEditing-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				592EC75A2756631900631D09 /* TextAlert */,
-				597CABA0271E733C008E9588 /* Info.plist */,
-				59B31A79271DA892002DADE8 /* UI */,
-				59B31A86271DA892002DADE8 /* Utility */,
-				59B31A7E271DA892002DADE8 /* view */,
-				59B31A2B271DA841002DADE8 /* photoEditor */,
-				59B31A1E271DA837002DADE8 /* model */,
-				592B4E5627132BF500BBF5BA /* Preview Content */,
-				592B4E5027132BF400BBF5BA /* PhotoEditingApp.swift */,
-				592B4E5227132BF400BBF5BA /* ContentView.swift */,
-				592B4E5427132BF500BBF5BA /* Assets.xcassets */,
-				592B4E5927132BF500BBF5BA /* Persistence.swift */,
-				592B4E5B27132BF500BBF5BA /* PhotoEditing.xcdatamodeld */,
-			);
-			path = "PhotoEditing-iOS";
-			sourceTree = "<group>";
-		};
-		592B4E5627132BF500BBF5BA /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				592B4E5727132BF500BBF5BA /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		592EC75A2756631900631D09 /* TextAlert */ = {
-			isa = PBXGroup;
-			children = (
-				592EC75B2756632C00631D09 /* TextAlert.swift */,
-			);
-			path = TextAlert;
-			sourceTree = "<group>";
-		};
-		59B31A1E271DA837002DADE8 /* model */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A1F271DA837002DADE8 /* Collection.swift */,
-				59B31A20271DA837002DADE8 /* Data.swift */,
-				AA1FC002271DA841002DADE8 /* LazyPreviewManager.swift */,
-				59B31A24271DA837002DADE8 /* ImageSaver.swift */,
-				59752D00286B166F001F919C /* Recipe.swift */,
-			);
-			path = model;
-			sourceTree = "<group>";
-		};
-		59B31A2B271DA841002DADE8 /* photoEditor */ = {
-			isa = PBXGroup;
-			children = (
-				5924F5132794086100BE7705 /* Controller */,
-				5909A0BB2792CA6100431609 /* model */,
-				59B31A2C271DA841002DADE8 /* PhotoEditorView.swift */,
-				59B31A30271DA841002DADE8 /* image */,
-				59B31A32271DA841002DADE8 /* Components */,
-			);
-			path = photoEditor;
-			sourceTree = "<group>";
-		};
-		59B31A30271DA841002DADE8 /* image */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A31271DA841002DADE8 /* ImagePreviewView.swift */,
-			);
-			path = image;
-			sourceTree = "<group>";
-		};
-		59B31A32271DA841002DADE8 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A33271DA841002DADE8 /* UI */,
-				59B31A3A271DA841002DADE8 /* RecipeMenuUI.swift */,
-				59B31A3B271DA841002DADE8 /* LutMenuUI.swift */,
-				59B31A3C271DA841002DADE8 /* Controls */,
-				59B31A4F271DA842002DADE8 /* FilterMenuUI.swift */,
-				59B31A50271DA842002DADE8 /* EditMenuView.swift */,
-				59B31A51271DA842002DADE8 /* Utility */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
-		59B31A33271DA841002DADE8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A34271DA841002DADE8 /* CustomSlider.swift */,
-				59B31A35271DA841002DADE8 /* LUTButton.swift */,
-				59B31A36271DA841002DADE8 /* IconButton.swift */,
-				59B31A37271DA841002DADE8 /* RecipeButton.swift */,
-				59B31A38271DA841002DADE8 /* CollectionButton.swift */,
-				59B31A39271DA841002DADE8 /* ButtonView.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
+	592B4E4F27132BF400BBF5BA /* PhotoEditing-iOS */ = {
+		isa = PBXGroup;
+		children = (
+			AA1FC100271DA001002DADE8 /* App */,
+			59B31A1E271DA837002DADE8 /* Models */,
+			AA1FC101271DA002002DADE8 /* Views */,
+			5924F5132794086100BE7705 /* Controllers */,
+			59B31A86271DA892002DADE8 /* Utilities */,
+			AA1FC102271DA003002DADE8 /* Core */,
+			AA1FC103271DA004002DADE8 /* Resources */,
+		);
+		path = "PhotoEditing-iOS";
+		sourceTree = "<group>";
+	};
+	AA1FC100271DA001002DADE8 /* App */ = {
+		isa = PBXGroup;
+		children = (
+			592B4E5227132BF400BBF5BA /* ContentView.swift */,
+			597CABA0271E733C008E9588 /* Info.plist */,
+			592B4E5027132BF400BBF5BA /* PhotoEditingApp.swift */,
+		);
+		path = App;
+		sourceTree = "<group>";
+	};
+	AA1FC102271DA003002DADE8 /* Core */ = {
+		isa = PBXGroup;
+		children = (
+			592B4E5927132BF500BBF5BA /* Persistence.swift */,
+			592B4E5B27132BF500BBF5BA /* PhotoEditing.xcdatamodeld */,
+		);
+		path = Core;
+		sourceTree = "<group>";
+	};
+	AA1FC103271DA004002DADE8 /* Resources */ = {
+		isa = PBXGroup;
+		children = (
+			592B4E5427132BF500BBF5BA /* Assets.xcassets */,
+			592B4E5627132BF500BBF5BA /* Preview Content */,
+		);
+		path = Resources;
+		sourceTree = "<group>";
+	};
+	592B4E5627132BF500BBF5BA /* Preview Content */ = {
+		isa = PBXGroup;
+		children = (
+			592B4E5727132BF500BBF5BA /* Preview Assets.xcassets */,
+		);
+		path = "Preview Content";
+		sourceTree = "<group>";
+	};
+	59B31A1E271DA837002DADE8 /* Models */ = {
+		isa = PBXGroup;
+		children = (
+			59B31A1F271DA837002DADE8 /* Collection.swift */,
+			59B31A20271DA837002DADE8 /* Data.swift */,
+			59B31A2F271DA841002DADE8 /* FilterModel.swift */,
+			59B31A24271DA837002DADE8 /* ImageSaver.swift */,
+			AA1FC002271DA841002DADE8 /* LazyPreviewManager.swift */,
+			59752D00286B166F001F919C /* Recipe.swift */,
+		);
+		path = Models;
+		sourceTree = "<group>";
+	};
+	AA1FC101271DA002002DADE8 /* Views */ = {
+		isa = PBXGroup;
+		children = (
+			59B31A32271DA841002DADE8 /* Components */,
+			AA1FC104271DA005002DADE8 /* PhotoEditor */,
+		);
+		path = Views;
+		sourceTree = "<group>";
+	};
+	AA1FC104271DA005002DADE8 /* PhotoEditor */ = {
+		isa = PBXGroup;
+		children = (
+			59B31A7F271DA892002DADE8 /* CustomCropperView.swift */,
+			59B31A83271DA892002DADE8 /* ExportView.swift */,
+			59B31A31271DA841002DADE8 /* ImagePreviewView.swift */,
+			59B31A82271DA892002DADE8 /* PhotoEditView.swift */,
+			59B31A2C271DA841002DADE8 /* PhotoEditorView.swift */,
+		);
+		path = PhotoEditor;
+		sourceTree = "<group>";
+	};
+	59B31A32271DA841002DADE8 /* Components */ = {
+		isa = PBXGroup;
+		children = (
+			59B31A33271DA841002DADE8 /* Common */,
+			59B31A3C271DA841002DADE8 /* Controls */,
+			AA1FC105271DA006002DADE8 /* Menus */,
+		);
+		path = Components;
+		sourceTree = "<group>";
+	};
+	59B31A33271DA841002DADE8 /* Common */ = {
+		isa = PBXGroup;
+		children = (
+			59B31A39271DA841002DADE8 /* ButtonView.swift */,
+			59B31A38271DA841002DADE8 /* CollectionButton.swift */,
+			59B31A34271DA841002DADE8 /* CustomSlider.swift */,
+			59B31A36271DA841002DADE8 /* IconButton.swift */,
+			59B31A7C271DA892002DADE8 /* ImageBorder.swift */,
+			59B31A81271DA892002DADE8 /* ImagePicker.swift */,
+			59B31A7D271DA892002DADE8 /* ListTitle.swift */,
+			59B31A35271DA841002DADE8 /* LUTButton.swift */,
+			59B31A7A271DA892002DADE8 /* RaiseButton.swift */,
+			59B31A37271DA841002DADE8 /* RecipeButton.swift */,
+			592EC75B2756632C00631D09 /* TextAlert.swift */,
+		);
+		path = Common;
+		sourceTree = "<group>";
+	};
 		59B31A3C271DA841002DADE8 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,47 +378,30 @@
 			path = HLS;
 			sourceTree = "<group>";
 		};
-		59B31A51271DA842002DADE8 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A52271DA842002DADE8 /* Utility.swift */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
-		59B31A79271DA892002DADE8 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A7A271DA892002DADE8 /* RaiseButton.swift */,
-				59B31A7C271DA892002DADE8 /* ImageBorder.swift */,
-				59B31A7D271DA892002DADE8 /* ListTitle.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
-		};
-		59B31A7E271DA892002DADE8 /* view */ = {
-			isa = PBXGroup;
-			children = (
-				59B31A7F271DA892002DADE8 /* CustomCropperView.swift */,
-				59B31A81271DA892002DADE8 /* ImagePicker.swift */,
-				59B31A82271DA892002DADE8 /* PhotoEditView.swift */,
-				59B31A83271DA892002DADE8 /* ExportView.swift */,
-			);
-			path = view;
-			sourceTree = "<group>";
-		};
-		59B31A86271DA892002DADE8 /* Utility */ = {
-			isa = PBXGroup;
-			children = (
-				5909A0BC2792CADF00431609 /* RecipeUtils.swift */,
-				59B31A87271DA892002DADE8 /* AppTheme.swift */,
-				59B31A89271DA892002DADE8 /* AppContent.swift */,
-				5924F5112794062C00BE7705 /* Constants.swift */,
-				59752CFE286AF4B1001F919C /* NestedObservableObject.swift */,
-			);
-			path = Utility;
-			sourceTree = "<group>";
-		};
+	AA1FC105271DA006002DADE8 /* Menus */ = {
+		isa = PBXGroup;
+		children = (
+			59B31A50271DA842002DADE8 /* EditMenuView.swift */,
+			59B31A4F271DA842002DADE8 /* FilterMenuUI.swift */,
+			59B31A3B271DA841002DADE8 /* LutMenuUI.swift */,
+			59B31A3A271DA841002DADE8 /* RecipeMenuUI.swift */,
+		);
+		path = Menus;
+		sourceTree = "<group>";
+	};
+	59B31A86271DA892002DADE8 /* Utilities */ = {
+		isa = PBXGroup;
+		children = (
+			59B31A89271DA892002DADE8 /* AppContent.swift */,
+			59B31A87271DA892002DADE8 /* AppTheme.swift */,
+			5924F5112794062C00BE7705 /* Constants.swift */,
+			59752CFE286AF4B1001F919C /* NestedObservableObject.swift */,
+			5909A0BC2792CADF00431609 /* RecipeUtils.swift */,
+			59B31A52271DA842002DADE8 /* Utility.swift */,
+		);
+		path = Utilities;
+		sourceTree = "<group>";
+	};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -801,16 +793,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17E3225507F432BBE67DCA2C /* Pods-PhotoEditing-iOS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PhotoEditing-iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = V77QWBZR65;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PhotoEditing-iOS/Info.plist";
+			ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+			ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+			CODE_SIGN_IDENTITY = "Apple Development";
+			CODE_SIGN_STYLE = Automatic;
+			CURRENT_PROJECT_VERSION = 1;
+			DEVELOPMENT_ASSET_PATHS = "\"PhotoEditing-iOS/Resources/Preview Content\"";
+			DEVELOPMENT_TEAM = V77QWBZR65;
+			ENABLE_PREVIEWS = YES;
+			GENERATE_INFOPLIST_FILE = YES;
+			INFOPLIST_FILE = "PhotoEditing-iOS/App/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access your LIBRARY to save or pick your photo";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access your LIBRARY to save or pick your photo";
@@ -840,16 +832,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 91676B46D8DB0C5B8B5F9F42 /* Pods-PhotoEditing-iOS.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"PhotoEditing-iOS/Preview Content\"";
-				DEVELOPMENT_TEAM = V77QWBZR65;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "PhotoEditing-iOS/Info.plist";
+			ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+			ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+			CODE_SIGN_IDENTITY = "Apple Development";
+			CODE_SIGN_STYLE = Automatic;
+			CURRENT_PROJECT_VERSION = 1;
+			DEVELOPMENT_ASSET_PATHS = "\"PhotoEditing-iOS/Resources/Preview Content\"";
+			DEVELOPMENT_TEAM = V77QWBZR65;
+			ENABLE_PREVIEWS = YES;
+			GENERATE_INFOPLIST_FILE = YES;
+			INFOPLIST_FILE = "PhotoEditing-iOS/App/Info.plist";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "We need access your LIBRARY to save or pick your photo";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need access your LIBRARY to save or pick your photo";
