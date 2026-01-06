@@ -24,6 +24,10 @@
 		59752CFD286AC28C001F919C /* LutsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59752CFC286AC28C001F919C /* LutsController.swift */; };
 		59752CFF286AF4B1001F919C /* NestedObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59752CFE286AF4B1001F919C /* NestedObservableObject.swift */; };
 		59752D01286B166F001F919C /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59752D00286B166F001F919C /* Recipe.swift */; };
+		AB1FC001271DA841002DADE8 /* DraggableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1FC002271DA841002DADE8 /* DraggableTextView.swift */; };
+		AB1FC003271DA841002DADE8 /* TextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1FC004271DA841002DADE8 /* TextController.swift */; };
+		AB1FC005271DA841002DADE8 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1FC006271DA841002DADE8 /* TextElement.swift */; };
+		AB1FC007271DA841002DADE8 /* TextMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1FC008271DA841002DADE8 /* TextMenuView.swift */; };
 		59B31A1D271DA5B2002DADE8 /* PixelEnginePackage in Frameworks */ = {isa = PBXBuildFile; productRef = 59B31A1C271DA5B2002DADE8 /* PixelEnginePackage */; };
 		59B31A25271DA837002DADE8 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A1F271DA837002DADE8 /* Collection.swift */; };
 		59B31A26271DA837002DADE8 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A20271DA837002DADE8 /* Data.swift */; };
@@ -109,6 +113,10 @@
 		59752CFC286AC28C001F919C /* LutsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LutsController.swift; sourceTree = "<group>"; };
 		59752CFE286AF4B1001F919C /* NestedObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedObservableObject.swift; sourceTree = "<group>"; };
 		59752D00286B166F001F919C /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		AB1FC002271DA841002DADE8 /* DraggableTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DraggableTextView.swift; sourceTree = "<group>"; };
+		AB1FC004271DA841002DADE8 /* TextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextController.swift; sourceTree = "<group>"; };
+		AB1FC006271DA841002DADE8 /* TextElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
+		AB1FC008271DA841002DADE8 /* TextMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMenuView.swift; sourceTree = "<group>"; };
 		597CABA0271E733C008E9588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		59B31A1F271DA837002DADE8 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		59B31A20271DA837002DADE8 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -211,6 +219,7 @@
 			59752CFC286AC28C001F919C /* LutsController.swift */,
 			59B31A53271DA842002DADE8 /* PhotoEditorController.swift */,
 			59752CF8286AC1A5001F919C /* RecipeController.swift */,
+			AB1FC004271DA841002DADE8 /* TextController.swift */,
 		);
 		path = Controllers;
 		sourceTree = "<group>";
@@ -294,6 +303,7 @@
 			59B31A24271DA837002DADE8 /* ImageSaver.swift */,
 			AA1FC002271DA841002DADE8 /* LazyPreviewManager.swift */,
 			59752D00286B166F001F919C /* Recipe.swift */,
+			AB1FC006271DA841002DADE8 /* TextElement.swift */,
 		);
 		path = Models;
 		sourceTree = "<group>";
@@ -335,6 +345,7 @@
 			59B31A39271DA841002DADE8 /* ButtonView.swift */,
 			59B31A38271DA841002DADE8 /* CollectionButton.swift */,
 			59B31A34271DA841002DADE8 /* CustomSlider.swift */,
+			AB1FC002271DA841002DADE8 /* DraggableTextView.swift */,
 			59B31A36271DA841002DADE8 /* IconButton.swift */,
 			59B31A7C271DA892002DADE8 /* ImageBorder.swift */,
 			59B31A81271DA892002DADE8 /* ImagePicker.swift */,
@@ -385,6 +396,7 @@
 			59B31A4F271DA842002DADE8 /* FilterMenuUI.swift */,
 			59B31A3B271DA841002DADE8 /* LutMenuUI.swift */,
 			59B31A3A271DA841002DADE8 /* RecipeMenuUI.swift */,
+			AB1FC008271DA841002DADE8 /* TextMenuView.swift */,
 		);
 		path = Menus;
 		sourceTree = "<group>";
@@ -586,6 +598,10 @@
 				59752CFF286AF4B1001F919C /* NestedObservableObject.swift in Sources */,
 				592B4E5D27132BF500BBF5BA /* PhotoEditing.xcdatamodeld in Sources */,
 				592EC75C2756632C00631D09 /* TextAlert.swift in Sources */,
+				AB1FC001271DA841002DADE8 /* DraggableTextView.swift in Sources */,
+				AB1FC003271DA841002DADE8 /* TextController.swift in Sources */,
+				AB1FC005271DA841002DADE8 /* TextElement.swift in Sources */,
+				AB1FC007271DA841002DADE8 /* TextMenuView.swift in Sources */,
 				59752D01286B166F001F919C /* Recipe.swift in Sources */,
 				59B31A66271DA842002DADE8 /* VignetteControl.swift in Sources */,
 				5924F517279408BC00BE7705 /* ExportController.swift in Sources */,

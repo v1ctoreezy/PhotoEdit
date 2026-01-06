@@ -24,6 +24,9 @@ class PhotoEditingController: ObservableObject {
     // recipes controller
     @NestedObservableObject
     var recipesCtrl: RecipeController = RecipeController()
+    // text controller
+    @NestedObservableObject
+    var textCtrl: TextController = TextController()
     
     private(set) var editState: EditingStack?
     private(set) var croppedEditState: EditingStack?

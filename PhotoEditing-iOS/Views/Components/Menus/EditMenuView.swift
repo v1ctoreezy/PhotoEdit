@@ -50,6 +50,8 @@ struct EditMenuView: View {
             LutMenuUI()
         case .recipe:
             RecipeMenuUI()
+        case .text:
+            TextMenuView()
         }
     }
     
@@ -77,7 +79,7 @@ private struct EditToolbar: View {
     let onSwitchToFilter: () -> Void
     
     var body: some View {
-        HStack(spacing: 48) {
+        HStack(spacing: 32) {
             NavigationLink(destination: cropperView) {
                 IconButton("adjustment")
             }
@@ -96,6 +98,12 @@ private struct EditToolbar: View {
                 icon: currentView == .recipe ? "edit-recipe-highlight" : "edit-recipe",
                 action: { currentView = .recipe }
             )
+            
+            Button(action: { currentView = .text }) {
+                Image(systemName: currentView == .text ? "textformat.abc" : "textformat.abc")
+                    .font(.system(size: 24))
+                    .foregroundColor(currentView == .text ? .blue : .white)
+            }
             
             ToolbarButton(
                 icon: "icon-undo",
@@ -132,4 +140,5 @@ public enum EditView {
     case lut
     case filter
     case recipe
+    case text
 }
