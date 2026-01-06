@@ -29,6 +29,10 @@
 		AB1FC005271DA841002DADE8 /* TextElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1FC006271DA841002DADE8 /* TextElement.swift */; };
 		AB1FC007271DA841002DADE8 /* TextMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1FC008271DA841002DADE8 /* TextMenuView.swift */; };
 		59B31A1D271DA5B2002DADE8 /* PixelEnginePackage in Frameworks */ = {isa = PBXBuildFile; productRef = 59B31A1C271DA5B2002DADE8 /* PixelEnginePackage */; };
+		EE1FC001271DA841002DADE8 /* EditOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1FC002271DA841002DADE8 /* EditOperation.swift */; };
+		EE1FC003271DA841002DADE8 /* EditOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1FC004271DA841002DADE8 /* EditOperationManager.swift */; };
+		EE1FC005271DA841002DADE8 /* EditOperationExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1FC006271DA841002DADE8 /* EditOperationExamples.swift */; };
+		DD1FC001271DA841002DADE8 /* OperationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1FC002271DA841002DADE8 /* OperationHistoryView.swift */; };
 		59B31A25271DA837002DADE8 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A1F271DA837002DADE8 /* Collection.swift */; };
 		59B31A26271DA837002DADE8 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A20271DA837002DADE8 /* Data.swift */; };
 		AA1FC001271DA841002DADE8 /* LazyPreviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1FC002271DA841002DADE8 /* LazyPreviewManager.swift */; };
@@ -118,6 +122,10 @@
 		AB1FC006271DA841002DADE8 /* TextElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextElement.swift; sourceTree = "<group>"; };
 		AB1FC008271DA841002DADE8 /* TextMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMenuView.swift; sourceTree = "<group>"; };
 		597CABA0271E733C008E9588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EE1FC002271DA841002DADE8 /* EditOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOperation.swift; sourceTree = "<group>"; };
+		EE1FC004271DA841002DADE8 /* EditOperationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOperationManager.swift; sourceTree = "<group>"; };
+		EE1FC006271DA841002DADE8 /* EditOperationExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOperationExamples.swift; sourceTree = "<group>"; };
+		DD1FC002271DA841002DADE8 /* OperationHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationHistoryView.swift; sourceTree = "<group>"; };
 		59B31A1F271DA837002DADE8 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
 		59B31A20271DA837002DADE8 /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		AA1FC002271DA841002DADE8 /* LazyPreviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LazyPreviewManager.swift; sourceTree = "<group>"; };
@@ -299,6 +307,9 @@
 		children = (
 			59B31A1F271DA837002DADE8 /* Collection.swift */,
 			59B31A20271DA837002DADE8 /* Data.swift */,
+			EE1FC002271DA841002DADE8 /* EditOperation.swift */,
+			EE1FC006271DA841002DADE8 /* EditOperationExamples.swift */,
+			EE1FC004271DA841002DADE8 /* EditOperationManager.swift */,
 			59B31A2F271DA841002DADE8 /* FilterModel.swift */,
 			59B31A24271DA837002DADE8 /* ImageSaver.swift */,
 			AA1FC002271DA841002DADE8 /* LazyPreviewManager.swift */,
@@ -351,6 +362,7 @@
 			59B31A81271DA892002DADE8 /* ImagePicker.swift */,
 			59B31A7D271DA892002DADE8 /* ListTitle.swift */,
 			59B31A35271DA841002DADE8 /* LUTButton.swift */,
+			DD1FC002271DA841002DADE8 /* OperationHistoryView.swift */,
 			59B31A7A271DA892002DADE8 /* RaiseButton.swift */,
 			59B31A37271DA841002DADE8 /* RecipeButton.swift */,
 			592EC75B2756632C00631D09 /* TextAlert.swift */,
@@ -598,11 +610,14 @@
 				59752CFF286AF4B1001F919C /* NestedObservableObject.swift in Sources */,
 				592B4E5D27132BF500BBF5BA /* PhotoEditing.xcdatamodeld in Sources */,
 				592EC75C2756632C00631D09 /* TextAlert.swift in Sources */,
-				AB1FC001271DA841002DADE8 /* DraggableTextView.swift in Sources */,
-				AB1FC003271DA841002DADE8 /* TextController.swift in Sources */,
-				AB1FC005271DA841002DADE8 /* TextElement.swift in Sources */,
-				AB1FC007271DA841002DADE8 /* TextMenuView.swift in Sources */,
-				59752D01286B166F001F919C /* Recipe.swift in Sources */,
+			AB1FC001271DA841002DADE8 /* DraggableTextView.swift in Sources */,
+			AB1FC003271DA841002DADE8 /* TextController.swift in Sources */,
+			AB1FC005271DA841002DADE8 /* TextElement.swift in Sources */,
+			AB1FC007271DA841002DADE8 /* TextMenuView.swift in Sources */,
+			EE1FC001271DA841002DADE8 /* EditOperation.swift in Sources */,
+			EE1FC005271DA841002DADE8 /* EditOperationExamples.swift in Sources */,
+			EE1FC003271DA841002DADE8 /* EditOperationManager.swift in Sources */,
+			59752D01286B166F001F919C /* Recipe.swift in Sources */,
 				59B31A66271DA842002DADE8 /* VignetteControl.swift in Sources */,
 				5924F517279408BC00BE7705 /* ExportController.swift in Sources */,
 				5924F5122794062C00BE7705 /* Constants.swift in Sources */,
@@ -638,9 +653,10 @@
 				59B31A72271DA842002DADE8 /* EditMenuView.swift in Sources */,
 				59B31A95271DA892002DADE8 /* AppTheme.swift in Sources */,
 				59B31A71271DA842002DADE8 /* FilterMenuUI.swift in Sources */,
-				59B31A59271DA842002DADE8 /* LUTButton.swift in Sources */,
-				59B31A61271DA842002DADE8 /* SharpenControl.swift in Sources */,
-				59B31A68271DA842002DADE8 /* ColorSelectButton.swift in Sources */,
+			59B31A59271DA842002DADE8 /* LUTButton.swift in Sources */,
+			DD1FC001271DA841002DADE8 /* OperationHistoryView.swift in Sources */,
+			59B31A61271DA842002DADE8 /* SharpenControl.swift in Sources */,
+			59B31A68271DA842002DADE8 /* ColorSelectButton.swift in Sources */,
 				59B31A6E271DA842002DADE8 /* FadeControl.swift in Sources */,
 				592B4E5327132BF400BBF5BA /* ContentView.swift in Sources */,
 				59B31A5A271DA842002DADE8 /* IconButton.swift in Sources */,
