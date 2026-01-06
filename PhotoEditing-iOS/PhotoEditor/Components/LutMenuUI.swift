@@ -18,16 +18,19 @@ struct LutMenuUI: View {
                                 Spacer().frame(width: 0)
                                 // neutral
                                 NeutralButton(image: UIImage(cgImage: shared.lutsCtrl.cubeSourceCG!)).id("neutral")
-                                // cube by collections
+                                // cube by collections - using lazy loading
                                 ForEach(shared.lutsCtrl.collections, id: \.identifier) { collection in
                                     HStack(spacing: 12){
-                                        if(collection.cubePreviews.isEmpty == false){
+                                        if(collection.cubeInfos.isEmpty == false){
                                             Rectangle()
                                                 .fill(Color.myDivider)
                                                 .frame(width: 1, height: 92)
                                         }
-                                        ForEach(collection.cubePreviews, id: \.filter.identifier) { cube in
-                                            LUTButton(cube: cube)
+                                        ForEach(collection.cubeInfos, id: \.identifier) { cubeInfo in
+                                            LazyLUTButton(
+                                                cubeInfo: cubeInfo,
+                                                sourceImage: shared.lutsCtrl.cubeSourceCI
+                                            )
                                         }
                                     }.id("\(collection.identifier)-cube")
                                 }

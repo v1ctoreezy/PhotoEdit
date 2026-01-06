@@ -2,14 +2,21 @@ import Foundation
 import PixelEnginePackage
 import SwiftUI
 
-public class Collection {
+public class Collection: ObservableObject {
     
     public let name: String
     public let identifier: String
     public var cubeInfos:[FilterColorCubeInfo]
+    
+    // Deprecated - use lazy loading instead
+    @available(*, deprecated, message: "Use lazy loading with LazyPreviewManager instead")
     public var cubePreviews:[PreviewFilterColorCube] = []
     
+    // Lazy loading support
+    public var sourceImage: CIImage?
+    
     ///
+    @available(*, deprecated, message: "Use setSourceImage instead for lazy loading")
     public func setImage(image:CIImage?){
         self.cubePreviews = []
         if let cubeSourceCI: CIImage = image
@@ -23,9 +30,29 @@ public class Collection {
         }
     }
     
+    /// Set source image for lazy preview generation
+    public func setSourceImage(image: CIImage?) {
+        self.sourceImage = image
+        // Clear any cached previews when source changes
+        if image != nil {
+            for item in cubeInfos {
+                LazyPreviewManager.shared.clearPreview(for: item.identifier)
+            }
+        }
+    }
+    
+    /// Get filter for a specific cube
+    public func getFilter(for identifier: String) -> FilterColorCube? {
+        guard let info = cubeInfos.first(where: { $0.identifier == identifier }) else {
+            return nil
+        }
+        return info.getFilter()
+    }
+    
     ///
     public func reset(){
         cubePreviews = []
+        sourceImage = nil
     }
     
     ///

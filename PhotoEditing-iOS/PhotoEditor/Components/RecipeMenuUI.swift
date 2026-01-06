@@ -29,7 +29,7 @@ struct RecipeMenuUI: View {
                                 .frame(width: 1, height: 92)
                         }
                         ForEach(Array(shared.recipesCtrl.recipes.enumerated()), id: \.offset) { index, item in
-                            RecipeButton(
+                            LazyRecipeButton(
                                 data: item,
                                 on: item.data.objectID == shared.currentRecipe?.objectID,
                                 index: index

@@ -28,13 +28,13 @@ class RecipeController : ObservableObject{
     
     func setImage(image:CIImage){
         self.sourceImage = image
-        DispatchQueue.global(qos: .background).async{
-            print("init Recipe")
-            
-            for e in self.recipes {
-                e.setImage(image: image)
-            }
+        
+        // NEW: Use lazy loading instead of generating all previews at once
+        print("init Recipe - using lazy loading")
+        for e in self.recipes {
+            e.setSourceImage(image: image)
         }
+        print("Recipe initialization complete - previews will load on demand")
     }
     
      ///
@@ -43,7 +43,7 @@ class RecipeController : ObservableObject{
          if let e = RecipeUtils.addRecipe(name, filters: editState.currentEdit.filters){
              let item = Recipe(data: e)
              if let sourceImage = sourceImage {
-                 item.setImage(image: sourceImage)
+                 item.setSourceImage(image: sourceImage)
              }
              recipes.append(item)
              controller.currentRecipe = item.data
