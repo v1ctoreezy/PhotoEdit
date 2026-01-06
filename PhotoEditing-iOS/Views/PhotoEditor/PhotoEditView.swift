@@ -28,7 +28,8 @@ struct PhotoEditView: View {
                         Button(action:{
                             self.showImagePicker = true
                         }){
-                            Text("Library")
+                            Image(systemName: "photo.on.rectangle.angled")
+                                .font(.system(size: 22))
                                 .foregroundColor(.white)
                                 .padding(.horizontal)
                                 .padding(.top, 8)
@@ -36,7 +37,8 @@ struct PhotoEditView: View {
                         Spacer()
                         if(shared.previewImage != nil){
                             NavigationLink(destination: ExportView()){
-                                Text("Export")
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(.system(size: 22))
                                     .foregroundColor(.white)
                                     .padding(.horizontal)
                                     .padding(.top, 8)

@@ -16,9 +16,9 @@ struct ListTitle: View {
     
     var body: some View {
         HStack(alignment: .top, spacing: 0){
-            Image(leadingImage)
-                .resizable()
-                .scaledToFit()
+            Image(systemName: leadingImage)
+                .font(.system(size: 24, weight: .medium))
+                .foregroundColor(.white)
                 .frame(width: 32, height: 32)
                 .padding(.trailing, 20)
             VStack(alignment: .leading, spacing: 4){
@@ -52,7 +52,7 @@ struct ListTitle_Previews: PreviewProvider {
             ListTitle(
                 title: "Free and Premium Filters",
                 supTitle: "Export your picture, Lookup image, all effects, and more",
-                leadingImage: "edit-lut",
+                leadingImage: "square.stack.3d.up",
                 highlight: "AR filter"
             )
                 .background(Color(UIColor.systemBackground))

@@ -81,32 +81,37 @@ private struct EditToolbar: View {
     var body: some View {
         HStack(spacing: 32) {
             NavigationLink(destination: cropperView) {
-                IconButton("adjustment")
+                IconButton("crop.rotate")
+                    .foregroundColor(.white)
             }
             
             ToolbarButton(
-                icon: currentView == .lut ? "edit-lut-highlight" : "edit-lut",
+                icon: "square.stack.3d.up",
+                isHighlighted: currentView == .lut,
                 action: { currentView = .lut }
             )
             
             ToolbarButton(
-                icon: currentView == .filter ? "edit-color-highlight" : "edit-color",
+                icon: "slider.horizontal.3",
+                isHighlighted: currentView == .filter,
                 action: onSwitchToFilter
             )
             
             ToolbarButton(
-                icon: currentView == .recipe ? "edit-recipe-highlight" : "edit-recipe",
+                icon: "book.closed",
+                isHighlighted: currentView == .recipe,
                 action: { currentView = .recipe }
             )
             
             Button(action: { currentView = .text }) {
-                Image(systemName: currentView == .text ? "textformat.abc" : "textformat.abc")
+                Image(systemName: "textformat")
                     .font(.system(size: 24))
                     .foregroundColor(currentView == .text ? .blue : .white)
             }
             
             ToolbarButton(
-                icon: "icon-undo",
+                icon: "arrow.uturn.backward",
+                isHighlighted: false,
                 action: onUndo
             )
         }
@@ -125,11 +130,14 @@ private struct EditToolbar: View {
 
 private struct ToolbarButton: View {
     let icon: String
+    var isHighlighted: Bool = false
     let action: () -> Void
     
     var body: some View {
         Button(action: action) {
-            IconButton(icon)
+            Image(systemName: icon)
+                .font(.system(size: 24))
+                .foregroundColor(isHighlighted ? .blue : .white)
         }
     }
 }

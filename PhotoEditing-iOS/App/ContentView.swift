@@ -54,9 +54,8 @@ struct ContentView: View {
                                 .frame(width: geo.size.width - 60, height: 52)
                             HStack(alignment: .center, spacing: 10){
                                 
-                                Image("icon-photo-add")
-                                    .resizable()
-                                    .scaledToFit()
+                                Image(systemName: "photo.badge.plus")
+                                    .font(.system(size: 18, weight: .regular))
                                     .foregroundColor(Color.black)
                                     .frame(width: 18, height: 18)
                                 Text("CHOOSE YOUR PICTURE")

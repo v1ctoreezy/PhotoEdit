@@ -6,22 +6,22 @@ class K{
         [
             "title": "Free and Premium Filters",
             "supTitle": "A lot of filter you can use for your picture",
-            "leadingImage": "edit-lut"
+            "leadingImage": "square.stack.3d.up"
         ],
         [
             "title": "Selective Color",
             "supTitle": "Freedom to custom your filter ",
-            "leadingImage": "hls"
+            "leadingImage": "slider.horizontal.3"
         ],
         [
             "title": "Many Effects are available",
             "supTitle": "Freedom to custom your filter ",
-            "leadingImage": "edit-effect"
+            "leadingImage": "wand.and.stars"
         ],
         [
             "title": "Get all your resources",
             "supTitle": "Export your picture, Lookup image, all effects, and more",
-            "leadingImage": "icon-lut",
+            "leadingImage": "cube.transparent",
             "highlight": "AR filter"
         ]
     ]
