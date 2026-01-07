@@ -91,6 +91,11 @@ public struct TextOperation: EditOperation {
     public var rotation: Double
     public var scale: Double
     public var alignment: TextAlignment
+    public var isBold: Bool
+    public var isItalic: Bool
+    
+    // Store the text element ID for tracking
+    public var textElementId: UUID
     
     public var description: String {
         return "Текст: \(text.prefix(20))..."
@@ -101,11 +106,14 @@ public struct TextOperation: EditOperation {
     public init(text: String,
          position: CGPoint = .zero,
          fontSize: CGFloat = 24,
-         fontName: String = "Helvetica",
+         fontName: String = "System",
          color: Color = .white,
          rotation: Double = 0,
          scale: Double = 1.0,
-         alignment: TextAlignment = .center) {
+         alignment: TextAlignment = .center,
+         isBold: Bool = false,
+         isItalic: Bool = false,
+         textElementId: UUID? = nil) {
         self.id = UUID()
         self.timestamp = Date()
         self.text = text
@@ -116,6 +124,9 @@ public struct TextOperation: EditOperation {
         self.rotation = rotation
         self.scale = scale
         self.alignment = alignment
+        self.isBold = isBold
+        self.isItalic = isItalic
+        self.textElementId = textElementId ?? UUID()
     }
     
     public func apply(to image: CIImage) -> CIImage {

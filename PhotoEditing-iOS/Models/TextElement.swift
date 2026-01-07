@@ -13,7 +13,7 @@ struct TextElement: Identifiable, Codable {
     
     init(
         id: UUID = UUID(),
-        text: String = "Текст",
+        text: String = "",
         position: CGPoint = .zero,
         color: Color = .white,
         fontSize: CGFloat = 24,
@@ -118,6 +118,39 @@ struct TextElement: Identifiable, Codable {
         }
         
         return font
+    }
+    
+    // MARK: - Conversion to TextOperation
+    
+    /// Convert TextElement to TextOperation
+    func toTextOperation() -> TextOperation {
+        return TextOperation(
+            text: text,
+            position: position,
+            fontSize: fontSize,
+            fontName: fontName,
+            color: color,
+            rotation: 0,
+            scale: 1.0,
+            alignment: .center,
+            isBold: isBold,
+            isItalic: isItalic,
+            textElementId: id
+        )
+    }
+    
+    /// Create TextElement from TextOperation
+    static func from(textOperation: TextOperation) -> TextElement {
+        return TextElement(
+            id: textOperation.textElementId,
+            text: textOperation.text,
+            position: textOperation.position,
+            color: textOperation.color.color,
+            fontSize: textOperation.fontSize,
+            fontName: textOperation.fontName,
+            isBold: textOperation.isBold,
+            isItalic: textOperation.isItalic
+        )
     }
 }
 

@@ -186,6 +186,28 @@ public struct AnyEditOperation: EditOperation, Codable {
         return _apply(image)
     }
     
+    // MARK: - Base Operation Access
+    
+    /// Get the underlying TextOperation if this is a text operation
+    public func asTextOperation() -> TextOperation? {
+        return baseOperation as? TextOperation
+    }
+    
+    /// Get the underlying FilterOperation if this is a filter operation
+    public func asFilterOperation() -> FilterOperation? {
+        return baseOperation as? FilterOperation
+    }
+    
+    /// Get the underlying StickerOperation if this is a sticker operation
+    public func asStickerOperation() -> StickerOperation? {
+        return baseOperation as? StickerOperation
+    }
+    
+    /// Get the underlying AdjustmentOperation if this is an adjustment operation
+    public func asAdjustmentOperation() -> AdjustmentOperation? {
+        return baseOperation as? AdjustmentOperation
+    }
+    
     // MARK: - Codable
     
     enum CodingKeys: String, CodingKey {

@@ -31,6 +31,7 @@
 		59B31A1D271DA5B2002DADE8 /* PixelEnginePackage in Frameworks */ = {isa = PBXBuildFile; productRef = 59B31A1C271DA5B2002DADE8 /* PixelEnginePackage */; };
 		EE1FC001271DA841002DADE8 /* EditOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1FC002271DA841002DADE8 /* EditOperation.swift */; };
 		EE1FC003271DA841002DADE8 /* EditOperationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1FC004271DA841002DADE8 /* EditOperationManager.swift */; };
+		EE1FC007271DA842002DADE8 /* EditOperationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1FC008271DA842002DADE8 /* EditOperationExtensions.swift */; };
 		EE1FC005271DA841002DADE8 /* EditOperationExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1FC006271DA841002DADE8 /* EditOperationExamples.swift */; };
 		DD1FC001271DA841002DADE8 /* OperationHistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD1FC002271DA841002DADE8 /* OperationHistoryView.swift */; };
 		59B31A25271DA837002DADE8 /* Collection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59B31A1F271DA837002DADE8 /* Collection.swift */; };
@@ -124,6 +125,7 @@
 		597CABA0271E733C008E9588 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EE1FC002271DA841002DADE8 /* EditOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOperation.swift; sourceTree = "<group>"; };
 		EE1FC004271DA841002DADE8 /* EditOperationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOperationManager.swift; sourceTree = "<group>"; };
+		EE1FC008271DA842002DADE8 /* EditOperationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOperationExtensions.swift; sourceTree = "<group>"; };
 		EE1FC006271DA841002DADE8 /* EditOperationExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditOperationExamples.swift; sourceTree = "<group>"; };
 		DD1FC002271DA841002DADE8 /* OperationHistoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationHistoryView.swift; sourceTree = "<group>"; };
 		59B31A1F271DA837002DADE8 /* Collection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Collection.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			59B31A20271DA837002DADE8 /* Data.swift */,
 			EE1FC002271DA841002DADE8 /* EditOperation.swift */,
 			EE1FC006271DA841002DADE8 /* EditOperationExamples.swift */,
+			EE1FC008271DA842002DADE8 /* EditOperationExtensions.swift */,
 			EE1FC004271DA841002DADE8 /* EditOperationManager.swift */,
 			59B31A2F271DA841002DADE8 /* FilterModel.swift */,
 			59B31A24271DA837002DADE8 /* ImageSaver.swift */,
@@ -616,6 +619,7 @@
 			AB1FC007271DA841002DADE8 /* TextMenuView.swift in Sources */,
 			EE1FC001271DA841002DADE8 /* EditOperation.swift in Sources */,
 			EE1FC005271DA841002DADE8 /* EditOperationExamples.swift in Sources */,
+			EE1FC007271DA842002DADE8 /* EditOperationExtensions.swift in Sources */,
 			EE1FC003271DA841002DADE8 /* EditOperationManager.swift in Sources */,
 			59752D01286B166F001F919C /* Recipe.swift in Sources */,
 				59B31A66271DA842002DADE8 /* VignetteControl.swift in Sources */,

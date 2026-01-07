@@ -30,13 +30,21 @@ class ExportController : ObservableObject{
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
+            // Render base image with filters
+            var renderedImage: UIImage?
             if let cropperState = self.controller.cropperCtrl.state,
                let croppedImage = originUI.cropped(withCropperState: cropperState) {
                 let source = StaticImageSource(source: convertUItoCI(from: croppedImage))
-                self.originExport = editState.makeCustomRenderer(source: source)
+                renderedImage = editState.makeCustomRenderer(source: source)
                     .render(resolution: .full)
             } else {
-                self.originExport = editState.makeRenderer().render(resolution: .full)
+                renderedImage = editState.makeRenderer().render(resolution: .full)
+            }
+            
+            // Apply text elements on top of the rendered image
+            if let baseImage = renderedImage {
+                let textElements = self.controller.textCtrl.textElements
+                self.originExport = baseImage.withTextElements(textElements)
             }
         }
     }
