@@ -48,10 +48,19 @@ func imageOrientationToTiffOrientation(_ value: UIImage.Orientation) -> Int32 {
 
 extension UIImage {
     /// Render text elements on top of the image
-    func withTextElements(_ textElements: [TextElement]) -> UIImage {
+    /// - Parameters:
+    ///   - textElements: Array of text elements to render
+    ///   - previewHeight: Height of the preview image used during editing (default: 512)
+    /// - Returns: New image with text rendered on top
+    func withTextElements(_ textElements: [TextElement], previewHeight: CGFloat = 512) -> UIImage {
         guard !textElements.isEmpty else { return self }
         
         let imageSize = self.size
+        
+        // Calculate scale factor: ratio of full image height to preview height
+        // This ensures text appears at the same relative size as in the preview
+        let scaleFactor = imageSize.height / previewHeight
+        
         let renderer = UIGraphicsImageRenderer(size: imageSize)
         
         return renderer.image { context in
@@ -64,17 +73,20 @@ extension UIImage {
                 let x = textElement.position.x * imageSize.width
                 let y = textElement.position.y * imageSize.height
                 
-                // Get UIFont from text element
-                let uiFont = getUIFont(for: textElement)
+                // Scale font size proportionally to image size
+                let scaledFontSize = textElement.fontSize * scaleFactor
+                
+                // Get UIFont from text element with scaled size
+                let uiFont = getUIFont(for: textElement, scaledFontSize: scaledFontSize)
                 
                 // Convert SwiftUI Color to UIColor
                 let uiColor = UIColor(textElement.color)
                 
-                // Create shadow for better readability
+                // Create shadow for better readability (scaled proportionally)
                 let shadow = NSShadow()
                 shadow.shadowColor = UIColor.black.withAlphaComponent(0.5)
-                shadow.shadowBlurRadius = 2
-                shadow.shadowOffset = CGSize(width: 0, height: 1)
+                shadow.shadowBlurRadius = 2 * scaleFactor
+                shadow.shadowOffset = CGSize(width: 0, height: 1 * scaleFactor)
                 
                 // Set text attributes
                 let attributes: [NSAttributedString.Key: Any] = [
@@ -92,8 +104,8 @@ extension UIImage {
                 var textX = x - textSize.width / 2
                 var textY = y - textSize.height / 2
                 
-                // Constrain text to stay within image bounds
-                let edgePadding: CGFloat = 10
+                // Constrain text to stay within image bounds (scaled for full resolution)
+                let edgePadding: CGFloat = 10 * scaleFactor
                 
                 // Constrain X position
                 textX = max(edgePadding, textX)
@@ -125,43 +137,43 @@ extension UIImage {
     }
     
     /// Helper to convert TextElement font properties to UIFont
-    private func getUIFont(for textElement: TextElement) -> UIFont {
+    private func getUIFont(for textElement: TextElement, scaledFontSize: CGFloat) -> UIFont {
         var font: UIFont
         
         switch textElement.fontName {
         case "System":
-            font = .systemFont(ofSize: textElement.fontSize)
+            font = .systemFont(ofSize: scaledFontSize)
         case "Helvetica":
-            font = UIFont(name: "Helvetica", size: textElement.fontSize) ?? .systemFont(ofSize: textElement.fontSize)
+            font = UIFont(name: "Helvetica", size: scaledFontSize) ?? .systemFont(ofSize: scaledFontSize)
         case "Arial":
-            font = UIFont(name: "Arial", size: textElement.fontSize) ?? .systemFont(ofSize: textElement.fontSize)
+            font = UIFont(name: "Arial", size: scaledFontSize) ?? .systemFont(ofSize: scaledFontSize)
         case "Courier":
-            font = UIFont(name: "Courier", size: textElement.fontSize) ?? .systemFont(ofSize: textElement.fontSize)
+            font = UIFont(name: "Courier", size: scaledFontSize) ?? .systemFont(ofSize: scaledFontSize)
         case "Georgia":
-            font = UIFont(name: "Georgia", size: textElement.fontSize) ?? .systemFont(ofSize: textElement.fontSize)
+            font = UIFont(name: "Georgia", size: scaledFontSize) ?? .systemFont(ofSize: scaledFontSize)
         case "Times New Roman":
-            font = UIFont(name: "TimesNewRomanPSMT", size: textElement.fontSize) ?? .systemFont(ofSize: textElement.fontSize)
+            font = UIFont(name: "TimesNewRomanPSMT", size: scaledFontSize) ?? .systemFont(ofSize: scaledFontSize)
         case "Verdana":
-            font = UIFont(name: "Verdana", size: textElement.fontSize) ?? .systemFont(ofSize: textElement.fontSize)
+            font = UIFont(name: "Verdana", size: scaledFontSize) ?? .systemFont(ofSize: scaledFontSize)
         default:
-            font = .systemFont(ofSize: textElement.fontSize)
+            font = .systemFont(ofSize: scaledFontSize)
         }
         
         // Apply bold and italic
         if textElement.isBold && textElement.isItalic {
             let descriptor = font.fontDescriptor.withSymbolicTraits([.traitBold, .traitItalic])
             if let newDescriptor = descriptor {
-                font = UIFont(descriptor: newDescriptor, size: textElement.fontSize)
+                font = UIFont(descriptor: newDescriptor, size: scaledFontSize)
             }
         } else if textElement.isBold {
             let descriptor = font.fontDescriptor.withSymbolicTraits(.traitBold)
             if let newDescriptor = descriptor {
-                font = UIFont(descriptor: newDescriptor, size: textElement.fontSize)
+                font = UIFont(descriptor: newDescriptor, size: scaledFontSize)
             }
         } else if textElement.isItalic {
             let descriptor = font.fontDescriptor.withSymbolicTraits(.traitItalic)
             if let newDescriptor = descriptor {
-                font = UIFont(descriptor: newDescriptor, size: textElement.fontSize)
+                font = UIFont(descriptor: newDescriptor, size: scaledFontSize)
             }
         }
         

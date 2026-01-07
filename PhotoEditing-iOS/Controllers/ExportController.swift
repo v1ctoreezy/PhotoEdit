@@ -30,6 +30,9 @@ class ExportController : ObservableObject{
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
+            // Preview height used during editing (must match PhotoEditorController)
+            let previewHeight: CGFloat = 512
+            
             // Render base image with filters
             var renderedImage: UIImage?
             if let cropperState = self.controller.cropperCtrl.state,
@@ -42,9 +45,10 @@ class ExportController : ObservableObject{
             }
             
             // Apply text elements on top of the rendered image
+            // Pass preview height to ensure correct font scaling
             if let baseImage = renderedImage {
                 let textElements = self.controller.textCtrl.textElements
-                self.originExport = baseImage.withTextElements(textElements)
+                self.originExport = baseImage.withTextElements(textElements, previewHeight: previewHeight)
             }
         }
     }
