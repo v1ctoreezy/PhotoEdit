@@ -9,6 +9,11 @@ struct PhotoEditorView: View {
             VStack(spacing: 0){
                 if let image = shared.previewImage{
                     GeometryReader { geometry in
+                        let imageBounds = ImageBounds.calculate(
+                            imageSize: image.size,
+                            containerSize: geometry.size
+                        )
+                        
                         ZStack {
                             ImagePreviewView(image: image)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -19,6 +24,7 @@ struct PhotoEditorView: View {
                                 DraggableTextView(
                                     textElement: textElement,
                                     containerSize: geometry.size,
+                                    imageBounds: imageBounds,
                                     onPositionChange: { newPosition in
                                         shared.textCtrl.updatePosition(
                                             id: textElement.id,

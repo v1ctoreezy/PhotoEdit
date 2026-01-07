@@ -88,10 +88,32 @@ extension UIImage {
                 // Calculate text size
                 let textSize = attributedString.size()
                 
-                // Center the text at the position
+                // Calculate text position centered at the point
+                var textX = x - textSize.width / 2
+                var textY = y - textSize.height / 2
+                
+                // Constrain text to stay within image bounds
+                let edgePadding: CGFloat = 10
+                
+                // Constrain X position
+                textX = max(edgePadding, textX)
+                textX = min(imageSize.width - textSize.width - edgePadding, textX)
+                
+                // Constrain Y position
+                textY = max(edgePadding, textY)
+                textY = min(imageSize.height - textSize.height - edgePadding, textY)
+                
+                // If text is larger than image, center it
+                if textSize.width > imageSize.width - 2 * edgePadding {
+                    textX = (imageSize.width - textSize.width) / 2
+                }
+                if textSize.height > imageSize.height - 2 * edgePadding {
+                    textY = (imageSize.height - textSize.height) / 2
+                }
+                
                 let textRect = CGRect(
-                    x: x - textSize.width / 2,
-                    y: y - textSize.height / 2,
+                    x: textX,
+                    y: textY,
                     width: textSize.width,
                     height: textSize.height
                 )
