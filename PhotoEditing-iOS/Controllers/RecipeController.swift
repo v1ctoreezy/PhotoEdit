@@ -5,8 +5,6 @@ import PixelEnginePackage
 import CoreData
 
 class RecipeController : ObservableObject{
-    
-    // Recipe
     @Published var recipes: [Recipe] = []
     
     var sourceImage:CIImage?
@@ -28,16 +26,11 @@ class RecipeController : ObservableObject{
     
     func setImage(image:CIImage){
         self.sourceImage = image
-        
-        // NEW: Use lazy loading instead of generating all previews at once
-        print("init Recipe - using lazy loading")
         for e in self.recipes {
             e.setSourceImage(image: image)
         }
-        print("Recipe initialization complete - previews will load on demand")
     }
-    
-     ///
+
      func addRecipe(_ name: String){
          guard let editState = controller.editState else { return }
          if let e = RecipeUtils.addRecipe(name, filters: editState.currentEdit.filters){
@@ -49,8 +42,7 @@ class RecipeController : ObservableObject{
              controller.currentRecipe = item.data
          }
      }
-     
-     ///
+
      func deleteRecipe(_ index:Int){
          let result = RecipeUtils.deleteRecipe(recipes[index].data)
          if(result){

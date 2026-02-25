@@ -37,7 +37,7 @@ struct ContentView: View {
                             Spacer()
                         }
                         VStack(spacing: 24){
-                            ForEach(K.introContent, id: \.["title"]){item in
+                            ForEach(AppContent.introContent, id: \.["title"]){item in
                                 ListTitle(
                                     title: item["title"],
                                     supTitle: item["supTitle"],

@@ -44,51 +44,24 @@ func imageOrientationToTiffOrientation(_ value: UIImage.Orientation) -> Int32 {
   }
 }
 
-// MARK: - UIImage + Text Rendering
-
 extension UIImage {
-    /// Render text elements on top of the image
-    /// - Parameters:
-    ///   - textElements: Array of text elements to render
-    ///   - previewHeight: Height of the preview image used during editing (default: 512)
-    /// - Returns: New image with text rendered on top
     func withTextElements(_ textElements: [TextElement], previewHeight: CGFloat = 512) -> UIImage {
         guard !textElements.isEmpty else { return self }
-        
         let imageSize = self.size
-        
-        // Calculate scale factor: ratio of full image height to preview height
-        // This ensures text appears at the same relative size as in the preview
         let scaleFactor = imageSize.height / previewHeight
-        
         let renderer = UIGraphicsImageRenderer(size: imageSize)
-        
         return renderer.image { context in
-            // Draw the original image
             self.draw(in: CGRect(origin: .zero, size: imageSize))
-            
-            // Draw each text element
             for textElement in textElements {
-                // Convert normalized position (0-1) to actual pixel coordinates
                 let x = textElement.position.x * imageSize.width
                 let y = textElement.position.y * imageSize.height
-                
-                // Scale font size proportionally to image size
                 let scaledFontSize = textElement.fontSize * scaleFactor
-                
-                // Get UIFont from text element with scaled size
                 let uiFont = getUIFont(for: textElement, scaledFontSize: scaledFontSize)
-                
-                // Convert SwiftUI Color to UIColor
                 let uiColor = UIColor(textElement.color)
-                
-                // Create shadow for better readability (scaled proportionally)
                 let shadow = NSShadow()
                 shadow.shadowColor = UIColor.black.withAlphaComponent(0.5)
                 shadow.shadowBlurRadius = 2 * scaleFactor
                 shadow.shadowOffset = CGSize(width: 0, height: 1 * scaleFactor)
-                
-                // Set text attributes
                 let attributes: [NSAttributedString.Key: Any] = [
                     .font: uiFont,
                     .foregroundColor: uiColor,
@@ -96,26 +69,14 @@ extension UIImage {
                 ]
                 
                 let attributedString = NSAttributedString(string: textElement.text, attributes: attributes)
-                
-                // Calculate text size
                 let textSize = attributedString.size()
-                
-                // Calculate text position centered at the point
                 var textX = x - textSize.width / 2
                 var textY = y - textSize.height / 2
-                
-                // Constrain text to stay within image bounds (scaled for full resolution)
                 let edgePadding: CGFloat = 10 * scaleFactor
-                
-                // Constrain X position
                 textX = max(edgePadding, textX)
                 textX = min(imageSize.width - textSize.width - edgePadding, textX)
-                
-                // Constrain Y position
                 textY = max(edgePadding, textY)
                 textY = min(imageSize.height - textSize.height - edgePadding, textY)
-                
-                // If text is larger than image, center it
                 if textSize.width > imageSize.width - 2 * edgePadding {
                     textX = (imageSize.width - textSize.width) / 2
                 }
@@ -129,14 +90,11 @@ extension UIImage {
                     width: textSize.width,
                     height: textSize.height
                 )
-                
-                // Draw the text
                 attributedString.draw(in: textRect)
             }
         }
     }
-    
-    /// Helper to convert TextElement font properties to UIFont
+
     private func getUIFont(for textElement: TextElement, scaledFontSize: CGFloat) -> UIFont {
         var font: UIFont
         
@@ -158,8 +116,6 @@ extension UIImage {
         default:
             font = .systemFont(ofSize: scaledFontSize)
         }
-        
-        // Apply bold and italic
         if textElement.isBold && textElement.isItalic {
             let descriptor = font.fontDescriptor.withSymbolicTraits([.traitBold, .traitItalic])
             if let newDescriptor = descriptor {

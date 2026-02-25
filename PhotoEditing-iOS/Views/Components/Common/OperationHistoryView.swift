@@ -1,6 +1,5 @@
 import SwiftUI
 
-/// UI компонент для отображения истории операций редактирования
 struct OperationHistoryView: View {
     
     @ObservedObject var operationManager: EditOperationManager
@@ -43,9 +42,7 @@ struct OperationHistoryView: View {
             }
         }
     }
-    
-    // MARK: - Empty State
-    
+
     private var emptyStateView: some View {
         VStack(spacing: 20) {
             Image(systemName: "clock.arrow.circlepath")
@@ -63,17 +60,12 @@ struct OperationHistoryView: View {
                 .padding(.horizontal, 40)
         }
     }
-    
-    // MARK: - Operation List
-    
+
     private var operationListView: some View {
         VStack(spacing: 0) {
-            // Статистика
             statisticsHeaderView
                 .padding(.vertical, 12)
                 .background(Color.myBackground.opacity(0.95))
-            
-            // Список операций
             ScrollView {
                 LazyVStack(spacing: 8) {
                     ForEach(Array(operationManager.operations.enumerated()), id: \.element.id) { index, operation in
@@ -90,16 +82,12 @@ struct OperationHistoryView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 12)
             }
-            
-            // Контролы undo/redo
             undoRedoControlsView
                 .padding(.vertical, 16)
                 .background(Color.myBackground.opacity(0.95))
         }
     }
-    
-    // MARK: - Statistics Header
-    
+
     private var statisticsHeaderView: some View {
         HStack(spacing: 20) {
             StatBadge(
@@ -122,12 +110,9 @@ struct OperationHistoryView: View {
         }
         .padding(.horizontal)
     }
-    
-    // MARK: - Undo/Redo Controls
-    
+
     private var undoRedoControlsView: some View {
         HStack(spacing: 20) {
-            // Undo button
             Button(action: {
                 withAnimation {
                     operationManager.undo()
@@ -147,8 +132,6 @@ struct OperationHistoryView: View {
                 .cornerRadius(12)
             }
             .disabled(!operationManager.canUndo)
-            
-            // Redo button
             Button(action: {
                 withAnimation {
                     operationManager.redo()
@@ -173,8 +156,6 @@ struct OperationHistoryView: View {
     }
 }
 
-// MARK: - Operation Row
-
 private struct OperationRowView: View {
     let operation: AnyEditOperation
     let index: Int
@@ -183,21 +164,16 @@ private struct OperationRowView: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            // Index
             Text("\(index + 1)")
                 .font(.caption)
                 .foregroundColor(.white)
                 .frame(width: 24, height: 24)
                 .background(isActive ? Color.blue : Color.gray.opacity(0.5))
                 .clipShape(Circle())
-            
-            // Icon
             Image(systemName: iconForType(operation.type))
                 .font(.system(size: 20))
                 .foregroundColor(colorForType(operation.type))
                 .frame(width: 32)
-            
-            // Description
             VStack(alignment: .leading, spacing: 4) {
                 Text(operation.description)
                     .font(.body)
@@ -209,8 +185,6 @@ private struct OperationRowView: View {
             }
             
             Spacer()
-            
-            // Delete button
             Button(action: onDelete) {
                 Image(systemName: "trash")
                     .font(.system(size: 16))
@@ -277,8 +251,6 @@ private struct OperationRowView: View {
     }
 }
 
-// MARK: - Stat Badge
-
 private struct StatBadge: View {
     let icon: String
     let value: String
@@ -307,13 +279,9 @@ private struct StatBadge: View {
     }
 }
 
-// MARK: - Preview
-
 struct OperationHistoryView_Previews: PreviewProvider {
     static var previews: some View {
         let manager = EditOperationManager()
-        
-        // Добавляем тестовые операции
         manager.addOperation(FilterOperation(filterName: "Vintage", lutIdentifier: "vintage_01"))
         manager.addOperation(TextOperation(text: "Summer", position: .zero))
         manager.addOperation(AdjustmentOperation(adjustmentType: .brightness, value: 0.2))

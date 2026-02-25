@@ -5,12 +5,9 @@ import PixelEnginePackage
 import Foundation
 @testable import PhotoEditing_iOS
 
-/// Вспомогательные утилиты для тестирования
 class TestHelpers {
     
-    // MARK: - Image Creation
     
-    /// Создать тестовое изображение с заданным цветом и размером
     static func createTestImage(
         color: CIColor = CIColor(red: 1, green: 0, blue: 0),
         size: CGSize = CGSize(width: 100, height: 100)
@@ -19,7 +16,6 @@ class TestHelpers {
         return CIImage(color: color).cropped(to: rect)
     }
     
-    /// Создать UIImage с заданным цветом и размером
     static func createUIImage(
         color: UIColor = .red,
         size: CGSize = CGSize(width: 100, height: 100)
@@ -31,7 +27,6 @@ class TestHelpers {
         }
     }
     
-    /// Создать градиентное изображение
     static func createGradientImage(
         from: CIColor = CIColor(red: 0, green: 0, blue: 0),
         to: CIColor = CIColor(red: 1, green: 1, blue: 1),
@@ -48,9 +43,7 @@ class TestHelpers {
             ?? createTestImage(size: size)
     }
     
-    // MARK: - Operation Creators
     
-    /// Создать тестовую FilterOperation
     static func createFilterOperation(
         name: String = "TestFilter",
         lutIdentifier: String? = "test_lut",
@@ -65,7 +58,6 @@ class TestHelpers {
         )
     }
     
-    /// Создать тестовую TextOperation
     static func createTextOperation(
         text: String = "Test Text",
         position: CGPoint = CGPoint(x: 100, y: 100),
@@ -80,7 +72,6 @@ class TestHelpers {
         )
     }
     
-    /// Создать тестовую AdjustmentOperation
     static func createAdjustmentOperation(
         type: AdjustmentType = .exposure,
         value: Double = 0.5
@@ -88,7 +79,6 @@ class TestHelpers {
         return AdjustmentOperation(adjustmentType: type, value: value)
     }
     
-    /// Создать тестовую StickerOperation
     static func createStickerOperation(
         identifier: String = "sticker_001",
         imageName: String = "test.png",
@@ -101,9 +91,7 @@ class TestHelpers {
         )
     }
     
-    // MARK: - Comparison Helpers
     
-    /// Сравнить два CIImage по размеру extent
     static func assertImagesEqualInSize(
         _ image1: CIImage,
         _ image2: CIImage,
@@ -115,7 +103,6 @@ class TestHelpers {
         XCTAssertEqual(image1.extent.height, image2.extent.height, accuracy: accuracy, file: file, line: line)
     }
     
-    /// Проверить что изображение не пустое
     static func assertImageNotEmpty(
         _ image: CIImage?,
         file: StaticString = #file,
@@ -126,9 +113,7 @@ class TestHelpers {
         XCTAssertGreaterThan(image?.extent.height ?? 0, 0, "Image height should be > 0", file: file, line: line)
     }
     
-    // MARK: - Color Helpers
     
-    /// Создать CodableColor из RGB значений
     static func createCodableColor(
         red: Double = 1.0,
         green: Double = 0.0,
@@ -139,7 +124,6 @@ class TestHelpers {
         return CodableColor(color: color)
     }
     
-    /// Сравнить два CodableColor
     static func assertColorsEqual(
         _ color1: CodableColor,
         _ color2: CodableColor,
@@ -153,9 +137,7 @@ class TestHelpers {
         XCTAssertEqual(color1.alpha, color2.alpha, accuracy: accuracy, file: file, line: line)
     }
     
-    // MARK: - JSON Helpers
     
-    /// Кодировать объект в JSON Data
     static func encodeToJSON<T: Encodable>(
         _ object: T,
         dateEncodingStrategy: JSONEncoder.DateEncodingStrategy = .iso8601
@@ -166,7 +148,6 @@ class TestHelpers {
         return try encoder.encode(object)
     }
     
-    /// Декодировать объект из JSON Data
     static func decodeFromJSON<T: Decodable>(
         _ type: T.Type,
         from data: Foundation.Data,
@@ -177,7 +158,6 @@ class TestHelpers {
         return try decoder.decode(type, from: data)
     }
     
-    /// Выполнить round-trip тест для Codable объекта
     static func assertCodableRoundTrip<T: Codable & Equatable>(
         _ object: T,
         file: StaticString = #file,
@@ -188,9 +168,7 @@ class TestHelpers {
         XCTAssertEqual(object, decoded, "Round-trip encoding/decoding should preserve equality", file: file, line: line)
     }
     
-    // MARK: - Async Helpers
     
-    /// Ожидать выполнения асинхронного блока
     static func waitForAsync(
         timeout: TimeInterval = 1.0,
         completion: @escaping (@escaping () -> Void) -> Void
@@ -205,16 +183,13 @@ class TestHelpers {
         return result == .completed
     }
     
-    // MARK: - Performance Helpers
     
-    /// Измерить время выполнения блока
     static func measureTime(_ block: () -> Void) -> TimeInterval {
         let start = Date()
         block()
         return Date().timeIntervalSince(start)
     }
     
-    /// Проверить что операция выполняется быстрее заданного времени
     static func assertPerformance(
         _ block: () -> Void,
         isFasterThan maxTime: TimeInterval,
@@ -231,16 +206,13 @@ class TestHelpers {
         )
     }
     
-    // MARK: - Vector Helpers
     
-    /// Создать массив CIVector для тестирования
     static func createTestVectors(count: Int = 3) -> [CIVector] {
         return (0..<count).map { i in
             CIVector(x: CGFloat(i), y: CGFloat(i * 2), z: CGFloat(i * 3))
         }
     }
     
-    /// Сравнить два CIVector
     static func assertVectorsEqual(
         _ vector1: CIVector,
         _ vector2: CIVector,
@@ -253,19 +225,15 @@ class TestHelpers {
         XCTAssertEqual(vector1.z, vector2.z, accuracy: accuracy, file: file, line: line)
     }
     
-    // MARK: - Random Data Generators
     
-    /// Сгенерировать случайный Double в диапазоне
     static func randomDouble(min: Double = 0.0, max: Double = 1.0) -> Double {
         return Double.random(in: min...max)
     }
     
-    /// Сгенерировать случайный CGFloat в диапазоне
     static func randomCGFloat(min: CGFloat = 0.0, max: CGFloat = 1.0) -> CGFloat {
         return CGFloat.random(in: min...max)
     }
     
-    /// Сгенерировать случайную CGPoint
     static func randomPoint(
         xRange: ClosedRange<CGFloat> = 0...100,
         yRange: ClosedRange<CGFloat> = 0...100
@@ -276,7 +244,6 @@ class TestHelpers {
         )
     }
     
-    /// Сгенерировать случайный Color
     static func randomColor() -> Color {
         return Color(
             red: randomDouble(),
@@ -286,16 +253,13 @@ class TestHelpers {
     }
 }
 
-// MARK: - XCTestCase Extensions
 
 extension XCTestCase {
     
-    /// Вспомогательный метод для создания expectation с таймаутом
     func expectation(timeout: TimeInterval = 1.0, description: String = "Async expectation") -> XCTestExpectation {
         return XCTestExpectation(description: description)
     }
     
-    /// Ожидать выполнения expectation
     func wait(for expectations: [XCTestExpectation], timeout: TimeInterval = 1.0) {
         wait(for: expectations, timeout: timeout)
     }

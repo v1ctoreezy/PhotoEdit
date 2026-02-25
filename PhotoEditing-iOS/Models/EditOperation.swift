@@ -2,25 +2,14 @@ import Foundation
 import SwiftUI
 import CoreImage
 
-// MARK: - Base Protocol
-
-/// Базовый протокол для всех операций редактирования
 public protocol EditOperation: Codable, Identifiable {
     var id: UUID { get }
     var type: EditOperationType { get }
     var timestamp: Date { get }
-    
-    /// Применить операцию к изображению
     func apply(to image: CIImage) -> CIImage
-    
-    /// Получить описание операции для UI
     var description: String { get }
-    
-    /// Можно ли отменить эту операцию
     var isReversible: Bool { get }
 }
-
-// MARK: - Operation Types
 
 public enum EditOperationType: String, Codable {
     case filter
@@ -35,19 +24,14 @@ public enum EditOperationType: String, Codable {
     case custom
 }
 
-// MARK: - Filter Operation
-
-/// Операция применения фильтра
 public struct FilterOperation: EditOperation {
     public let id: UUID
     public let type: EditOperationType = .filter
     public let timestamp: Date
-    
-    // Filter-specific properties
     public var filterName: String
     public var lutIdentifier: String?
     public var intensity: Double
-    public var parameters: [String: Double] // для хранения параметров типа exposure, contrast, etc.
+    public var parameters: [String: Double]
     
     public var description: String {
         return "Фильтр: \(filterName)"
@@ -68,21 +52,14 @@ public struct FilterOperation: EditOperation {
     }
     
     public func apply(to image: CIImage) -> CIImage {
-        // Здесь применяем фильтр через PixelEngine или Core Image
-        // Это интеграция с существующей системой фильтров
         return image
     }
 }
 
-// MARK: - Text Operation
-
-/// Операция добавления текста
 public struct TextOperation: EditOperation {
     public let id: UUID
     public let type: EditOperationType = .text
     public let timestamp: Date
-    
-    // Text-specific properties
     public var text: String
     public var position: CGPoint
     public var fontSize: CGFloat
@@ -93,8 +70,6 @@ public struct TextOperation: EditOperation {
     public var alignment: TextAlignment
     public var isBold: Bool
     public var isItalic: Bool
-    
-    // Store the text element ID for tracking
     public var textElementId: UUID
     
     public var description: String {
@@ -130,21 +105,14 @@ public struct TextOperation: EditOperation {
     }
     
     public func apply(to image: CIImage) -> CIImage {
-        // Применяем текст поверх изображения
-        // Можно использовать UIGraphicsImageRenderer для рендеринга текста
         return image
     }
 }
 
-// MARK: - Sticker Operation
-
-/// Операция добавления стикера
 public struct StickerOperation: EditOperation {
     public let id: UUID
     public let type: EditOperationType = .sticker
     public let timestamp: Date
-    
-    // Sticker-specific properties
     public var stickerIdentifier: String
     public var imageName: String
     public var position: CGPoint
@@ -178,20 +146,14 @@ public struct StickerOperation: EditOperation {
     }
     
     public func apply(to image: CIImage) -> CIImage {
-        // Накладываем стикер на изображение
         return image
     }
 }
 
-// MARK: - Adjustment Operation
-
-/// Операция регулировки параметров (яркость, контраст, насыщенность и т.д.)
 public struct AdjustmentOperation: EditOperation {
     public let id: UUID
     public let type: EditOperationType = .adjustment
     public let timestamp: Date
-    
-    // Adjustment parameters
     public var adjustmentType: AdjustmentType
     public var value: Double
     
@@ -209,7 +171,6 @@ public struct AdjustmentOperation: EditOperation {
     }
     
     public func apply(to image: CIImage) -> CIImage {
-        // Применяем соответствующий Core Image фильтр
         switch adjustmentType {
         case .exposure:
             return image.applyingFilter("CIExposureAdjust", parameters: ["inputEV": value])
@@ -222,13 +183,10 @@ public struct AdjustmentOperation: EditOperation {
         case .temperature:
             return image.applyingFilter("CITemperatureAndTint", parameters: ["inputNeutral": CIVector(x: value, y: 0)])
         case .highlights, .shadows, .vignette, .sharpen, .blur, .clarity:
-            // Для более сложных операций нужна дополнительная логика
             return image
         }
     }
 }
-
-// MARK: - Adjustment Types
 
 public enum AdjustmentType: String, Codable {
     case exposure
@@ -260,17 +218,13 @@ public enum AdjustmentType: String, Codable {
     }
 }
 
-// MARK: - Helper Types
-
-/// Обёртка для Color, чтобы сделать его Codable
 public struct CodableColor: Codable {
     public var red: Double
     public var green: Double
     public var blue: Double
     public var alpha: Double
-    
+
     public init(color: Color) {
-        // Извлекаем компоненты цвета
         let uiColor = UIColor(color)
         var r: CGFloat = 0
         var g: CGFloat = 0

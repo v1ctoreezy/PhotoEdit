@@ -16,9 +16,7 @@ struct LutMenuUI: View {
                         }else{
                             HStack(spacing: 12){
                                 Spacer().frame(width: 0)
-                                // neutral
                                 NeutralButton(image: UIImage(cgImage: shared.lutsCtrl.cubeSourceCG!)).id("neutral")
-                                // cube by collections - using lazy loading
                                 ForEach(shared.lutsCtrl.collections, id: \.identifier) { collection in
                                     HStack(spacing: 12){
                                         if(collection.cubeInfos.isEmpty == false){
@@ -44,7 +42,6 @@ struct LutMenuUI: View {
                             Spacer().frame(width: 0)
                         
                             collectionButtonView(key: "", name: "All Luts", reader:reader)
-                            //
                             ForEach(shared.lutsCtrl.collections, id: \.identifier) { collection in
                                 collectionButtonView(key: collection.identifier, name: collection.name,reader:reader)
                             }
@@ -53,7 +50,7 @@ struct LutMenuUI: View {
                     }.padding(.bottom, 8)
                 }
                 
-            } // ScrollViewReader
+            }
             if(self.shared.lutsCtrl.editingLut){
                 LutMenuUIEdit()
             }
@@ -76,7 +73,6 @@ struct LutMenuUI: View {
     }
 }
 
-///
 struct LutMenuUILoading: View{
     var body: some View{
         HStack(spacing: 12){
@@ -93,7 +89,6 @@ struct LutMenuUILoading: View{
     }
 }
 
-///
 struct LutMenuUIEdit: View{
     
     @EnvironmentObject var shared: PhotoEditingController

@@ -3,45 +3,30 @@ import SwiftUI
 import PixelEnginePackage
 import CoreImage
 
-// MARK: - Lazy Preview Manager
-/// Manages lazy loading of filter previews to optimize performance
 class LazyPreviewManager: ObservableObject {
-    
-    // Singleton instance
     static let shared = LazyPreviewManager()
-    
-    // Published properties for SwiftUI updates
     @Published private var previewCache: [String: CGImage] = [:]
-    
-    // Private properties
     private let processingQueue = DispatchQueue(label: "com.photoediting.preview", qos: .userInitiated)
     private let maxConcurrentOperations = 3
-    private let maxCacheSize = 50 // Maximum number of cached previews
+    private let maxCacheSize = 50
     private var activeOperations = 0
     private let operationLock = NSLock()
     private var pendingOperations: [(id: String, priority: Int, work: () -> Void)] = []
-    private var cacheAccessOrder: [String] = [] // LRU cache tracking
-    
+    private var cacheAccessOrder: [String] = []
     private init() {}
-    
-    // MARK: - Public Methods
-    
-    /// Get cached preview or return nil
+
     func getCachedPreview(for identifier: String) -> CGImage? {
         if let image = previewCache[identifier] {
-            // Update LRU order
             updateCacheAccess(for: identifier)
             return image
         }
         return nil
     }
-    
-    /// Check if preview is cached
+
     func isPreviewCached(for identifier: String) -> Bool {
         return previewCache[identifier] != nil
     }
-    
-    /// Request preview generation with priority
+
     func requestPreview(
         identifier: String,
         priority: Int = 0,
@@ -49,7 +34,6 @@ class LazyPreviewManager: ObservableObject {
         filter: FilterColorCube,
         completion: @escaping (CGImage?) -> Void
     ) {
-        // Check cache first
         if let cached = previewCache[identifier] {
             DispatchQueue.main.async {
                 completion(cached)
@@ -57,7 +41,6 @@ class LazyPreviewManager: ObservableObject {
             return
         }
         
-        // Add to queue
         let work = { [weak self] in
             self?.generatePreview(
                 identifier: identifier,
@@ -74,8 +57,7 @@ class LazyPreviewManager: ObservableObject {
         
         processNextOperation()
     }
-    
-    /// Request recipe preview generation
+
     func requestRecipePreview(
         identifier: String,
         priority: Int = 0,
@@ -83,7 +65,6 @@ class LazyPreviewManager: ObservableObject {
         filters: @escaping (inout EditingStack.Edit.Filters) -> Void,
         completion: @escaping (CGImage?) -> Void
     ) {
-        // Check cache first
         if let cached = previewCache[identifier] {
             DispatchQueue.main.async {
                 completion(cached)
@@ -91,7 +72,6 @@ class LazyPreviewManager: ObservableObject {
             return
         }
         
-        // Add to queue
         let work = { [weak self] in
             self?.generateRecipePreview(
                 identifier: identifier,
@@ -108,29 +88,23 @@ class LazyPreviewManager: ObservableObject {
         
         processNextOperation()
     }
-    
-    /// Clear all cached previews
+
     func clearCache() {
         previewCache.removeAll()
         cacheAccessOrder.removeAll()
-        print("LazyPreviewManager: Cache cleared")
     }
-    
-    /// Clear specific preview from cache
+
     func clearPreview(for identifier: String) {
         previewCache.removeValue(forKey: identifier)
         if let index = cacheAccessOrder.firstIndex(of: identifier) {
             cacheAccessOrder.remove(at: index)
         }
     }
-    
-    /// Get cache statistics
+
     func getCacheStats() -> (count: Int, maxSize: Int) {
         return (previewCache.count, maxCacheSize)
     }
-    
-    // MARK: - Private Methods
-    
+
     private func processNextOperation() {
         operationLock.lock()
         
@@ -162,11 +136,8 @@ class LazyPreviewManager: ObservableObject {
         completion: @escaping (CGImage?) -> Void
     ) {
         autoreleasepool {
-            // Create a smaller preview image for better performance
             let preview = PreviewFilterColorCube(sourceImage: sourceImage, filter: filter)
             let cgImage = preview.cgImage
-            
-            // Cache the result
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.cachePreview(cgImage, for: identifier)
@@ -192,8 +163,6 @@ class LazyPreviewManager: ObservableObject {
                 }
                 return
             }
-            
-            // Cache the result
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
                 self.cachePreview(cgImage, for: identifier)
@@ -201,44 +170,29 @@ class LazyPreviewManager: ObservableObject {
             }
         }
     }
-    
-    // MARK: - Cache Management
-    
+
     private func cachePreview(_ image: CGImage, for identifier: String) {
-        // Add to cache
         previewCache[identifier] = image
-        
-        // Update access order
         updateCacheAccess(for: identifier)
-        
-        // Enforce cache size limit (LRU eviction)
         if previewCache.count > maxCacheSize {
             evictLeastRecentlyUsed()
         }
     }
-    
+
     private func updateCacheAccess(for identifier: String) {
-        // Remove from current position if exists
         if let index = cacheAccessOrder.firstIndex(of: identifier) {
             cacheAccessOrder.remove(at: index)
         }
-        // Add to end (most recently used)
         cacheAccessOrder.append(identifier)
     }
-    
+
     private func evictLeastRecentlyUsed() {
         guard !cacheAccessOrder.isEmpty else { return }
-        
-        // Remove oldest item
         let oldestIdentifier = cacheAccessOrder.removeFirst()
         previewCache.removeValue(forKey: oldestIdentifier)
-        
-        print("LazyPreviewManager: Evicted '\(oldestIdentifier)' from cache (LRU policy)")
     }
 }
 
-// MARK: - Lazy Preview State
-/// State object for tracking preview loading in SwiftUI views
 class LazyPreviewState: ObservableObject {
     @Published var image: CGImage?
     @Published var isLoading: Bool = false
@@ -252,8 +206,6 @@ class LazyPreviewState: ObservableObject {
         filter: FilterColorCube
     ) {
         self.identifier = identifier
-        
-        // Check cache first
         if let cached = LazyPreviewManager.shared.getCachedPreview(for: identifier) {
             self.image = cached
             self.isLoading = false
@@ -281,16 +233,12 @@ class LazyPreviewState: ObservableObject {
         filters: @escaping (inout EditingStack.Edit.Filters) -> Void
     ) {
         self.identifier = identifier
-        
-        // Check cache first
         if let cached = LazyPreviewManager.shared.getCachedPreview(for: identifier) {
             self.image = cached
             self.isLoading = false
             return
         }
-        
         self.isLoading = true
-        
         LazyPreviewManager.shared.requestRecipePreview(
             identifier: identifier,
             priority: priority,

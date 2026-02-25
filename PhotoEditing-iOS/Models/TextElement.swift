@@ -30,9 +30,7 @@ struct TextElement: Identifiable, Codable {
         self.isBold = isBold
         self.isItalic = isItalic
     }
-    
-    // MARK: - Codable
-    
+
     enum CodingKeys: String, CodingKey {
         case id, text, position, fontSize, fontName, isBold, isItalic
         case colorRed, colorGreen, colorBlue, colorOpacity
@@ -83,9 +81,7 @@ struct TextElement: Identifiable, Codable {
         try container.encode(Double(blue), forKey: .colorBlue)
         try container.encode(Double(alpha), forKey: .colorOpacity)
     }
-    
-    // MARK: - Font Helper
-    
+
     func getFont() -> Font {
         var font: Font
         
@@ -107,8 +103,6 @@ struct TextElement: Identifiable, Codable {
         default:
             font = .system(size: fontSize)
         }
-        
-        // Apply bold and italic
         if isBold && isItalic {
             font = font.weight(.bold).italic()
         } else if isBold {
@@ -119,10 +113,7 @@ struct TextElement: Identifiable, Codable {
         
         return font
     }
-    
-    // MARK: - Conversion to TextOperation
-    
-    /// Convert TextElement to TextOperation
+
     func toTextOperation() -> TextOperation {
         return TextOperation(
             text: text,
@@ -138,8 +129,7 @@ struct TextElement: Identifiable, Codable {
             textElementId: id
         )
     }
-    
-    /// Create TextElement from TextOperation
+
     static func from(textOperation: TextOperation) -> TextElement {
         return TextElement(
             id: textOperation.textElementId,
