@@ -165,7 +165,7 @@ public class RecipeUtils {
             return FilterHLS.defaultValue;
         }
         // vectorFromString
-        func vectorFromString(_ text:String)-> CIVector{
+        func vectorFromString(_ text:String)-> CIVector?{
             // floatFromString
             func floatOf(_ text:String)-> CGFloat{
                 guard let number = NumberFormatter().number(from: text) else {
@@ -174,6 +174,9 @@ public class RecipeUtils {
                 return CGFloat(number.floatValue)
             }
             let items = text.components(separatedBy: ",")
+            guard items.count >= 3 else {
+                return nil
+            }
             let result = CIVector(x: floatOf(items[0]), y: floatOf(items[1]), z: floatOf(items[2]))
             return result
         }
@@ -181,7 +184,11 @@ public class RecipeUtils {
         var result:[CIVector] = FilterHLS.defaultValue
         let vectors = value.components(separatedBy: ";")
         vectors.enumerated().forEach { (i, text) in
-            result[i] = vectorFromString(text)
+            guard i < result.count else { return }
+            if let vector = vectorFromString(text) {
+                result[i] = vector
+            }
+            // Если vectorFromString вернул nil - оставляем дефолтное значение
         }
         return result
     }

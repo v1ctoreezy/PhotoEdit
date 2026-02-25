@@ -104,6 +104,7 @@ public class EditOperationManager: ObservableObject {
     /// Получить текущее обработанное изображение
     public func getCurrentImage() -> CIImage? {
         guard let original = originalImage else { return nil }
+        guard currentIndex >= 0 else { return original }
         
         // Применяем все операции до текущего индекса
         var result = original

@@ -4,5 +4,11 @@
 <dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Приложение использует фотографии из вашей галереи для применения фильтров и редактирования изображений</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Приложение сохраняет отредактированные фотографии в вашу галерею</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Приложение использует камеру для создания новых фотографий, которые можно отредактировать</string>
 </dict>
 </plist>
